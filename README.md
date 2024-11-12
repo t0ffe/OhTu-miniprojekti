@@ -1,2 +1,3 @@
-# OhTu-miniprojekti
- Ohjelmistotuotanto miniprojekti HY 2024
+## Ohtu miniprojekti boilerplate
+
+Lue [täältä](https://ohjelmistotuotanto-hy.github.io/flask/) lisää.
