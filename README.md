@@ -11,7 +11,3 @@ Definion of done kriteerit:
 - Sovellus ja koodi on testattu toimivaksi (sis. Robot-testin)
 - Jatkuva integraatio --> Errorit korjattu ja testit menevät läpi
 - Sprint 1 on dokumentoitu ja annettu tarvittavat liitteet
-
-Sprintin 1 hyväksymiskriteerit:
-
-- Lisätty viite sisältää kaikki pakolliset kentät
