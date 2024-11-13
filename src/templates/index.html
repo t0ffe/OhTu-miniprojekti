@@ -1,15 +1,15 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Todo app
+References app
 {% endblock %}
 
 {% block body %}
 
-<h2>Todo app</h2>
+<h2>References app</h2>
 
 <div>
-  things still unfinished: {{ unfinished }}
+  Here the client can add article type references: {{ unfinished }}
 </div>
 
 <ul>
@@ -28,7 +28,7 @@ Todo app
 </ul>
 
 <div>
-  <a href="/new_todo">Create new todo</a>
+  <a href="/new_todo">Add new reference</a>
 </div>
 
 {% endblock %}
