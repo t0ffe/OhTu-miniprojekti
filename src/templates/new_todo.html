@@ -1,12 +1,13 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Create a new todo
+References app
 {% endblock %}
 
 {% block body %}
 
-<h2>Add a new reference</h2>
+<h2>Add a new article type reference</h2>
+<h4>Please fill in the fields below:</h4>
 
 <form action="/create_todo" method="post">
   {% with messages = get_flashed_messages() %}
@@ -18,8 +19,18 @@ Create a new todo
       </ul>
     {% endif %}
   {% endwith %}
-  <label for="content">Reference:</label>
+  <label for="content">Author:</label>
   <input type="text" name="content">
+
+  <label for="content">Title:</label>
+  <input type="text" name="content">
+
+  <label for="content">Year:</label>
+  <input type="number" name="content">
+
+  <label for="content">Journal:</label>
+  <input type="text" name="content">
+
   <br>
   <button type="submit">
     Add 
