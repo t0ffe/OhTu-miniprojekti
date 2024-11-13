@@ -16,7 +16,7 @@ def set_done(todo_id):
     db.session.commit()
 
 
-def create_todo(content):
-    sql = text("INSERT INTO todos (content) VALUES (:content)")
-    db.session.execute(sql, {"content": content})
+def create_todo(author, title, journal, year):
+    sql = text("INSERT INTO articles (author, title, journal, year) VALUES (:author, :title, :journal, :year)")
+    db.session.execute(sql, {"author": author, "title": title, "journal": journal, "year": year})
     db.session.commit()
