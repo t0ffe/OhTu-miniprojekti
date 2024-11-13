@@ -1,15 +1,14 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.todo_repository import get_todos, create_todo, set_done
+from repositories.todo_repository import get_db_contents, create_todo, set_done
 from config import app, test_env
 from util import validate_todo
 
 
 @app.route("/")
 def index():
-    todos = get_todos()
-    unfinished = len([todo for todo in todos if not todo.done])
-    return render_template("index.html", todos=todos, unfinished=unfinished)
+    contents = get_db_contents()
+    return render_template("index.html", contents=contents)
 
 
 @app.route("/new_todo")
@@ -41,6 +40,5 @@ if test_env:
 
     @app.route("/reset_db")
     def reset_database():
-        table_name = request.form.get("table_name")
-        reset_db(table_name)
+        reset_db()
         return jsonify({"message": "db reset"})
