@@ -42,11 +42,11 @@ def setup_db():
         "  title TEXT NOT NULL, "
         "  journal TEXT NOT NULL,"
         "  year INT NOT NULL,"
-        "  volume DEFAULT NULL,"
-        "  number DEFAULT NULL,"
-        "  pages DEFAULT NULL,"
-        "  month DEFAULT NULL,"
-        "  note DEFAULT NULL"
+        "  volume INT,"
+        "  number INT,"
+        "  pages INT,"
+        "  month INT,"
+        "  note TEXT"
         ")"
     )
 
