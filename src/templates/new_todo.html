@@ -9,7 +9,7 @@ References app
 <h2>Add a new article type reference</h2>
 <h4>Please fill in the fields below:</h4>
 
-<form action="/create_todo" method="post">
+<form action="/create_reference" method="post">
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       <ul>
@@ -20,16 +20,16 @@ References app
     {% endif %}
   {% endwith %}
   <label for="content">Author:</label>
-  <input type="text" name="content">
+  <input type="text" name="author">
 
   <label for="content">Title:</label>
-  <input type="text" name="content">
+  <input type="text" name="title">
 
   <label for="content">Year:</label>
-  <input type="number" name="content">
+  <input type="number" name="journal">
 
   <label for="content">Journal:</label>
-  <input type="text" name="content">
+  <input type="text" name="year">
 
   <br>
   <button type="submit">
