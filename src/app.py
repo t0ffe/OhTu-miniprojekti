@@ -1,8 +1,8 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.todo_repository import get_db_contents, create_todo
+from repositories.reference_repository import get_db_contents, create_reference
 from config import app, test_env
-from util import validate_todo
+from util import validate_reference
 
 
 @app.route("/")
@@ -10,25 +10,31 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/new_todo")
+@app.route("/new_reference")
 def new():
-    return render_template("new_todo.html")
+    return render_template("new_reference.html")
 
 
 @app.route("/create_reference", methods=["POST"])
-def todo_creation():
+def reference_creation():
     author = request.form.get("author")
     title = request.form.get("title")
     journal = request.form.get("journal")
     year = request.form.get("year")
 
     try:
-        validate_todo(author, title, journal, year)
-        create_todo(author, title, journal, year)
+        validate_reference(author, title, journal, year)
+        create_reference(author, title, journal, year)
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return redirect("/new_todo")
+        return redirect("/new_reference")
+
+
+@app.route("/toggle_reference/<reference_id>", methods=["POST"])
+def toggle_reference(reference_id):
+    return redirect("/")
+
 
 # testausta varten oleva reitti
 if test_env:
