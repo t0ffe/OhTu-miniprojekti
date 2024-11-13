@@ -1,9 +1,10 @@
 class UserInputError(Exception):
     pass
 
-def validate_todo(content):
-    if len(content) < 5:
-        raise UserInputError("Todo content length must be greater than 4")
+def validate_todo(author, title, journal, year):
+    if not author or title or journal or year:
+        raise UserInputError("All fields must be filled")
 
-    if len(content) > 100:
-          raise UserInputError("Todo content length must be smaller than 100")
+    if len(author) or len(title) or len(journal) or len(year) > 200:
+    
+          raise UserInputError("Reference information length must be smaller than 200")

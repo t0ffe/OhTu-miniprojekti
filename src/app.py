@@ -18,11 +18,14 @@ def new():
 
 @app.route("/create_reference", methods=["POST"])
 def todo_creation():
-    content = request.form.get("reference")
+    author = request.form.get("author")
+    title = request.form.get("title")
+    journal = request.form.get("journal")
+    year = request.form.get("year")
 
     try:
-        validate_todo(content)
-        create_todo(content)
+        validate_todo(author, title, journal, year)
+        create_todo(author, title, journal, year)
         return redirect("/")
     except Exception as error:
         flash(str(error))
