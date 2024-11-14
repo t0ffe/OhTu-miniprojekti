@@ -36,6 +36,12 @@ def reference_creation():
         return redirect("/new_reference")
 
 
+@app.route("/view_references")
+def view_references():
+    references = get_db_contents()
+    return render_template("view_references.html")
+
+
 @app.route("/toggle_reference/<reference_id>", methods=["POST"])
 def toggle_reference(reference_id):
     return redirect("/")
