@@ -10,13 +10,17 @@ def get_db_contents():
     return [Reference(*row) for row in contents]
 
 
-def create_reference(author, title, journal, year, volume):
-    if not volume:
-        volume = None
+def create_reference(author, title, journal, year, volume, number, pages, month, note):
+    volume = volume if volume else None
+    number = number if number else None
+    pages = pages if pages else None
+    month = month if month else None
+    note = note if note else None
+
     sql = text(
-        "INSERT INTO articles (author, title, journal, year, volume) VALUES (:author, :title, :journal, :year, :volume)"
+        "INSERT INTO articles (author, title, journal, year, volume, number, pages, month, note) VALUES (:author, :title, :journal, :year, :volume, :number, :pages, :month, :note)"
     )
     db.session.execute(
-        sql, {"author": author, "title": title, "journal": journal, "year": year, "volume":volume}
+        sql, {"author": author, "title": title, "journal": journal, "year": year, "volume": volume, "number": number, "pages": pages, "month": month, "note": note}
     )
     db.session.commit()

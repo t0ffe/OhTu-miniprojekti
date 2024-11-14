@@ -1,9 +1,16 @@
 class UserInputError(Exception):
     pass
 
-def validate_reference(author, title, journal, year):
-    if not author or not title or not journal or not year:
-        raise UserInputError("All fields must be filled")
+def validate_reference(author, title, journal, year, volume, number, pages, month, note):
+    mandatory = [author, title, journal, year]
+    allfields = [author, title, journal, year, volume, number, pages, month, note]
+    nonempty = []
+    for field in allfields:
+        if field:
+            nonempty.append(field)
 
-    if len(author) > 200 or len(title) > 200 or len(journal) > 200 or len(year) > 200:
+    if not all(mandatory):
+        raise UserInputError("All mandatory fields must be filled")
+
+    if any(len(field) > 200 for field in nonempty):
         raise UserInputError("Reference information length must be smaller than 200")

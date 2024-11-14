@@ -28,8 +28,8 @@ def reference_creation():
     note = request.form.get("note")
 
     try:
-        validate_reference(author, title, journal, year)
-        create_reference(author, title, journal, year, volume)
+        validate_reference(author, title, journal, year, volume, number, pages, month, note)
+        create_reference(author, title, journal, year, volume, number, pages, month, note)
         return redirect("/")
     except Exception as error:
         flash(str(error))
