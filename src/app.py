@@ -36,7 +36,7 @@ def reference_creation():
         return redirect("/new_reference")
 
 
-@app.route("/references")
+@app.route("/view_references")
 def view_references():
     references = get_db_contents()
     return render_template("view_references.html")
