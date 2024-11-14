@@ -39,13 +39,11 @@ Yksikkötestit suoritetaan komennolla:
 ```bash
 pytest src/tests
 ```
-<!--
 
 Robot-testit suoritetaan komennolla:
 ```bash
 robot src/story_tests
 ```
-<!--
 
 Testikattavuusraportin generointi komennolla:
 ```bash
