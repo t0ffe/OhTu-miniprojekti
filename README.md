@@ -1,5 +1,5 @@
-## OhTu miniprojekti
-##Lähdeviite-sovellus
+# OhTu miniprojekti
+## Lähdeviite-sovellus
 
 [Product Backlog](https://github.com/users/t0ffe/projects/4)
 - Backlogissa on omat välilehdet sprinteille 1, 2, 3 ja 4 
