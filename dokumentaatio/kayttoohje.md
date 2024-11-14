@@ -1,5 +1,7 @@
 # Ohjelman Käyttöohje
 
+Linkki README.md tiedostoon: https://github.com/t0ffe/OhTu-miniprojekti/blob/main/README.md
+
 ## Asennus
 
 1. Lataa ohjelman viimeisin versio (kloonaa repositorio omalle koneellesi)
