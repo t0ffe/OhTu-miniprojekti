@@ -38,7 +38,8 @@ def reference_creation():
         create_reference(
             author, title, journal, year, volume, number, pages, month, note
         )
-        return redirect("/")
+        flash("Succesfully added reference!")
+        return redirect("/new_reference")
     except Exception as error:
         flash(str(error))
         return redirect("/new_reference")
