@@ -18,3 +18,6 @@ def create_reference(author, title, journal, year):
         sql, {"author": author, "title": title, "journal": journal, "year": year}
     )
     db.session.commit()
+
+def get_all_references():
+    return get_db_contents()

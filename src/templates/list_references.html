@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Reference List
+{% endblock %}
+
+{% block body %}
+<h2>Reference List</h2>
+
+<ul>
+  {% for reference in references %}
+    <li>{{ reference.author }}. {{ reference.title }}. {{ reference.journal }}, {{ reference.year }}.</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
