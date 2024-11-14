@@ -21,10 +21,15 @@ def reference_creation():
     title = request.form.get("title")
     journal = request.form.get("journal")
     year = request.form.get("year")
+    volume = request.form.get("volume")
+    number = request.form.get("number")
+    pages = request.form.get("pages")
+    month = request.form.get("month")
+    note = request.form.get("note")
 
     try:
         validate_reference(author, title, journal, year)
-        create_reference(author, title, journal, year)
+        create_reference(author, title, journal, year, volume)
         return redirect("/")
     except Exception as error:
         flash(str(error))
