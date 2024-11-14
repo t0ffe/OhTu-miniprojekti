@@ -6,6 +6,8 @@ ${SERVER}     localhost:5001
 ${DELAY}      0.5 seconds
 ${HOME_URL}   http://${SERVER}
 ${RESET_URL}  http://${SERVER}/reset_db
+${NEW_REFERENCE}  http://${SERVER}/new_reference
+${LIST_REFERENCES}  http://${SERVER}/list_reference
 ${BROWSER}    chrome
 ${HEADLESS}   false
 
@@ -24,6 +26,5 @@ Open And Configure Browser
     END
     Open Browser  browser=${BROWSER}  options=${options}
 
-Reset Todos
+Reset References
     Go To  ${RESET_URL}
-
