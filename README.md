@@ -7,10 +7,14 @@
 
 ---
 
-**Definion of done kriteerit:**
-- Sovellus ja koodi on testattu toimivaksi (sis. Robot-testin)
+**Definion of Done**
+- User story on määritelty
+- Story on jaettu teknisiin osiin ja  estimoitu
+- Tekniset osat (koodi) on toteutettu
+- Koodi on testattu toimivaksi (sisältää Robot-testin)
 - Jatkuva integraatio --> Errorit korjattu ja testit menevät läpi
-- Sprint 1 on dokumentoitu ja annettu tarvittavat liitteet
+- Vähintään yksi toinen tiimin jäsen on katsonut koodin läpi
+
 
 ---
 
