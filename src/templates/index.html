@@ -9,26 +9,12 @@ References app
 <h2>References app</h2>
 
 <div>
-  Here the client can add article type references {{ unfinished }}
+  Here the client can add article type references
 </div>
 
-<ul>
-  {% for reference in references %}
-    <li style="display: flex">
-      <div>
-        {{ reference }} 
-      </div>
-      {% if not reference.done %}
-        <form action="/toggle_reference/{{ reference.id }}" method="post" style="margin-left: 10px;">
-          <button type="submit">mark as done</button>
-        </form>
-      {% endif %}
-    </li>
-  {% endfor %}
-</ul>
-
 <div>
-  <a href="/new_reference">Add new reference</a>
+  <p><a href="/new_reference">Add new reference</a></p>
+  <p><a href="/list_references">List all references</a></p>
 </div>
 
 {% endblock %}
