@@ -25,15 +25,25 @@
 
 
 ## Ohjelman käynnistys- ja käyttöohje
-
-Avaa sovellus komennolla:
+Avaa ensin Poetry virtuaaliympäristö komennolla:
 ```bash
-poetry run python3 src/index.py
+poetry shell
 ```
 
-Testit suoritetaan komennolla:
+Avaa sovellus selaimessa esim. VSCoden terminaalissa komennolla:
 ```bash
-poetry run pytest
+python src/index.py
+```
+
+Yksikkötestit suoritetaan komennolla:
+```bash
+pytest src/tests
+```
+<!--
+
+Robot-testit suoritetaan komennolla:
+```bash
+robot src/story_tests
 ```
 <!--
 
