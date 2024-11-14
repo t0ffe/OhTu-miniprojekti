@@ -14,9 +14,10 @@
 3. Luo .env tiedosto:
     ```Dotenv
     DATABASE_URL=postgresql://xxx
-    TEST_ENV=true   
+    TEST_ENV=false   
     SECRET_KEY=satunnainen_merkkijono
     ```
+Huomaa, että `.env` tiedoston `DATABASE_URL` täytyy itse hakea jostain internetpalveluna tarjottavasta tietokannasta, esim. https://aiven.io.
 
 4. Alusta tietokanta komennolla:
     ```bash
