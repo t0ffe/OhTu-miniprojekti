@@ -25,12 +25,21 @@ class TestReferenceValidation(unittest.TestCase):
 
     def test_vol_too_much_or_str_raises_error(self):
         with self.assertRaises(UserInputError):
+            validate_reference("Author", "Title", "Journal", "2023", "3000000000", "", "5000", "", "note")
+
+        with self.assertRaises(UserInputError):
             validate_reference("Author", "Title", "Journal", "2023", "testi", "", "5000", "", "note")
 
     def test_number_too_much_or_str_raises_error(self):
         with self.assertRaises(UserInputError):
+            validate_reference("Author", "Title", "Journal", "2023", "3", "40000000000", "5000", "", "note")
+
+        with self.assertRaises(UserInputError):
             validate_reference("Author", "Title", "Journal", "2023", "3", "testi", "5000", "", "note")
 
     def test_month_too_much_or_str_raises_error(self):
+        with self.assertRaises(UserInputError):
+            validate_reference("Author", "Title", "Journal", "2023", "3", "", "5000", "13", "note")
+
         with self.assertRaises(UserInputError):
             validate_reference("Author", "Title", "Journal", "2023", "3", "", "5000", "testi", "note")
