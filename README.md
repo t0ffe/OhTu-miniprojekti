@@ -1,6 +1,8 @@
 # OhTu miniprojekti
 ## Lähdeviite-sovellus
 
+[![CI Badge](https://github.com/t0ffe/OhTu-miniprojekti/workflows/CI/badge.svg)](https://github.com/t0ffe/OhTu-miniprojekti/actions)
+
 [Product Backlog](https://github.com/users/t0ffe/projects/4)
 - Backlogissa on omat välilehdet sprinteille 1, 2, 3 ja 4 
 
