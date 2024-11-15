@@ -13,15 +13,24 @@ def validate_reference(author, title, journal, year, volume, number, pages, mont
         raise UserInputError("All mandatory fields must be filled")
     if any(len(field) > 200 for field in nonempty):
         raise UserInputError("Reference information length must be smaller than 200")
+    
+    if year.isdigit() == False:
+        raise UserInputError("Year must be a number between 1-2100")
     if int(year) < 1 or int(year) > 2100:
-            raise UserInputError("Year must be between 1-2100")
+        raise UserInputError("Year must be a number between 1-2100")
     
     if volume != "":
-        if int(volume) < 1 or int(volume) > 5000:
-            raise UserInputError("Volume must be between 1-5000")
+        if volume.isdigit() == False:
+            raise UserInputError("Volume must be a number between 1-5000")
+        elif int(volume) < 1 or int(volume) > 5000:
+            raise UserInputError("Volume must be a number between 1-5000")
     if number != "":
-        if int(number) < 1 or int(number) > 5000:
-            raise UserInputError("Number must be between 1-5000")
+        if number.isdigit() == False:
+            raise UserInputError("Number must be a number between 1-5000")
+        elif int(number) < 1 or int(number) > 5000:
+            raise UserInputError("Number must be a number between 1-5000")
     if month !=  "":
-        if int(month) < 1 or int(month) > 12:
-            raise UserInputError("Month must be between 1-12")
+        if month.isdigit() == False:
+            raise UserInputError("Month must be a number between 1-12")
+        elif int(month) < 1 or int(month) > 12:
+            raise UserInputError("Month must be a number between 1-12")

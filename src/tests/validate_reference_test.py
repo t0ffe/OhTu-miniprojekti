@@ -15,3 +15,22 @@ class TestReferenceValidation(unittest.TestCase):
 
         with self.assertRaises(UserInputError):
             validate_reference("koodaa" * 201, "Title", "Journal", "2023", "3", "", "5000", "", "note" * 45)   
+
+    def test_year_too_much_or_str_raises_error(self):
+        with self.assertRaises(UserInputError):
+            validate_reference("Author", "Title", "Journal", "200000", "3", "", "5000", "", "note")
+        
+        with self.assertRaises(UserInputError):
+            validate_reference("Author", "Title", "Journal", "testi", "3", "", "5000", "", "note")
+
+    def test_vol_too_much_or_str_raises_error(self):
+        with self.assertRaises(UserInputError):
+            validate_reference("Author", "Title", "Journal", "2023", "testi", "", "5000", "", "note")
+
+    def test_number_too_much_or_str_raises_error(self):
+        with self.assertRaises(UserInputError):
+            validate_reference("Author", "Title", "Journal", "2023", "3", "testi", "5000", "", "note")
+
+    def test_month_too_much_or_str_raises_error(self):
+        with self.assertRaises(UserInputError):
+            validate_reference("Author", "Title", "Journal", "2023", "3", "", "5000", "testi", "note")
