@@ -9,7 +9,7 @@ References app
 <h2>Add a new article type reference</h2>
 <h4>Please fill in the fields below:</h4>
 
-<form action="/create_reference" method="post">
+<form action="/create_reference" method="post" onsubmit="return check(this)" >
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       <ul>
@@ -20,34 +20,34 @@ References app
     {% endif %}
   {% endwith %}
   <label for="content">Author:</label>
-  <input type="text" name="author">
+  <input type="text" name="author" minlength="1" maxlength="200" required>
 
   <label for="content">Title:</label>
-  <input type="text" name="title">
+  <input type="text" name="title" minlength="1" maxlength="200" required>
 
   <label for="content">Year:</label>
-  <input type="number" name="year">
+  <input type="number" name="year" min="1" max="2100" required>
 
   <label for="content">Journal:</label>
-  <input type="text" name="journal"><br>
+  <input type="text" name="journal" minlength="1" maxlength="200" required><br>
   <br>
   <br>
-  Optional fields:<br>
+  <b>Optional fields:</b><br>
   <br>
   <label for="content">Volume:</label>
-  <input type="number" name="volume">
+  <input type="number" name="volume" min="1" max="5000">
   
   <label for="content">Number:</label>
-  <input type="number" name="number">
+  <input type="number" name="number" min="1" max="5000">
 
   <label for="content">Pages:</label>
-  <input type="number" name="pages">
+  <input type="number" name="pages" min="1" max="5000">
 
   <label for="content">Month:</label>
-  <input type="number" name="month">
+  <input type="number" name="month" min="1" max="12">
 
   <label for="content">Note:</label>
-  <input type="text" name="note"><br>
+  <input type="text" name="note" minlength="1" maxlength="200"><br>
   <br>
   <br>
   <button type="submit">
