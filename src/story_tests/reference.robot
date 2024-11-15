@@ -44,6 +44,7 @@ After adding two references there is two
     Input Text  year  2022
     Input Text  journal  Lehtinen
     Click Button  Add
+    Page Should Contain  Succesfully added reference!
     Click Link  View added references
     Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen, 2020.
     Page Should Contain  Aki Artikuloija. Parempi Artikkeli. Lehtinen, 2022.
