@@ -108,12 +108,14 @@ After adding three references there is three
     Input Text  journal  Lehtinen
     Click Button  Add
     Page Should Contain  Succesfully added reference!
+    Click Link  View added references
     Input Text  author  Aki Artikuloija
     Input Text  title  Parempi Artikkeli
     Input Text  year  2022
     Input Text  journal  Lehtinen
     Click Button  Add
     Page Should Contain  Succesfully added reference!
+    Click Link  View added references
     Input Text  author  Aki Artikuloija
     Input Text  title  Paras Artikkeli
     Input Text  year  2022
