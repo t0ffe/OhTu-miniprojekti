@@ -8,7 +8,7 @@ Linkki README.md tiedostoon: https://github.com/t0ffe/OhTu-miniprojekti/blob/mai
     ```bash
     git clone https://github.com/t0ffe/OhTu-miniprojekti.git
     ```
-2. Asenna tarvittavat riippuvuudet:
+2. Asenna tarvittavat riippuvuudet projektin juurihakemistossa:
     ```bash
     poetry install
     ```
@@ -19,7 +19,7 @@ Linkki README.md tiedostoon: https://github.com/t0ffe/OhTu-miniprojekti/blob/mai
     TEST_ENV=false   
     SECRET_KEY=satunnainen_merkkijono
     ```
-   Huomaa, että `.env` tiedoston `DATABASE_URL` täytyy itse hakea jostain internetpalveluna tarjottavasta tietokannasta, esim. https://aiven.io.
+   Huomaa, että `.env` tiedoston `DATABASE_URL` täytyy itse hakea jostain internetpalveluna tarjottavasta tietokannasta, esim. https://aiven.io. Lisäksi muokkaa TEST_ENV=true
 
 4. Alusta tietokanta komennolla:
     ```bash
