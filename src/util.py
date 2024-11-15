@@ -15,11 +15,13 @@ def validate_reference(author, title, journal, year, volume, number, pages, mont
         raise UserInputError("Reference information length must be smaller than 200")
     if int(year) < 1 or int(year) > 2100:
             raise UserInputError("Year must be between 1-2100")
-    if int(volume) < 1 or int(volume) > 5000:
-        raise UserInputError("Volume must be between 1-5000")
-    if int(number) < 1 or int(number) > 5000:
-        raise UserInputError("Number must be between 1-5000")
-    if int(pages) < 2 or int(pages) > 5000:
-        raise UserInputError("Pages must be between 1-5000")
-    if int(month) < 1 or int(month) > 12:
-        raise UserInputError("Month must be between 1-12")
+    
+    if volume != "":
+        if int(volume) < 1 or int(volume) > 5000:
+            raise UserInputError("Volume must be between 1-5000")
+    if number != "":
+        if int(number) < 1 or int(number) > 5000:
+            raise UserInputError("Number must be between 1-5000")
+    if month !=  "":
+        if int(month) < 1 or int(month) > 12:
+            raise UserInputError("Month must be between 1-12")
