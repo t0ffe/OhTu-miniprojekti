@@ -11,11 +11,11 @@ Reference List
   {% for reference in references %}
     <li>
       {{ reference.author }}. {{ reference.title }}. {{ reference.journal }}, {{ reference.year }}.
-      {% if reference.volume %}{{ reference.volume }},{% endif %}
-      {% if reference.number %}{{ reference.number }},{% endif %}
-      {% if reference.pages %}{{ reference.pages }},{% endif %}
-      {% if reference.month %}{{ reference.month }},{% endif %}
-      {% if reference.note %}{{ reference.note }},{% endif %}
+      {% if reference.volume %} vol. {{ reference.volume }}.{% endif %}
+      {% if reference.number %} no. {{ reference.number }}.{% endif %}
+      {% if reference.pages %} page(s) {{ reference.pages }}.{% endif %}
+      {% if reference.month %} month: {{ reference.month }}.{% endif %}
+      {% if reference.note %} notes: {{ reference.note }}.{% endif %}
     </li>
   {% endfor %}
 </ul>
