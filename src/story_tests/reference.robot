@@ -48,6 +48,11 @@ After adding two references there is two
     Click Link  View added references
     Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen, 2020.
     Page Should Contain  Aki Artikuloija. Parempi Artikkeli. Lehtinen, 2022.
+    Page Should Not Contain    vol.
+    Page Should Not Contain    no.
+    Page Should Not Contain    page(s)
+    Page Should Not Contain    month:
+    Page Should Not Contain    notes:
 
 After adding voluntary information there is info
     Go To  ${NEW_REFERENCE} 

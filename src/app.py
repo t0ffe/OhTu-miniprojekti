@@ -1,7 +1,6 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from repositories.reference_repository import (
-    get_db_contents,
     create_reference,
     get_all_references,
 )
@@ -43,11 +42,6 @@ def reference_creation():
     except Exception as error:
         flash(str(error))
         return redirect("/new_reference")
-
-
-@app.route("/toggle_reference/<reference_id>", methods=["POST"])
-def toggle_reference(reference_id):
-    return redirect("/")
 
 
 @app.route("/list_references", methods=["GET"])
