@@ -7,17 +7,26 @@ Test Setup       Reset References
 *** Test Cases ***
 Main Page Should Be Open
     Go To  ${HOME_URL}
-    Title Should Be  References app
-    Page Should Contain  Here the client can add article type references
+    Title Should Be  References App
+    Page Should Contain  This is an app for the client to add article type references and inspect them in BibTex- format
+    Page Should Contain  The client can also edit added references
+    Page Should Contain  The app is created by LateXin Ritarit during the course Ohjelmistotuotanto (5 op)
+    Page Should Contain  Creators:
+    Page Should Contain  Tofelius Laakso
+    Page Should Contain  Heidi Tapani
+    Page Should Contain  Daniel Kalske
+    Page Should Contain  Emilia Koponen
+    Page Should Contain  Matias Ilola
+    Page Should Contain  Kety Kuusaru
 
-Click List All References Link
+Click All References Link
     Go To  ${HOME_URL}
-    Click Link  List all references
+    Click Link  All references
     Title Should Be  Reference List
 
-Click Add New Reference List Link
+Click New Reference List Link
     Go To  ${HOME_URL}
-    Click Link  Add new reference
+    Click Link  New reference
     Page Should Contain  Add a new article type reference
 
 After adding a reference there is one
