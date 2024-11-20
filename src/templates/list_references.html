@@ -5,6 +5,9 @@ Reference List
 {% endblock %}
 
 {% block body %}
+<br>
+<br>
+<br>
 <h2>Reference List</h2>
 
 <ul>
@@ -17,7 +20,7 @@ Reference List
       {% if reference.month %} month: {{ reference.month }}.{% endif %}
       {% if reference.note %} notes: {{ reference.note }}.{% endif %}
       <a href="/add_reference?id={{ reference.id }}">
-        <button style="font-size: 13px; padding: 7px 7px;">Edit</button>
+        <button style="font-size: 13px; padding: 7px 7px;background-color: #72A0C1">Edit</button>
     </a>
     </li>
   {% endfor %}
