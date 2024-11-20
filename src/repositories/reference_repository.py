@@ -10,6 +10,12 @@ def get_all_references():
     return [Reference(*row) for row in contents]
 
 
+def get_reference_by_id(id):
+    result = db.session.execute(text(f"SELECT * FROM articles WHERE id = {id}"))
+    contents = result.fetchall()
+    return [Reference(*row) for row in contents]
+
+
 def create_reference(author, title, journal, year, volume, number, pages, month, note):
     volume = volume if volume else None
     number = number if number else None
@@ -22,7 +28,17 @@ def create_reference(author, title, journal, year, volume, number, pages, month,
             VALUES (:author, :title, :journal, :year, :volume, :number, :pages, :month, :note)"
     )
     db.session.execute(
-        sql, {"author": author, "title": title, "journal": journal, "year": year,
-              "volume": volume, "number": number, "pages": pages, "month": month, "note": note}
+        sql,
+        {
+            "author": author,
+            "title": title,
+            "journal": journal,
+            "year": year,
+            "volume": volume,
+            "number": number,
+            "pages": pages,
+            "month": month,
+            "note": note,
+        },
     )
     db.session.commit()
