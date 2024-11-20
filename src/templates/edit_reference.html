@@ -7,101 +7,76 @@ References App
 {% block body %}
 <script>
   function add_author() {
-    var container = document.getElementById("added-authors");
-
-    var Authors = document.getElementsByClassName("author-container").length;
-
-    if (Authors > 10) {
-        alert("You can only add max 10 authors")
+    var authorsContainer = document.getElementById('authorsContainer');
+    var Authors = authorsContainer.getElementsByClassName('author-entry').length;
+    
+    if (Authors >= 10) {
+        alert('You can only add max 10 authors');
         return;
     }
+    
+    const authorEntry = document.createElement('div');
+    authorEntry.className = 'author-entry';
+    authorEntry.innerHTML = `
+        <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required>
+        <button type="button" class="remove-author" onclick="remove_author(this)">×</button>`;
+    authorsContainer.appendChild(authorEntry);
+}
 
-    const newDiv = document.createElement("div");
-    newDiv.className = "author-container";
-    newDiv.style.marginTop = "10px";
-
-    const newChoice = document.createElement("label");
-    newChoice.textContent = "Author*";
-    newDiv.appendChild(newChoice);
-
-    const newElem = document.createElement("input");
-    newElem.setAttribute("type", "text");
-    newElem.setAttribute("name", "author");
-    newElem.setAttribute("minlength", "1");
-    newElem.setAttribute("maxlength", "200");
-    newElem.setAttribute("required", "");
-
-    newDiv.appendChild(newElem);
-    newDiv.appendChild(document.createElement("br"));
-    container.appendChild(newDiv)
-  }
+function remove_author(button) {
+    button.parentElement.remove();
+}
 </script>
+<div class="form-section">
+  <h2>Edit your reference</h2>
+    <form action="/edit_reference" method="post" onsubmit="return check(this)" >
+      <div class="form-grid">
 
-<h2>Add a new article type reference</h2>
-<br>
-<h4>Please fill in the fields below:</h4>
-<br>
-<form action="/edit_reference" method="post" onsubmit="return check(this)" >
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul>
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-  <label for="content">Author*</label>
-  <input type="text" name="author" minlength="1" maxlength="200" required>
-  <div id="added-authors"></div>
-  <br>
-  <button type="button" onclick="add_author()">Add another author </button>    
-  <br>
-  <br>
-  <label for="content">Title*</label>
-  <input type="text" name="title" minlength="1" maxlength="200" required value="{{ reference.title }}">
-  <br>
-  <br>
-  <label for="content">Year*</label>
-  <input type="number" name="year" min="1" max="2100" required>
-  <br>
-  <br>
-  <label for="content">Journal*</label>
-  <input type="text" name="journal" minlength="1" maxlength="200" required><br>
-  <br>
-  <br>
-  <b>Optional fields:</b><br>
-  <br>
-  <label for="content">Volume</label>
-  <input type="number" name="volume" min="1" max="5000">
-  <br>
-  <br>
-  <label for="content">Number</label>
-  <input type="number" name="number" min="1" max="5000">
-  <br>
-  <br>
-  <label for="content">Pages</label>
-  <input type="text" name="pages" minlength="1" maxlength="200">
-  <br>
-  <br>
-  <label for="content">Month</label>
-  <input type="number" name="month" min="1" max="12">
-  <br>
-  <br>
-  <label for="content">Note</label>
-  <input type="text" name="note" minlength="1" maxlength="200"><br>
-  <br>
-  <br>
-  <button type="submit">
-    Add 
-  </button>
-</form>
-<br>
-<br>
-<div>
-  <a href="/list_references">View added references</a>
-  <br>
-  <p><a href="/">Back to front page</a></p>
+        <div class="authors-container">
+          <div id="authorsContainer">
+              <div class="author-entry">
+                <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required>
+                <button class="add-author-button" type="button" onclick="add_author()">+</button>
+              </div>
+          </div>
+      </div>
+        <div>
+          <label for="title">Title</label>
+          <input placeholder="Title" type="text" name="title" minlength="1" maxlength="200" required value="{{ reference.title }}">
+        </div>
+        <div>
+          <label for="year">Year</label>
+          <input placeholder="Year" type="number" name="year" min="1" max="2100" required value="{{ reference.year }}">
+        </div>
+        <div>
+          <label for="journal">Journal</label>
+          <input placeholder="Journal" type="text" name="journal" minlength="1" maxlength="200" required value="{{ reference.journal }}">
+        </div>
+        <div>
+          <label for="volume">Volume (Optional)</label>
+          <input placeholder="Volume (Optional)" type="number" name="volume" min="1" max="5000" value="{{ reference.volume }}">
+        </div>
+        <div>
+          <label for="number">Number (Optional)</label>
+          <input placeholder="Number (Optional)" type="number" name="number" min="1" max="5000" value="{{ reference.number }}">
+        </div>
+        <div>
+          <label for="pages">Pages (Optional)</label>
+          <input placeholder="Pages (Optional)" type="text" name="pages" minlength="1" maxlength="200" value="{{ reference.pages }}">
+        </div>
+        <div>
+          <label for="month">Month (Optional)</label>
+          <input placeholder="Month (Optional)" type="number" name="month" min="1" max="12" value="{{ reference.month }}">
+        </div>
+        <div>
+          <label for="note">Note (Optional)</label>
+          <input placeholder="Note (Optional)" type="text" name="note" minlength="1" maxlength="200" value="{{ reference.note }}">
+        </div>
+      </div> 
+      <button class="button add-reference-button" type="submit">
+        Edit 
+      </button>
+    </form>
 </div>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
