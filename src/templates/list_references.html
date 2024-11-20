@@ -16,6 +16,9 @@ Reference List
       {% if reference.pages %} page(s) {{ reference.pages }}.{% endif %}
       {% if reference.month %} month: {{ reference.month }}.{% endif %}
       {% if reference.note %} notes: {{ reference.note }}.{% endif %}
+      <a href="/add_reference?id={{ reference.id }}">
+        <button style="font-size: 13px; padding: 7px 7px;">Edit</button>
+    </a>
     </li>
   {% endfor %}
 </ul>
