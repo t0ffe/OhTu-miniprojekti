@@ -10,25 +10,26 @@ Reference List
 <br>
 <h2>Reference List</h2>
 
-<ul>
+<div class="references-container">
+<div class="export-button-container">
+  <button class="export-button" >Export as BibTeX</button>
+</div>
+
   {% for reference in references %}
-    <li>
-      {{ reference.author }}. {{ reference.title }}. {{ reference.journal }}, {{ reference.year }}.
+    <li class="reference">
+      {{ reference.author }}. {{ reference.title }}. {{ reference.journal }} ({{ reference.year }})
       {% if reference.volume %} vol. {{ reference.volume }}.{% endif %}
       {% if reference.number %} no. {{ reference.number }}.{% endif %}
       {% if reference.pages %} page(s) {{ reference.pages }}.{% endif %}
       {% if reference.month %} month: {{ reference.month }}.{% endif %}
       {% if reference.note %} notes: {{ reference.note }}.{% endif %}
       <a href="/add_reference?id={{ reference.id }}">
-        <button style="font-size: 13px; padding: 7px 7px;background-color: #72A0C1">Edit</button>
-    </a>
+        <button class="edit-button">Edit</button>
+      </a>
+      <a href="/delete_reference?id={{ reference.id }}">
+        <button class="delete-button">Delete</button>
+      </a>
     </li>
   {% endfor %}
-</ul>
-<br>
-<br>
-<div>
-  <p><a href="/new_reference">Add new reference</a></p>
-  <p><a href="/">Back to front page</a></p>
 </div>
 {% endblock %}

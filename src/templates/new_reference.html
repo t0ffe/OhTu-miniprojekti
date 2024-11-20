@@ -5,71 +5,58 @@ References App
 {% endblock %}
 
 {% block body %}
-<br>
-<br>
-<br>
-<h2>Add a new article type reference</h2>
-<br>
-<h4>Please fill in the fields below:</h4>
-<br>
-<form action="/create_reference" method="post" onsubmit="return check(this)" >
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul>
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
-  <label for="content">Author:</label>
-  <input type="text" name="author" minlength="1" maxlength="200" required>
-  <br>
-  <br>
-  <label for="content">Title:</label>
-  <input type="text" name="title" minlength="1" maxlength="200" required>
-  <br>
-  <br>
-  <label for="content">Year:</label>
-  <input type="number" name="year" min="1" max="2100" required>
-  <br>
-  <br>
-  <label for="content">Journal:</label>
-  <input type="text" name="journal" minlength="1" maxlength="200" required><br>
-  <br>
-  <br>
-  <b>Optional fields:</b><br>
-  <br>
-  <label for="content">Volume:</label>
-  <input type="number" name="volume" min="1" max="5000">
-  <br>
-  <br>
-  <label for="content">Number:</label>
-  <input type="number" name="number" min="1" max="5000">
-  <br>
-  <br>
-  <label for="content">Pages:</label>
-  <input type="text" name="pages" minlength="1" maxlength="200">
-  <br>
-  <br>
-  <label for="content">Month:</label>
-  <input type="number" name="month" min="1" max="12">
-  <br>
-  <br>
-  <label for="content">Note:</label>
-  <input type="text" name="note" minlength="1" maxlength="200"><br>
-  <br>
-  <br>
-  <button type="submit">
-    Add 
-  </button>
-</form>
-<br>
-<br>
-<div>
-  <a href="/list_references">View added references</a>
-  <br>
-  <p><a href="/">Back to front page</a></p>
+<div class="form-section">
+  <h2>Add a new article type reference</h2>
+    <form action="/create_reference" method="post" onsubmit="return check(this)" >
+      <div class="form-grid">
+        <div>
+          <label for="content">Author:</label>
+          <input type="text" name="author" minlength="1" maxlength="200" required>
+        </div>
+        <div>
+          <label for="content">Title:</label>
+          <input type="text" name="title" minlength="1" maxlength="200" required>
+        </div>
+        <div>
+          <label for="content">Year:</label>
+          <input type="number" name="year" min="1" max="2100" required>
+        </div>
+        <div>
+          <label for="content">Journal:</label>
+          <input type="text" name="journal" minlength="1" maxlength="200" required><br>
+        </div>
+        <div>
+          <label for="content">Volume (Optional):</label>
+          <input type="number" name="volume" min="1" max="5000">
+        </div>
+        <div>
+          <label for="content">Number (Optional):</label>
+          <input type="number" name="number" min="1" max="5000">
+        </div>
+        <div>
+          <label for="content">Pages (Optional):</label>
+          <input type="text" name="pages" minlength="1" maxlength="200">
+        </div>
+        <div>
+          <label for="content">Month (Optional):</label>
+          <input type="number" name="month" min="1" max="12">
+        </div>
+        <div>
+          <label for="content">Note (Optional):</label>
+          <input type="text" name="note" minlength="1" maxlength="200"><br>
+        </div>
+      </div> 
+      <button class="button add-reference-button" type="submit">
+        Add 
+      </button>
+    </form>
 </div>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="success-message">{{ messages }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
 {% endblock %}
