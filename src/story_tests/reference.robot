@@ -37,8 +37,8 @@ After adding a reference there is one
     Input Text  journal  Lehtinen
     Click Button  Add
     Page Should Contain  Succesfully added reference!
-    Click Link  View added references
-    Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen, 2020.
+    Click Button  All references
+    Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen (2020)
 
 After adding two references there is two
     Go To  ${NEW_REFERENCE} 
@@ -54,9 +54,9 @@ After adding two references there is two
     Input Text  journal  Lehtinen
     Click Button  Add
     Page Should Contain  Succesfully added reference!
-    Click Link  View added references
-    Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen, 2020.
-    Page Should Contain  Aki Artikuloija. Parempi Artikkeli. Lehtinen, 2022.
+    Click Button  All references
+    Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen (2020)
+    Page Should Contain  Aki Artikuloija. Parempi Artikkeli. Lehtinen (2022)
     Page Should Not Contain    vol.
     Page Should Not Contain    no.
     Page Should Not Contain    page(s)
@@ -76,8 +76,8 @@ After adding voluntary information there is info
     Input Text  note  Muistiin
     Click Button  Add
     Page Should Contain  Succesfully added reference!
-    Click Link  View added references
-    Page Should Contain  Aki Artikuloija. Paras Artikkeli. Lehtinen, 2022. 
+    Click Button  All references
+    Page Should Contain  Aki Artikuloija. Paras Artikkeli. Lehtinen (2022)
     Page Should Contain  vol. 3
     Page Should Contain  no. 2.
     Page Should Contain  page(s) 142.
