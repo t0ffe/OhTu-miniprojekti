@@ -64,27 +64,39 @@ def create_author(author, reference_id):
 
 
 def generate_bibkey(reference):
-    author = reference.author[:3]
+    author = "".join([name.split()[-1][:4] for name in reference.authors.split(" & ")])
     title = reference.title[:3]
     year = reference.year
     return f"{author}{title}{year}"
 
 
 def format_bibtex(reference):
-    bibkey = generate_bibkey(reference)
-    author = reference.author
-    title = reference.title
-    journal = reference.journal
-    year = reference.year
-    volume = reference.volume
-    number = reference.number
-    pages = reference.pages
-    month = reference.month
-    note = reference.note
-    return f"@article{{{bibkey},\n  author = {{{author}}},\n  title = {{{title}}},\n  journal = {{{journal}}},\n  year = {{{year}}},\n  volume = {{{volume}}},\n  number = {{{number}}},\n  pages = {{{pages}}},\n  month = {{{month}}},\n  note = {{{note}}}\n}}"
+    bibtex_str = ""
+    bibtex_str += f"@article{{{str(generate_bibkey(reference))},\n"
+    bibtex_str += f"  author = {{{str(reference.authors)}}}\n"
+    bibtex_str += f"  title = {{{str(reference.title)}}}\n"
+    bibtex_str += f"  journal = {{{str(reference.journal)}}}\n"
+    bibtex_str += f"  year = {{{str(reference.year)}}}\n"
+    
 
+    if reference.volume:
+        bibtex_str += f"  volume = {{{str(reference.volume)}}}\n"
+    if reference.number:
+        bibtex_str += f"  number = {{{str(reference.number)}}}\n"
+    if reference.pages:
+        bibtex_str += f"  pages = {{{str(reference.pages)}}}\n"
+    if reference.month:
+        bibtex_str += f"  month = {{{str(reference.month)}}}\n"
+    if reference.note:
+        bibtex_str += f"  note = {{{str(reference.note)}}}\n"
+    
+    bibtex_str += "}\n"
+
+    return bibtex_str
 
 def join_bibtex():
-    result = db.session.execute(text(f"SELECT * FROM articles"))
+    result = db.session.execute(text(
+        f"SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
+            r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"))
     contents = result.fetchall()
     return "\n".join([format_bibtex(reference) for reference in contents])
