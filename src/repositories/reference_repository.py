@@ -36,7 +36,6 @@ def create_reference(authors, title, journal, year, volume, number, pages, month
     result = db.session.execute(
         sql,
         {
-            "author": author,
             "title": title,
             "journal": journal,
             "year": year,
