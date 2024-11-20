@@ -56,6 +56,11 @@ def references_as_bibtex():
     bibtex = join_bibtex()
     return render_template("bibtex.html", bibtex=bibtex)
 
+@app.route("/delete_reference", methods=["GET"])
+def delete_reference():
+    reference_id = request.args.get("id")
+
+
 
 # testausta varten oleva reitti
 if test_env:
