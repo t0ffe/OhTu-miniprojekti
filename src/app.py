@@ -70,6 +70,7 @@ def reference_editing():
         reference = get_reference_by_id(request.args.get("id"))
         return render_template("edit_reference.html", reference=reference)
     if request.method == "POST":
+        reference_id = request.form.get("reference_id")
         authors = request.form.getlist("author")
         title = request.form.get("title")
         journal = request.form.get("journal")
@@ -85,13 +86,22 @@ def reference_editing():
                 authors, title, journal, year, volume, number, pages, month, note
             )
             edit_reference(
-                authors, title, journal, year, volume, number, pages, month, note
+                reference_id,
+                authors,
+                title,
+                journal,
+                year,
+                volume,
+                number,
+                pages,
+                month,
+                note,
             )
             flash("Succesfully added reference!")
             return redirect("/list_references")
         except Exception as error:
             flash(str(error))
-            return redirect("/edit_reference")
+            return redirect(f"/edit_reference?id={reference_id}")
 
 
 # testausta varten oleva reitti
