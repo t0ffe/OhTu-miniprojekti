@@ -184,3 +184,35 @@ pre {
     max-height: 80vh;
     overflow-y: auto;
 }
+
+.authors-container {
+    grid-column: 1 / -1;
+}
+
+.author-entry {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.remove-author {
+    background: #ff4444;
+    padding: 8px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.add-author-button {
+    padding: 8px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
