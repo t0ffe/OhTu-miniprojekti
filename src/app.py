@@ -3,7 +3,8 @@ from db_helper import reset_db
 from repositories.reference_repository import (
     create_reference,
     get_all_references,
-    get_reference_by_id
+    get_reference_by_id,
+    join_bibtex
 )
 from config import app, test_env
 from util import validate_reference
@@ -49,6 +50,11 @@ def reference_creation():
 def list_references():
     references = get_all_references()
     return render_template("list_references.html", references=references)
+
+@app.route("/references_as_bibtex")
+def references_as_bibtex():
+    bibtex = join_bibtex()
+    return render_template("bibtex.html", bibtex=bibtex)
 
 
 # testausta varten oleva reitti
