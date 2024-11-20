@@ -2,9 +2,9 @@ class UserInputError(Exception):
     pass
 
 
-def validate_reference(author, title, journal, year, volume, number, pages, month, note):
-    mandatory = [author, title, journal, year]
-    allfields = [author, title, journal, year,
+def validate_reference(authors, title, journal, year, volume, number, pages, month, note):
+    mandatory = [authors, title, journal, year]
+    allfields = [authors, title, journal, year,
                  volume, number, pages, month, note]
     nonempty = []
     for field in allfields:
@@ -35,3 +35,6 @@ def validate_reference(author, title, journal, year, volume, number, pages, mont
             raise UserInputError("Month must be a number between 1-12")
         if int(month) < 1 or int(month) > 12:
             raise UserInputError("Month must be a number between 1-12")
+
+    if len(authors) > 10:
+        raise UserInputError("Maximum number of authors is 10")

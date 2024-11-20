@@ -2,7 +2,7 @@ class Reference:
     def __init__(
         self,
         id,
-        author,
+        authors,
         title,
         journal,
         year,
@@ -13,7 +13,7 @@ class Reference:
         note=None,
     ):
         self.id = id
-        self.author = author
+        self.authors = authors
         self.title = title
         self.journal = journal
         self.year = year
@@ -24,4 +24,20 @@ class Reference:
         self.note = note
 
     def __str__(self):
-        return f"{self.author}. {self.title}. {self.journal}, {self.year}."
+        vol = None
+        no = None
+        pages = None
+        month = None
+        note = None
+
+        if self.volume:
+            vol = f"vol. {self.volume}."
+        if self.number:
+            no = f"no. {self.number}."
+        if self.pages:
+            pages = f"page(s) {self.pages}."
+        if self.month:
+            month = f"month: {self.month}."
+        if self.note:
+            note = f"notes: {self.note}."
+        return f"{self.authors}. {self.title}. {self.journal}, {self.year}. {vol or ''} {no or ''} {pages or ''} {month or ''} {note or ''}"

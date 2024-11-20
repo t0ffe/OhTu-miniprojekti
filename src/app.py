@@ -22,7 +22,7 @@ def new():
 
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
-    author = request.form.get("author")
+    authors = request.form.getlist("author")
     title = request.form.get("title")
     journal = request.form.get("journal")
     year = request.form.get("year")
@@ -34,10 +34,10 @@ def reference_creation():
 
     try:
         validate_reference(
-            author, title, journal, year, volume, number, pages, month, note
+            authors, title, journal, year, volume, number, pages, month, note
         )
         create_reference(
-            author, title, journal, year, volume, number, pages, month, note
+            authors, title, journal, year, volume, number, pages, month, note
         )
         flash("Succesfully added reference!")
         return redirect("/new_reference")
