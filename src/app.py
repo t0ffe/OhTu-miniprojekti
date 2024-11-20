@@ -5,7 +5,7 @@ from repositories.reference_repository import (
     get_all_references,
     get_reference_by_id,
     join_bibtex,
-    edit_reference
+    edit_reference,
 )
 from config import app, test_env
 from util import validate_reference
@@ -52,10 +52,12 @@ def list_references():
     references = get_all_references()
     return render_template("list_references.html", references=references)
 
+
 @app.route("/references_as_bibtex")
 def references_as_bibtex():
     bibtex = join_bibtex()
     return render_template("bibtex.html", bibtex=bibtex)
+
 
 @app.route("/delete_reference", methods=["GET"])
 def delete_reference():
@@ -64,8 +66,8 @@ def delete_reference():
 
 @app.route("/edit_reference", methods=["POST", "GET"])
 def reference_editing():
-    reference = get_reference_by_id(request.args.get("id"))
     if request.method == "GET":
+        reference = get_reference_by_id(request.args.get("id"))
         return render_template("edit_reference.html", reference=reference)
     if request.method == "POST":
         authors = request.form.getlist("author")
@@ -90,6 +92,7 @@ def reference_editing():
         except Exception as error:
             flash(str(error))
             return redirect("/edit_reference")
+
 
 # testausta varten oleva reitti
 if test_env:
