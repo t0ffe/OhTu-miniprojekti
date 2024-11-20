@@ -5,14 +5,15 @@ Reference List
 {% endblock %}
 
 {% block body %}
-<br>
-<br>
-<br>
-<h2>Reference List</h2>
+
+
 
 <div class="references-container">
+  <h2>Reference List</h2>
 <div class="export-button-container">
-  <button class="export-button" >Export as BibTeX</button>
+  <a href="/references_as_bibtex">
+    <button class="export-button" >Export as BibTeX</button>
+  </a>
 </div>
 
   {% for reference in references %}
