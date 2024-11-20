@@ -9,81 +9,90 @@ References App
   function add_author() {
     var authorsContainer = document.getElementById('authorsContainer');
     var Authors = authorsContainer.getElementsByClassName('author-entry').length;
-    
+
     if (Authors >= 10) {
-        alert('You can only add max 10 authors');
-        return;
+      alert('You can only add max 10 authors');
+      return;
     }
-    
+
     const authorEntry = document.createElement('div');
     authorEntry.className = 'author-entry';
     authorEntry.innerHTML = `
         <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required>
         <button type="button" class="remove-author" onclick="remove_author(this)">×</button>`;
     authorsContainer.appendChild(authorEntry);
-}
+  }
 
-function remove_author(button) {
+  function remove_author(button) {
     button.parentElement.remove();
-}
+  }
 </script>
 <div class="form-section">
   <h2>Edit your reference</h2>
-    <form action="/edit_reference" method="post" onsubmit="return check(this)" >
-      <div class="form-grid">
+  <form action="/edit_reference" method="post" onsubmit="return check(this)">
+    <div class="form-grid">
 
-        <div class="authors-container">
-          <div id="authorsContainer">
-              <div class="author-entry">
-                <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required>
-                <button class="add-author-button" type="button" onclick="add_author()">+</button>
-              </div>
+      <div class="authors-container">
+        <div id="authorsContainer">
+          <div class="author-entry">
+            <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required>
+            <button class="add-author-button" type="button" onclick="add_author()">+</button>
           </div>
+        </div>
       </div>
-        <div>
-          <label for="title">Title</label>
-          <input placeholder="Title" type="text" name="title" minlength="1" maxlength="200" required value="{{ reference.title }}">
-        </div>
-        <div>
-          <label for="year">Year</label>
-          <input placeholder="Year" type="number" name="year" min="1" max="2100" required value="{{ reference.year }}">
-        </div>
-        <div>
-          <label for="journal">Journal</label>
-          <input placeholder="Journal" type="text" name="journal" minlength="1" maxlength="200" required value="{{ reference.journal }}">
-        </div>
-        <div>
-          <label for="volume">Volume (Optional)</label>
-          <input placeholder="Volume (Optional)" type="number" name="volume" min="1" max="5000" value="{{ reference.volume }}">
-        </div>
-        <div>
-          <label for="number">Number (Optional)</label>
-          <input placeholder="Number (Optional)" type="number" name="number" min="1" max="5000" value="{{ reference.number }}">
-        </div>
-        <div>
-          <label for="pages">Pages (Optional)</label>
-          <input placeholder="Pages (Optional)" type="text" name="pages" minlength="1" maxlength="200" value="{{ reference.pages }}">
-        </div>
-        <div>
-          <label for="month">Month (Optional)</label>
-          <input placeholder="Month (Optional)" type="number" name="month" min="1" max="12" value="{{ reference.month }}">
-        </div>
-        <div>
-          <label for="note">Note (Optional)</label>
-          <input placeholder="Note (Optional)" type="text" name="note" minlength="1" maxlength="200" value="{{ reference.note }}">
-        </div>
-      </div> 
-      <button class="button add-reference-button" type="submit">
-        Edit 
-      </button>
-    </form>
+      <div>
+        <label for="title">Title</label>
+        <input placeholder="Title" type="text" name="title" minlength="1" maxlength="200" required
+          value="{{ reference.title }}">
+      </div>
+      <div>
+        <label for="year">Year</label>
+        <input placeholder="Year" type="number" name="year" min="1" max="2100" required value="{{ reference.year }}">
+      </div>
+      <div>
+        <label for="journal">Journal</label>
+        <input placeholder="Journal" type="text" name="journal" minlength="1" maxlength="200" required
+          value="{{ reference.journal }}">
+      </div>
+      <div>
+        <label for="volume">Volume (Optional)</label>
+        <input placeholder="Volume (Optional)" type="number" name="volume" min="1" max="5000"
+          value="{{ reference.volume }}">
+      </div>
+      <div>
+        <label for="number">Number (Optional)</label>
+        <input placeholder="Number (Optional)" type="number" name="number" min="1" max="5000"
+          value="{{ reference.number }}">
+      </div>
+      <div>
+        <label for="pages">Pages (Optional)</label>
+        <input placeholder="Pages (Optional)" type="text" name="pages" minlength="1" maxlength="200"
+          value="{{ reference.pages }}">
+      </div>
+      <div>
+        <label for="month">Month (Optional)</label>
+        <input placeholder="Month (Optional)" type="number" name="month" min="1" max="12" value="{{ reference.month }}">
+      </div>
+      <div>
+        <label for="note">Note (Optional)</label>
+        <input placeholder="Note (Optional)" type="text" name="note" minlength="1" maxlength="200"
+          value="{{ reference.note }}">
+      </div>
+      <div>
+        <input name="reference_id" type="hidden" value="{{ reference.id }}">
+      </div>
+    </div>
+    <button class="button add-reference-button" type="submit">
+      Edit
+    </button>
+  </form>
 </div>
 {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <div class="success-message">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
+{% if messages %}
+{% for message in messages %}
+<div class="success-message">{{ message }}</div>
+{% endfor %}
+{% endif %}
 {% endwith %}
 
 {% endblock %}
