@@ -61,6 +61,34 @@ def delete_reference():
     reference_id = request.args.get("id")
 
 
+@app.route("/edit_reference", methods=["POST", "GET"])
+def reference_editing():
+    reference = get_reference_by_id(1)
+    #if request.method == "GET":
+    return render_template("edit_reference.html", reference=reference)
+    """ if request.method == "POST":
+        authors = request.form.getlist("author")
+        title = request.form.get("title")
+        journal = request.form.get("journal")
+        year = request.form.get("year")
+        volume = request.form.get("volume")
+        number = request.form.get("number")
+        pages = request.form.get("pages")
+        month = request.form.get("month")
+        note = request.form.get("note")
+
+        try:
+            validate_reference(
+                authors, title, journal, year, volume, number, pages, month, note
+            )
+            create_reference(
+                authors, title, journal, year, volume, number, pages, month, note
+            )
+            flash("Succesfully added reference!")
+            return redirect("/list_references")
+        except Exception as error:
+            flash(str(error))
+            return redirect("/edit_reference") """
 
 # testausta varten oleva reitti
 if test_env:

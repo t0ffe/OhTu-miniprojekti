@@ -15,7 +15,8 @@ def get_all_references():
 def get_reference_by_id(id):
     result = db.session.execute(text(f"SELECT * FROM articles WHERE id = {id}"))
     contents = result.fetchall()
-    return [Reference(*row) for row in contents]
+    columns = result.keys()
+    return [dict(zip(columns, row)) for row in contents][0]
 
 
 def delete_reference(id):
@@ -53,6 +54,8 @@ def create_reference(authors, title, journal, year, volume, number, pages, month
     for author in authors:
         create_author(author, id_of_new_row)
 
+def edit_reference(authors, title, journal, year, volume, number, pages, month, note):
+    pass
 
 def create_author(author, reference_id):
     sql = text(
