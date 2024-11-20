@@ -16,6 +16,10 @@ def get_reference_by_id(id):
     return [Reference(*row) for row in contents]
 
 
+def delete_reference(id):
+    db.session.execute(text(f"DELETE FROM articles WHERE id = {id}"))
+
+
 def create_reference(author, title, journal, year, volume, number, pages, month, note):
     volume = volume if volume else None
     number = number if number else None
@@ -43,11 +47,13 @@ def create_reference(author, title, journal, year, volume, number, pages, month,
     )
     db.session.commit()
 
+
 def generate_bibkey(reference):
     author = reference.author[:3]
     title = reference.title[:3]
     year = reference.year
-    return f'{author}{title}{year}'
+    return f"{author}{title}{year}"
+
 
 def format_bibtex(reference):
     bibkey = generate_bibkey(reference)
@@ -60,9 +66,10 @@ def format_bibtex(reference):
     pages = reference.pages
     month = reference.month
     note = reference.note
-    return f'@article{{{bibkey},\n  author = {{{author}}},\n  title = {{{title}}},\n  journal = {{{journal}}},\n  year = {{{year}}},\n  volume = {{{volume}}},\n  number = {{{number}}},\n  pages = {{{pages}}},\n  month = {{{month}}},\n  note = {{{note}}}\n}}'
+    return f"@article{{{bibkey},\n  author = {{{author}}},\n  title = {{{title}}},\n  journal = {{{journal}}},\n  year = {{{year}}},\n  volume = {{{volume}}},\n  number = {{{number}}},\n  pages = {{{pages}}},\n  month = {{{month}}},\n  note = {{{note}}}\n}}"
+
 
 def join_bibtex():
     result = db.session.execute(text(f"SELECT * FROM articles"))
     contents = result.fetchall()
-    return '\n'.join([format_bibtex(reference) for reference in contents])
+    return "\n".join([format_bibtex(reference) for reference in contents])
