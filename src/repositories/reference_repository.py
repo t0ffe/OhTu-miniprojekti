@@ -55,7 +55,13 @@ def create_reference(authors, title, journal, year, volume, number, pages, month
         create_author(author, id_of_new_row)
 
 def edit_reference(authors, title, journal, year, volume, number, pages, month, note):
-    pass
+    volume = volume if volume else None
+    number = number if number else None
+    pages = pages if pages else None
+    month = month if month else None
+    note = note if note else None
+
+    sql = text("UPDATE articles SET title, journal, year, volume, number, pages, month, note")
 
 def create_author(author, reference_id):
     sql = text(
