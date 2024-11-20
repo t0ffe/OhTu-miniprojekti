@@ -207,6 +207,10 @@ pre {
     border-radius: 4px;
 }
 
+.remove-author:hover {
+    background: #cc0000;
+}
+
 .add-author-button {
     padding: 8px;
     width: 30px;
