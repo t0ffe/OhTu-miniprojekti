@@ -26,6 +26,7 @@ def get_reference_by_id(id):
 
 def delete_reference(id):
     db.session.execute(text("DELETE FROM articles WHERE id = :id"), {"id": id})
+    db.session.commit()
 
 
 def create_reference(authors, title, journal, year, volume, number, pages, month, note):
