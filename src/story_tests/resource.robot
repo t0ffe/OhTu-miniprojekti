@@ -8,7 +8,7 @@ ${HOME_URL}   http://${SERVER}
 ${RESET_URL}  http://${SERVER}/reset_db
 ${NEW_REFERENCE}  http://${SERVER}/new_reference
 ${LIST_REFERENCES}  http://${SERVER}/list_reference
-${EDIT_REFERENCE} http://${SERVER}/edit_reference
+${EDIT_REFERENCE}  http://${SERVER}/edit_reference
 ${BROWSER}    chrome
 ${HEADLESS}   false
 
