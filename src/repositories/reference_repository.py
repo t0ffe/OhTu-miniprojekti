@@ -16,14 +16,16 @@ def get_all_references():
 
 
 def get_reference_by_id(id):
-    result = db.session.execute(text(f"SELECT * FROM articles WHERE id = {id}"))
+    result = db.session.execute(
+        text("SELECT * FROM articles WHERE id = :id"), {"id": id}
+    )
     contents = result.fetchall()
     columns = result.keys()
     return [dict(zip(columns, row)) for row in contents][0]
 
 
 def delete_reference(id):
-    db.session.execute(text(f"DELETE FROM articles WHERE id = {id}"))
+    db.session.execute(text("DELETE FROM articles WHERE id = :id"), {"id": id})
 
 
 def create_reference(authors, title, journal, year, volume, number, pages, month, note):
