@@ -57,17 +57,17 @@ References App
       <div>
         <label for="volume">Volume (Optional)</label>
         <input placeholder="Volume (Optional)" type="number" name="volume" min="1" max="5000"
-          value="{{ reference.volume }}">
+          value="{{ reference.volume or '' }}">
       </div>
       <div>
         <label for="number">Number (Optional)</label>
         <input placeholder="Number (Optional)" type="number" name="number" min="1" max="5000"
-          value="{{ reference.number }}">
+          value="{{ reference.number or '' }}">
       </div>
       <div>
         <label for="pages">Pages (Optional)</label>
         <input placeholder="Pages (Optional)" type="text" name="pages" minlength="1" maxlength="200"
-          value="{{ reference.pages }}">
+          value="{{ reference.pages or '' }}">
       </div>
       <div>
         <label for="month">Month (Optional)</label>
@@ -76,7 +76,7 @@ References App
       <div>
         <label for="note">Note (Optional)</label>
         <input placeholder="Note (Optional)" type="text" name="note" minlength="1" maxlength="200"
-          value="{{ reference.note }}">
+          value="{{ reference.note or '' }}">
       </div>
       <div>
         <input name="reference_id" type="hidden" value="{{ reference.id }}">
