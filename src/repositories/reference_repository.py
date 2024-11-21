@@ -25,7 +25,7 @@ def get_reference_by_id(id):
 
 
 def delete_reference_db(id):
-    db.session.execute(text("DELETE FROM authors WHERE id = :id"), {"id": id})
+    db.session.execute(text("DELETE FROM authors WHERE reference_id = :id"), {"id": id})
     db.session.execute(text("DELETE FROM articles WHERE id = :id"), {"id": id})
     db.session.commit()
 
