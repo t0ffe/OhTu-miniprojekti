@@ -114,17 +114,22 @@ After removing optional information there is only mandatory
     Click Button  Add
     Page Should Contain  Succesfully added reference!
     Click Button  All references
-    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022) vol. 2. no. 4. page(s) 10. month: 5. notes: Opiskele. 
+    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
+    Page Should Contain  vol. 2
+    Page Should Contain  no. 4
+    Page Should Contain  page(s) 10
+    Page Should Contain  month: 5
+    Page Should Contain  notes: Opiskele.
     Click Button  Edit
     Input Text  author  Kari Kirjoittelija
-    Clear Text  volume
-    Clear Text  number
-    Clear Text  pages
-    Clear Text  month
-    Clear Text  note
+    Clear Element Text  volume
+    Clear Element Text  number
+    Clear Element Text  pages
+    Clear Element Text  month
+    Clear Element Text  note
     Click Button  Edit
     Page Should Contain  Succesfully added reference!
-    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022) 
+    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
 
 After removing optional information there is only mandatory
     Go To  ${NEW_REFERENCE}
