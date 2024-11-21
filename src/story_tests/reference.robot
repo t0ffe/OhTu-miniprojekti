@@ -132,6 +132,11 @@ After removing optional information there is only mandatory
     Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
 
 After deleting one reference
+    Go To  ${NEW_REFERENCE}
+    Input Text  author  Kari Kirjoittelija
+    Input Text  title  Paras Artikkeli
+    Input Text  year  2022
+    Input Text  journal  Lehtinen
     Go To  ${LIST_REFERENCES}
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
