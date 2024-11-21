@@ -85,17 +85,79 @@ After adding voluntary information there is info
     Page Should Contain  notes: Muistiin.
 
 After editing author author is different
-    Go To ${NEW_REFERENCE}
+    Go To  ${NEW_REFERENCE}
     Input Text  author  Aki Artikuloija
     Input Text  title  Paras Artikkeli
     Input Text  year  2022
     Input Text  journal  Lehtinen
-    Click Button Add
-    Page Should Contain  Successfully added reference!
+    Click Button  Add
+    Page Should Contain  Succesfully added reference!
     Click Button  All references
     Page Should Contain  Aki Artikuloija. Paras Artikkeli. Lehtinen (2022)
     Click Button  Edit
     Input Text  author  Kari Kirjoittelija
     Click Button  Edit
-    Page Should Contain  Successfully added reference!
-    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2002)
+    Page Should Contain  Succesfully added reference!
+    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
+
+After removing optional information there is only mandatory
+    Go To  ${NEW_REFERENCE}
+    Input Text  author  Kari Kirjoittelija
+    Input Text  title  Paras Artikkeli
+    Input Text  year  2022
+    Input Text  journal  Lehtinen
+    Input Text  volume  2
+    Input Text  number  4
+    Input Text  pages  10
+    Input Text  month  5
+    Input Text  note  Opiskele
+    Click Button  Add
+    Page Should Contain  Succesfully added reference!
+    Click Button  All references
+    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022) vol. 2. no. 4. page(s) 10. month: 5. notes: Opiskele. 
+    Click Button  Edit
+    Input Text  author  Kari Kirjoittelija
+    Clear Text  volume
+    Clear Text  number
+    Clear Text  pages
+    Clear Text  month
+    Clear Text  note
+    Click Button  Edit
+    Page Should Contain  Succesfully added reference!
+    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022) 
+
+After removing optional information there is only mandatory
+    Go To  ${NEW_REFERENCE}
+    Input Text  author  Kari Kirjoittelija
+    Input Text  title  Paras Artikkeli
+    Input Text  year  2022
+    Input Text  journal  Lehtinen
+    Input Text  volume  2
+    Input Text  number  4
+    Input Text  pages  10
+    Input Text  month  5
+    Input Text  note  Opiskele
+    Click Button  Add
+    Page Should Contain  Succesfully added reference!
+    Click Button  All references
+    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
+    Page Should Contain  vol. 2
+    Page Should Contain  no. 4
+    Page Should Contain  page(s) 10
+    Page Should Contain  month: 5
+    Page Should Contain  notes: Opiskele.
+    Click Button  Edit
+    Input Text  author  Kari Kirjoittelija
+    Clear Element Text  volume
+    Clear Element Text  number
+    Clear Element Text  pages
+    Clear Element Text  month
+    Clear Element Text  note
+    Click Button  Edit
+    Page Should Contain  Succesfully added reference!
+    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
+
+After deleting one reference
+    Go To  ${LIST_REFERENCES}
+    Click Button  Delete
+    Page Should Contain  Succesfully removed reference!
