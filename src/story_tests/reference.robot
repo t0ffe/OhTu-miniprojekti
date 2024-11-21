@@ -85,7 +85,7 @@ After adding voluntary information there is info
     Page Should Contain  notes: Muistiin.
 
 After editing author author is different
-    Go To ${NEW_REFERENCE}
+    Go To  ${NEW_REFERENCE}
     Input Text  author  Aki Artikuloija
     Input Text  title  Paras Artikkeli
     Input Text  year  2022
