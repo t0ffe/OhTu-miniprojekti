@@ -5,9 +5,12 @@ from entities.reference import Reference
 
 
 def get_all_references():
-    result = db.session.execute(text(
-        f"SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
-            r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"))
+    result = db.session.execute(
+        text(
+            f"SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
+            r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
+        )
+    )
     contents = result.fetchall()
     return [Reference(*row) for row in contents]
 
@@ -54,21 +57,55 @@ def create_reference(authors, title, journal, year, volume, number, pages, month
     for author in authors:
         create_author(author, id_of_new_row)
 
-def edit_reference(authors, title, journal, year, volume, number, pages, month, note):
+
+def edit_reference(
+    reference_id, authors, title, journal, year, volume, number, pages, month, note
+):
     volume = volume if volume else None
     number = number if number else None
     pages = pages if pages else None
     month = month if month else None
     note = note if note else None
 
-    sql = text("UPDATE articles SET title, journal, year, volume, number, pages, month, note")
+    update_reference_sql = text(
+        """
+        UPDATE articles SET title = :title, journal = :journal, year = :year, volume = :volume,
+        number = :number, pages = :pages, month = :month, note = :note WHERE id = :reference_id
+        """
+    )
+
+    db.session.execute(
+        update_reference_sql,
+        {
+            "title": title,
+            "journal": journal,
+            "year": year,
+            "volume": volume,
+            "number": number,
+            "pages": pages,
+            "month": month,
+            "note": note,
+            "reference_id": reference_id,
+        },
+    )
+
+    remove_previous_authors_sql = text(
+        "DELETE FROM authors WHERE reference_id = :reference_id"
+    )
+
+    db.session.execute(remove_previous_authors_sql, {"reference_id": reference_id})
+
+    for author in authors:
+        create_author(author, reference_id)
+
+    db.session.commit()
+
 
 def create_author(author, reference_id):
     sql = text(
-        "INSERT INTO authors (author, reference_id) VALUES (:author, :reference_id)")
-    db.session.execute(
-        sql, {"author": author, "reference_id": reference_id}
+        "INSERT INTO authors (author, reference_id) VALUES (:author, :reference_id)"
     )
+    db.session.execute(sql, {"author": author, "reference_id": reference_id})
     db.session.commit()
 
 
@@ -86,7 +123,6 @@ def format_bibtex(reference):
     bibtex_str += f"  title = {{{str(reference.title)}}}\n"
     bibtex_str += f"  journal = {{{str(reference.journal)}}}\n"
     bibtex_str += f"  year = {{{str(reference.year)}}}\n"
-    
 
     if reference.volume:
         bibtex_str += f"  volume = {{{str(reference.volume)}}}\n"
@@ -98,14 +134,18 @@ def format_bibtex(reference):
         bibtex_str += f"  month = {{{str(reference.month)}}}\n"
     if reference.note:
         bibtex_str += f"  note = {{{str(reference.note)}}}\n"
-    
+
     bibtex_str += "}\n"
 
     return bibtex_str
 
+
 def join_bibtex():
-    result = db.session.execute(text(
-        f"SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
-            r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"))
+    result = db.session.execute(
+        text(
+            f"SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
+            r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
+        )
+    )
     contents = result.fetchall()
     return "\n".join([format_bibtex(reference) for reference in contents])
