@@ -66,6 +66,7 @@ def delete_reference():
     if ref_id is not None:
         try:
             delete_reference_db(ref_id)
+            flash("Succesfully removed reference!")
             return redirect("/list_references")
         except Exception as error:
             flash(str(error))
