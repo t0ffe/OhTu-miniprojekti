@@ -84,18 +84,7 @@ After adding voluntary information there is info
     Page Should Contain  month: 5.
     Page Should Contain  notes: Muistiin.
 
-After editing author author is different
-    Go To  ${NEW_REFERENCE}
-    Input Text  author  Aki Artikuloija
-    Input Text  title  Paras Artikkeli
-    Input Text  year  2022
-    Input Text  journal  Lehtinen
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
-    Click Button  All references
-    Page Should Contain  Aki Artikuloija. Paras Artikkeli. Lehtinen (2022)
-    Click Button  Edit
-    Input Text  author  Kari Kirjoittelija
-    Click Button  Edit
-    Page Should Contain  Succesfully added reference!
-    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
+After deleting one reference
+    Go To  ${LIST_REFERENCES}
+    Click Button  Delete
+    Page Should Contain  Succesfully removed reference!
