@@ -6,6 +6,7 @@ from repositories.reference_repository import (
     get_reference_by_id,
     join_bibtex,
     edit_reference,
+    delete_reference_db
 )
 from config import app, test_env
 from util import validate_reference
@@ -61,7 +62,15 @@ def references_as_bibtex():
 
 @app.route("/delete_reference", methods=["GET"])
 def delete_reference():
-    reference_id = request.args.get("id")
+    ref_id = request.args.get("id")
+    if ref_id is not None:
+        try:
+            delete_reference_db(ref_id)
+            return redirect("/list_references")
+        except Exception as error:
+            flash(str(error))
+            return redirect("/list_references")
+
 
 
 @app.route("/edit_reference", methods=["POST", "GET"])

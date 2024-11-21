@@ -24,7 +24,8 @@ def get_reference_by_id(id):
     return [dict(zip(columns, row)) for row in contents][0]
 
 
-def delete_reference(id):
+def delete_reference_db(id):
+    db.session.execute(text("DELETE FROM authors WHERE id = :id"), {"id": id})
     db.session.execute(text("DELETE FROM articles WHERE id = :id"), {"id": id})
     db.session.commit()
 
