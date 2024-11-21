@@ -90,12 +90,12 @@ After editing author author is different
     Input Text  title  Paras Artikkeli
     Input Text  year  2022
     Input Text  journal  Lehtinen
-    Click Button Add
-    Page Should Contain  Successfully added reference!
+    Click Button  Add
+    Page Should Contain  Succesfully added reference!
     Click Button  All references
     Page Should Contain  Aki Artikuloija. Paras Artikkeli. Lehtinen (2022)
     Click Button  Edit
     Input Text  author  Kari Kirjoittelija
     Click Button  Edit
-    Page Should Contain  Successfully added reference!
-    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2002)
+    Page Should Contain  Succesfully added reference!
+    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
