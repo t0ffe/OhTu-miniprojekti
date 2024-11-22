@@ -4,6 +4,37 @@ Suite Setup      Open And Configure Browser
 Suite Teardown   Close Browser
 Test Setup       Reset References
 
+*** Variables ***
+${AUTHOR}  Aki Artikuloija
+${TITLE}  Artikkeli
+${YEAR}  2020
+${JOURNAL}  Lehtinen
+
+*** Keywords ***
+Add Reference
+    [Arguments]  ${author}  ${title}  ${year}  ${journal}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    Go To  ${NEW_REFERENCE}
+    Input Text  author  ${author}
+    Input Text  title  ${title}
+    Input Text  year  ${year}
+    Input Text  journal  ${journal}
+    Run Keyword If  '${volume}' != 'None'  Input Text  volume  ${volume}
+    Run Keyword If  '${number}' != 'None'  Input Text  number  ${number}
+    Run Keyword If  '${pages}' != 'None'  Input Text  pages  ${pages}
+    Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
+    Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
+    Click Button  Add
+    Page Should Contain  Succesfully added reference!
+
+Verify Reference
+    [Arguments]  ${author}  ${title}  ${journal}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    Page Should Contain  ${author}. ${title}. ${journal} (${year})
+    Run Keyword If  '${volume}' != 'None'  Page Should Contain  vol. ${volume}
+    Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}
+    Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}
+    Run Keyword If  '${month}' != 'None'  Page Should Contain  month: ${month}
+    Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
+
 *** Test Cases ***
 Main Page Should Be Open
     Go To  ${HOME_URL}
@@ -30,96 +61,41 @@ Click New Reference List Link
     Page Should Contain  Add a new article type reference
 
 After adding a reference there is one
-    Go To  ${NEW_REFERENCE} 
-    Input Text  author  Aki Artikuloija
-    Input Text  title  Artikkeli
-    Input Text  year  2020
-    Input Text  journal  Lehtinen
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
+    Add Reference  ${AUTHOR}  ${TITLE}  ${YEAR}  ${JOURNAL}
     Click Button  All references
-    Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen (2020)
+    Verify Reference  ${AUTHOR}  ${TITLE}  ${JOURNAL}  ${YEAR}
 
 After adding two references there is two
-    Go To  ${NEW_REFERENCE} 
-    Input Text  author  Aki Artikuloija
-    Input Text  title  Artikkeli
-    Input Text  year  2020
-    Input Text  journal  Lehtinen
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
-    Input Text  author  Aki Artikuloija
-    Input Text  title  Parempi Artikkeli
-    Input Text  year  2022
-    Input Text  journal  Lehtinen
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
+    Add Reference  ${AUTHOR}  ${TITLE}  ${YEAR}  ${JOURNAL}
+    Add Reference  ${AUTHOR}  Parempi Artikkeli  2022  ${JOURNAL}
     Click Button  All references
-    Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen (2020)
-    Page Should Contain  Aki Artikuloija. Parempi Artikkeli. Lehtinen (2022)
-    Page Should Not Contain    vol.
-    Page Should Not Contain    no.
-    Page Should Not Contain    page(s)
-    Page Should Not Contain    month:
-    Page Should Not Contain    notes:
+    Verify Reference  ${AUTHOR}  ${TITLE}  ${JOURNAL}  ${YEAR}
+    Verify Reference  ${AUTHOR}  Parempi Artikkeli  ${JOURNAL}  2022
+    Page Should Not Contain  vol.
+    Page Should Not Contain  no.
+    Page Should Not Contain  page(s)
+    Page Should Not Contain  month:
+    Page Should Not Contain  notes:
 
 After adding voluntary information there is info
-    Go To  ${NEW_REFERENCE} 
-    Input Text  author  Aki Artikuloija
-    Input Text  title  Paras Artikkeli
-    Input Text  year  2022
-    Input Text  journal  Lehtinen
-    Input Text  volume  3
-    Input Text  number  2
-    Input Text  pages  142
-    Input Text  month  5
-    Input Text  note  Muistiin
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
+    Add Reference  ${AUTHOR}  Paras Artikkeli  2022  ${JOURNAL}  3  2  142  5  Muistiin
     Click Button  All references
-    Page Should Contain  Aki Artikuloija. Paras Artikkeli. Lehtinen (2022)
-    Page Should Contain  vol. 3
-    Page Should Contain  no. 2.
-    Page Should Contain  page(s) 142.
-    Page Should Contain  month: 5.
-    Page Should Contain  notes: Muistiin.
+    Verify Reference  ${AUTHOR}  Paras Artikkeli  ${JOURNAL}  2022  3  2  142  5  Muistiin
 
 After editing author author is different
-    Go To  ${NEW_REFERENCE}
-    Input Text  author  Aki Artikuloija
-    Input Text  title  Paras Artikkeli
-    Input Text  year  2022
-    Input Text  journal  Lehtinen
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
+    Add Reference  ${AUTHOR}  Paras Artikkeli  2022  ${JOURNAL}
     Click Button  All references
-    Page Should Contain  Aki Artikuloija. Paras Artikkeli. Lehtinen (2022)
+    Verify Reference  ${AUTHOR}  Paras Artikkeli  ${JOURNAL}  2022
     Click Button  Edit
     Input Text  author  Kari Kirjoittelija
     Click Button  Edit
     Page Should Contain  Succesfully edited reference!
-    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
+    Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022
 
 After removing optional information there is only mandatory
-    Go To  ${NEW_REFERENCE}
-    Input Text  author  Kari Kirjoittelija
-    Input Text  title  Paras Artikkeli
-    Input Text  year  2022
-    Input Text  journal  Lehtinen
-    Input Text  volume  2
-    Input Text  number  4
-    Input Text  pages  10
-    Input Text  month  5
-    Input Text  note  Opiskele
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
+    Add Reference  Kari Kirjoittelija  Paras Artikkeli  2022  ${JOURNAL}  2  4  10  5  Opiskele
     Click Button  All references
-    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
-    Page Should Contain  vol. 2
-    Page Should Contain  no. 4
-    Page Should Contain  page(s) 10
-    Page Should Contain  month: 5
-    Page Should Contain  notes: Opiskele.
+    Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022  2  4  10  5  Opiskele
     Click Button  Edit
     Input Text  author  Kari Kirjoittelija
     Clear Element Text  volume
@@ -129,66 +105,33 @@ After removing optional information there is only mandatory
     Clear Element Text  note
     Click Button  Edit
     Page Should Contain  Succesfully edited reference!
-    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
+    Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022
 
 After deleting one reference, display message for success
-    Go To  ${NEW_REFERENCE}
-    Input Text  author  Kari Kirjoittelija
-    Input Text  title  Paras Artikkeli
-    Input Text  year  2022
-    Input Text  journal  Lehtinen
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
+    Add Reference  Kari Kirjoittelija  Paras Artikkeli  2022  ${JOURNAL}
     Click Button  All references
-    Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
+    Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
 
 After adding ref with voluntary info, delete ref succesfully
-    Go To  ${NEW_REFERENCE}
-    Input Text  author  Aki Artikuloija
-    Input Text  title  Paras Artikkeli Ikinä
-    Input Text  year  2002
-    Input Text  journal  Aikakauslehti
-    Input Text  volume  2
-    Input Text  number  4
-    Input Text  pages  10
-    Input Text  month  5
-    Input Text  note  Opiskele
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
+    Add Reference  ${AUTHOR}  Paras Artikkeli Ikinä  2002  Aikakauslehti  2  4  10  5  Opiskele
     Click Button  All references
-    Page Should Contain  Aki Artikuloija. Paras Artikkeli Ikinä. Aikakauslehti (2002)
-    Page Should Contain  vol. 2
-    Page Should Contain  no. 4
-    Page Should Contain  page(s) 10
-    Page Should Contain  month: 5
-    Page Should Contain  notes: Opiskele.
+    Verify Reference  ${AUTHOR}  Paras Artikkeli Ikinä  Aikakauslehti  2002  2  4  10  5  Opiskele
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
 
 After removing all references, display message
-    Go To  ${NEW_REFERENCE} 
-    Input Text  author  Aki Artikuloija
-    Input Text  title  Artikkeli
-    Input Text  year  2020
-    Input Text  journal  Lehtinen
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
-    Input Text  author  Aki Artikuloija
-    Input Text  title  Parempi Artikkeli
-    Input Text  year  2022
-    Input Text  journal  Lehtinen
-    Click Button  Add
-    Page Should Contain  Succesfully added reference!
+    Add Reference  ${AUTHOR}  ${TITLE}  ${YEAR}  ${JOURNAL}
+    Add Reference  ${AUTHOR}  Parempi Artikkeli  2022  ${JOURNAL}
     Click Button  All references
-    Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen (2020)
-    Page Should Contain  Aki Artikuloija. Parempi Artikkeli. Lehtinen (2022)
-    Page Should Not Contain    vol.
-    Page Should Not Contain    no.
-    Page Should Not Contain    page(s)
-    Page Should Not Contain    month:
-    Page Should Not Contain    notes:
+    Verify Reference  ${AUTHOR}  ${TITLE}  ${JOURNAL}  ${YEAR}
+    Verify Reference  ${AUTHOR}  Parempi Artikkeli  ${JOURNAL}  2022
+    Page Should Not Contain  vol.
+    Page Should Not Contain  no.
+    Page Should Not Contain  page(s)
+    Page Should Not Contain  month:
+    Page Should Not Contain  notes:
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
     Click Button  Delete
