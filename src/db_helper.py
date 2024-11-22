@@ -49,7 +49,7 @@ def setup_db():
         "  year INT NOT NULL,"
         "  volume INT,"
         "  number INT,"
-        "  pages INT,"
+        "  pages TEXT,"
         "  month INT,"
         "  note TEXT"
         ")"
