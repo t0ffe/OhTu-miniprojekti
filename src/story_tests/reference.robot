@@ -166,3 +166,31 @@ After adding one ref and voluntary info, delete ref
     Page Should Contain  notes: Opiskele.
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
+
+After removing all references
+    Go To  ${NEW_REFERENCE}
+    Input Text  author  Aki Artikuloija
+    Input Text  title  Paras Artikkeli Koskaan
+    Input Text  year  2002
+    Input Text  journal  Aikakauslehti
+    Input Text  volume  2
+    Input Text  number  4
+    Input Text  pages  10
+    Input Text  month  5
+    Input Text  note  Opiskele
+    Click Button  Add
+    Page Should Contain  Succesfully added reference!
+    Click Button  All references
+    Page Should Contain  Aki Artikuloija. Paras Artikkeli Koskaan. Aikakauslehti (2002)
+    Page Should Contain  vol. 2
+    Page Should Contain  no. 4
+    Page Should Contain  page(s) 10
+    Page Should Contain  month: 5
+    Page Should Contain  notes: Opiskele.
+    Click Button  Delete
+    Page Should Contain  Succesfully removed reference!
+    Page Should Contain  No references added yet.
+
+When no references added
+    Go To  ${LIST_REFERENCES}
+    Page Should Contain  No references added yet.
