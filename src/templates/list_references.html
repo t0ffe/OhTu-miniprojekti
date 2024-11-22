@@ -17,7 +17,7 @@ Reference List
   </a>
 </div>
 <br>
-
+{% if references %}
   {% for reference in references %}
     <li class="reference">
       {{ reference.authors }}. {{ reference.title }}. {{ reference.journal }} ({{ reference.year }})
@@ -34,6 +34,9 @@ Reference List
       </a>
     </li>
   {% endfor %}
+{% else %}
+  <p>No references added yet.</p>
+{% endif %}
 </div>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
