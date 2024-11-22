@@ -50,22 +50,22 @@ Main Page Should Be Open
     Page Should Contain  Matias Ilola
     Page Should Contain  Kety Kuusaru
 
-Click All References Link
+All References Link Should Be Clickable
     Go To  ${HOME_URL}
     Click Link  All references
     Title Should Be  Reference List
 
-Click New Reference List Link
+New Reference Link Should Be Clickable
     Go To  ${HOME_URL}
     Click Link  New reference
     Page Should Contain  Add a new article type reference
 
-After adding a reference there is one
+Single Reference Should Be Added
     Add Reference  ${AUTHOR}  ${TITLE}  ${YEAR}  ${JOURNAL}
     Click Button  All references
     Verify Reference  ${AUTHOR}  ${TITLE}  ${JOURNAL}  ${YEAR}
 
-After adding two references there is two
+Two References Should Be Added
     Add Reference  ${AUTHOR}  ${TITLE}  ${YEAR}  ${JOURNAL}
     Add Reference  ${AUTHOR}  Parempi Artikkeli  2022  ${JOURNAL}
     Click Button  All references
@@ -77,12 +77,12 @@ After adding two references there is two
     Page Should Not Contain  month:
     Page Should Not Contain  notes:
 
-After adding voluntary information there is info
+Reference With Voluntary Info Should Be Added
     Add Reference  ${AUTHOR}  Paras Artikkeli  2022  ${JOURNAL}  3  2  142  5  Muistiin
     Click Button  All references
     Verify Reference  ${AUTHOR}  Paras Artikkeli  ${JOURNAL}  2022  3  2  142  5  Muistiin
 
-After editing author author is different
+Author Should Be Editable
     Add Reference  ${AUTHOR}  Paras Artikkeli  2022  ${JOURNAL}
     Click Button  All references
     Verify Reference  ${AUTHOR}  Paras Artikkeli  ${JOURNAL}  2022
@@ -92,7 +92,7 @@ After editing author author is different
     Page Should Contain  Succesfully edited reference!
     Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022
 
-After removing optional information there is only mandatory
+Optional Info Should Be Removable
     Add Reference  Kari Kirjoittelija  Paras Artikkeli  2022  ${JOURNAL}  2  4  10  5  Opiskele
     Click Button  All references
     Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022  2  4  10  5  Opiskele
@@ -107,21 +107,21 @@ After removing optional information there is only mandatory
     Page Should Contain  Succesfully edited reference!
     Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022
 
-After deleting one reference, display message for success
+Single Reference Should Be Deletable
     Add Reference  Kari Kirjoittelija  Paras Artikkeli  2022  ${JOURNAL}
     Click Button  All references
     Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
 
-After adding ref with voluntary info, delete ref succesfully
+Reference With Voluntary Info Should Be Deletable
     Add Reference  ${AUTHOR}  Paras Artikkeli Ikinä  2002  Aikakauslehti  2  4  10  5  Opiskele
     Click Button  All references
     Verify Reference  ${AUTHOR}  Paras Artikkeli Ikinä  Aikakauslehti  2002  2  4  10  5  Opiskele
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
 
-After removing all references, display message
+All References Should Be Deletable
     Add Reference  ${AUTHOR}  ${TITLE}  ${YEAR}  ${JOURNAL}
     Add Reference  ${AUTHOR}  Parempi Artikkeli  2022  ${JOURNAL}
     Click Button  All references
@@ -138,6 +138,6 @@ After removing all references, display message
     Page Should Contain  Succesfully removed reference!
     Page Should Contain  No references added yet.
 
-When no references added, display message
+No References Should Display Message
     Go To  ${LIST_REFERENCES}
     Page Should Contain  No references added yet.
