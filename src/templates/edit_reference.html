@@ -36,10 +36,8 @@ References App
         <div id="authorsContainer">
           <div class="author-entry">
             {% for author in authors %}
-              <div class="author-entry">
                 <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required value="{{ author }}">
                 <button type="button" class="remove-author" onclick="remove_author(this)">×</button>
-              </div>
             {% endfor %}
             <button class="add-author-button" type="button" onclick="add_author()">+</button>
           </div>
