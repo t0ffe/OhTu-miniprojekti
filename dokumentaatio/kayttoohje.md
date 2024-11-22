@@ -21,7 +21,7 @@ Linkki README.md tiedostoon: https://github.com/t0ffe/OhTu-miniprojekti/blob/mai
     ```
    Huomaa, että `.env` tiedoston `DATABASE_URL` täytyy itse hakea jostain internetpalveluna tarjottavasta tietokannasta, esim. https://aiven.io. Lisäksi muokkaa TEST_ENV=true
 
-4. Alusta tietokanta komennolla:
+4. Alusta tietokanta komennolla (python3 tai python riippuen asennuksesta):
     ```bash
     poetry run python3 src/db_helper.py
     ```
