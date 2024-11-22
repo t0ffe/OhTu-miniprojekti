@@ -131,7 +131,7 @@ After removing optional information there is only mandatory
     Page Should Contain  Succesfully added reference!
     Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
 
-After deleting one reference
+After deleting one reference, display message for success
     Go To  ${NEW_REFERENCE}
     Input Text  author  Kari Kirjoittelija
     Input Text  title  Paras Artikkeli
@@ -144,7 +144,7 @@ After deleting one reference
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
 
-After adding one ref and voluntary info, delete ref
+After adding ref with voluntary info, delete ref succesfully
     Go To  ${NEW_REFERENCE}
     Input Text  author  Aki Artikuloija
     Input Text  title  Paras Artikkeli Ikinä
@@ -167,7 +167,7 @@ After adding one ref and voluntary info, delete ref
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
 
-After removing all references
+After removing all references, display message
     Go To  ${NEW_REFERENCE}
     Input Text  author  Aki Artikuloija
     Input Text  title  Paras Artikkeli Koskaan
@@ -191,6 +191,6 @@ After removing all references
     Page Should Contain  Succesfully removed reference!
     Page Should Contain  No references added yet.
 
-When no references added
+When no references added, display message
     Go To  ${LIST_REFERENCES}
     Page Should Contain  No references added yet.
