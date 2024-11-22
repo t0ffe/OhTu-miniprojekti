@@ -168,25 +168,29 @@ After adding ref with voluntary info, delete ref succesfully
     Page Should Contain  Succesfully removed reference!
 
 After removing all references, display message
-    Go To  ${NEW_REFERENCE}
+    Go To  ${NEW_REFERENCE} 
     Input Text  author  Aki Artikuloija
-    Input Text  title  Paras Artikkeli Koskaan
-    Input Text  year  2002
-    Input Text  journal  Aikakauslehti
-    Input Text  volume  2
-    Input Text  number  4
-    Input Text  pages  10
-    Input Text  month  5
-    Input Text  note  Opiskele
+    Input Text  title  Artikkeli
+    Input Text  year  2020
+    Input Text  journal  Lehtinen
+    Click Button  Add
+    Page Should Contain  Succesfully added reference!
+    Input Text  author  Aki Artikuloija
+    Input Text  title  Parempi Artikkeli
+    Input Text  year  2022
+    Input Text  journal  Lehtinen
     Click Button  Add
     Page Should Contain  Succesfully added reference!
     Click Button  All references
-    Page Should Contain  Aki Artikuloija. Paras Artikkeli Koskaan. Aikakauslehti (2002)
-    Page Should Contain  vol. 2
-    Page Should Contain  no. 4
-    Page Should Contain  page(s) 10
-    Page Should Contain  month: 5
-    Page Should Contain  notes: Opiskele.
+    Page Should Contain  Aki Artikuloija. Artikkeli. Lehtinen (2020)
+    Page Should Contain  Aki Artikuloija. Parempi Artikkeli. Lehtinen (2022)
+    Page Should Not Contain    vol.
+    Page Should Not Contain    no.
+    Page Should Not Contain    page(s)
+    Page Should Not Contain    month:
+    Page Should Not Contain    notes:
+    Click Button  Delete
+    Page Should Contain  Succesfully removed reference!
     Click Button  Delete
     Page Should Contain  Succesfully removed reference!
     Page Should Contain  No references added yet.
