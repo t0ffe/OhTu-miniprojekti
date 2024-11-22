@@ -97,7 +97,7 @@ After editing author author is different
     Click Button  Edit
     Input Text  author  Kari Kirjoittelija
     Click Button  Edit
-    Page Should Contain  Succesfully added reference!
+    Page Should Contain  Succesfully edited reference!
     Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
 
 After removing optional information there is only mandatory
@@ -128,7 +128,7 @@ After removing optional information there is only mandatory
     Clear Element Text  month
     Clear Element Text  note
     Click Button  Edit
-    Page Should Contain  Succesfully added reference!
+    Page Should Contain  Succesfully edited reference!
     Page Should Contain  Kari Kirjoittelija. Paras Artikkeli. Lehtinen (2022)
 
 After deleting one reference, display message for success

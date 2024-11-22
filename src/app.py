@@ -6,7 +6,8 @@ from repositories.reference_repository import (
     get_reference_by_id,
     join_bibtex,
     edit_reference,
-    delete_reference_db
+    delete_reference_db,
+    get_authors_by_reference_id
 )
 from config import app, test_env
 from util import validate_reference
@@ -77,8 +78,10 @@ def delete_reference():
 @app.route("/edit_reference", methods=["POST", "GET"])
 def reference_editing():
     if request.method == "GET":
-        reference = get_reference_by_id(request.args.get("id"))
-        return render_template("edit_reference.html", reference=reference)
+        id = request.args.get("id")
+        reference = get_reference_by_id(id)
+        authors = get_authors_by_reference_id(id)
+        return render_template("edit_reference.html", reference=reference, authors=authors)
     if request.method == "POST":
         reference_id = request.form.get("reference_id")
         authors = request.form.getlist("author")
@@ -107,7 +110,7 @@ def reference_editing():
                 month,
                 note,
             )
-            flash("Succesfully added reference!")
+            flash("Succesfully edited reference!")
             return redirect("/list_references")
         except Exception as error:
             flash(str(error))

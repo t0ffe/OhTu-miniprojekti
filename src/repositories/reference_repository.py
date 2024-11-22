@@ -23,6 +23,12 @@ def get_reference_by_id(id):
     columns = result.keys()
     return [dict(zip(columns, row)) for row in contents][0]
 
+def get_authors_by_reference_id(id):
+    result = db.session.execute(
+        text("SELECT author FROM authors WHERE reference_id = :id"), {"id": id}
+    )
+    contents = result.fetchall()
+    return [row[0] for row in contents]
 
 def delete_reference_db(id):
     db.session.execute(text("DELETE FROM authors WHERE reference_id = :id"), {"id": id})
