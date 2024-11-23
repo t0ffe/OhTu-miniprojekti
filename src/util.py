@@ -36,5 +36,5 @@ def validate_reference(authors, title, journal, year, volume, number, pages, mon
         if int(month) < 1 or int(month) > 12:
             raise UserInputError("Month must be a number between 1-12")
 
-    if len(authors) > 10:
-        raise UserInputError("Maximum number of authors is 10")
+    if len(authors) > 21:
+        raise UserInputError("Maximum number of authors is 21")
