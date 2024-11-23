@@ -33,6 +33,7 @@ body {
     background: #f8f9fa;
     border-radius: 4px;
     list-style-type: none;
+    padding-right: 135px;
 }
 
 .home-page {
@@ -106,7 +107,10 @@ pre {
     cursor: pointer;
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 50%;
+    margin: 0;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 
@@ -123,7 +127,10 @@ pre {
     cursor: pointer;
     position: absolute;
     right: 70px;
-    top: 10px;
+    top: 50%;
+    margin: 0;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .delete-button:hover {
