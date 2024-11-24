@@ -1,4 +1,5 @@
-from flask import redirect, render_template, request, jsonify, flash
+from flask import redirect, render_template, request, jsonify, flash, send_file
+from io import BytesIO
 from db_helper import reset_db
 from repositories.reference_repository import (
     create_reference,
@@ -59,6 +60,20 @@ def list_references():
 def references_as_bibtex():
     bibtex = join_bibtex()
     return render_template("bibtex.html", bibtex=bibtex)
+
+
+@app.route("/download_references_as_bibtex")
+def download_references_as_bibtex():
+    bibtex = join_bibtex()
+    bibtex_io = BytesIO(bibtex.encode("utf-8"))
+    bibtex_io.seek(0)
+
+    return send_file(
+        bibtex_io,
+        mimetype="application/x-bibtex",
+        as_attachment=True,
+        download_name="references.txt"        
+    )
 
 
 @app.route("/delete_reference", methods=["GET"])
