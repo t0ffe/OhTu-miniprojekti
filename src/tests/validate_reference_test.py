@@ -60,5 +60,7 @@ class TestReferenceValidation(unittest.TestCase):
     def test_too_many_authors(self):
         with self.assertRaises(UserInputError):
             validate_reference(["Author", "Author", "Author", "Author", "Author", "Author",
-                                "Author", "Author", "Author", "Author", "Author"], "Title", "Journal",
+                                "Author", "Author", "Author", "Author", "Author","Author", 
+                                "Author", "Author", "Author", "Author", "Author","Author", 
+                                "Author", "Author", "Author", "Author"], "Title", "Journal",
                                "2023", "3", "", "5000", "12", "note")
