@@ -10,8 +10,8 @@ References App
     var authorsContainer = document.getElementById('authorsContainer');
     var Authors = authorsContainer.getElementsByClassName('author-entry').length;
 
-    if (Authors >= 10) {
-      alert('You can only add max 10 authors');
+    if (Authors >= 21) {
+      alert('You can only add max 21 authors');
       return;
     }
 
@@ -33,14 +33,14 @@ References App
     <div class="form-grid">
 
       <div class="authors-container">
+        <button class="add-author-button" type="button" onclick="add_author()">+</button>
         <div id="authorsContainer">
+          {% for author in authors %}
           <div class="author-entry">
-            {% for author in authors %}
-                <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required value="{{ author }}">
-                <button type="button" class="remove-author" onclick="remove_author(this)">×</button>
-            {% endfor %}
-            <button class="add-author-button" type="button" onclick="add_author()">+</button>
+            <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required value="{{ author }}">
+            <button type="button" class="remove-author" onclick="remove_author(this)">×</button>
           </div>
+          {% endfor %}
         </div>
       </div>
       <div>
