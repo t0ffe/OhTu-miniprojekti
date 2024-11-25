@@ -1,7 +1,7 @@
 class Reference:
     def __init__(
         self,
-        id,
+        ref_id,
         authors,
         title,
         journal,
@@ -12,7 +12,7 @@ class Reference:
         month=None,
         note=None,
     ):
-        self.id = id
+        self.id = ref_id
         self.authors = authors
         self.title = title
         self.journal = journal

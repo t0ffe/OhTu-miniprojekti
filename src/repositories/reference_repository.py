@@ -1,5 +1,5 @@
-from config import db
 from sqlalchemy import text
+from config import db
 
 from entities.reference import Reference
 
@@ -7,7 +7,7 @@ from entities.reference import Reference
 def get_all_references():
     result = db.session.execute(
         text(
-            f"SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
+            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
             r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
         )
     )
@@ -15,24 +15,24 @@ def get_all_references():
     return [Reference(*row) for row in contents]
 
 
-def get_reference_by_id(id):
+def get_reference_by_id(ref_id):
     result = db.session.execute(
-        text("SELECT * FROM articles WHERE id = :id"), {"id": id}
+        text("SELECT * FROM articles WHERE id = :id"), {"id": ref_id}
     )
     contents = result.fetchall()
     columns = result.keys()
     return [dict(zip(columns, row)) for row in contents][0]
 
-def get_authors_by_reference_id(id):
+def get_authors_by_reference_id(ref_id):
     result = db.session.execute(
-        text("SELECT author FROM authors WHERE reference_id = :id"), {"id": id}
+        text("SELECT author FROM authors WHERE reference_id = :id"), {"id": ref_id}
     )
     contents = result.fetchall()
     return [row[0] for row in contents]
 
-def delete_reference_db(id):
-    db.session.execute(text("DELETE FROM authors WHERE reference_id = :id"), {"id": id})
-    db.session.execute(text("DELETE FROM articles WHERE id = :id"), {"id": id})
+def delete_reference_db(ref_id):
+    db.session.execute(text("DELETE FROM authors WHERE reference_id = :id"), {"id": ref_id})
+    db.session.execute(text("DELETE FROM articles WHERE id = :id"), {"id": ref_id})
     db.session.commit()
 
 
@@ -153,7 +153,7 @@ def format_bibtex(reference):
 def join_bibtex():
     result = db.session.execute(
         text(
-            f"SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
+            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
             r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
         )
     )
