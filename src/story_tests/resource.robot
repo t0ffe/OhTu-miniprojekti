@@ -29,3 +29,34 @@ Open And Configure Browser
 
 Reset References
     Go To  ${RESET_URL}
+
+*** Variables ***
+${AUTHOR}  Aki Artikuloija
+${TITLE}  Artikkeli
+${YEAR}  2020
+${JOURNAL}  Lehtinen
+
+*** Keywords ***
+Add Reference
+    [Arguments]  ${author}  ${title}  ${year}  ${journal}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    Go To  ${NEW_REFERENCE}
+    Input Text  author  ${author}
+    Input Text  title  ${title}
+    Input Text  year  ${year}
+    Input Text  journal  ${journal}
+    Run Keyword If  '${volume}' != 'None'  Input Text  volume  ${volume}
+    Run Keyword If  '${number}' != 'None'  Input Text  number  ${number}
+    Run Keyword If  '${pages}' != 'None'  Input Text  pages  ${pages}
+    Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
+    Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
+    Click Button  Add
+    Page Should Contain  Succesfully added reference!
+
+Verify Reference
+    [Arguments]  ${author}  ${title}  ${journal}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    Page Should Contain  ${author}. ${title}. ${journal} (${year})
+    Run Keyword If  '${volume}' != 'None'  Page Should Contain  vol. ${volume}
+    Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}
+    Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}
+    Run Keyword If  '${month}' != 'None'  Page Should Contain  month: ${month}
+    Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
