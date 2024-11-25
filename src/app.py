@@ -72,7 +72,7 @@ def download_references_as_bibtex():
         bibtex_io,
         mimetype="application/x-bibtex",
         as_attachment=True,
-        download_name="references.txt"        
+        download_name="bibliography.bib"
     )
 
 
