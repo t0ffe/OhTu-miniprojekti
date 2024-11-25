@@ -53,6 +53,9 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Pylint format check
+        run: poetry run pylint src
+
       - name: Setup chromedriver
         uses: nanasess/setup-chromedriver@master
       - run: |
