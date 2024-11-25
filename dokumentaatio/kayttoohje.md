@@ -50,11 +50,11 @@ robot src/story_tests
 
 Testikattavuusraportin generointi komennolla:
 ```bash
-poetry coverage 
+coverage run --branch -m pytest
 ```
 
 Pylint tarkistus komennolla:
 ```bash
-poetry run invoke lint
+pylint src
 ```
 -->
