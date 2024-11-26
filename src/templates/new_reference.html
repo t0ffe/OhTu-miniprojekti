@@ -26,6 +26,9 @@ New Reference
 function remove_author(button) {
     button.parentElement.remove();
 }
+function select_reference_type(type) {
+  document.getElementById('reference_type').value = type;
+}
 </script>
 <div class="form-section">
   <h2>Add a new article type reference</h2>
@@ -40,6 +43,9 @@ function remove_author(button) {
   <br>
   <br>
   <br>
+  <div>
+    <input name="type" type="hidden" value="{{ reference_type }}">
+  </div>
     <form action="/create_reference" method="post" onsubmit="return check(this)" >
       <div class="form-grid">
 

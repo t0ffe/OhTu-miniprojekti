@@ -31,11 +31,11 @@ def new():
 # Uuden article-tyypisen referensin luomisfunktio.
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
-    ref_type = request.form.get("type")
+    reference_type = request.form.get("type")
     # Tämä pitää saada front-end puolelta kun tekee uuden viitteen.
-    if ref_type == "article":
+    if reference_type == "article":
         new_reference = Article.from_form(request.form)
-    if ref_type == "book":
+    if reference_type == "book":
          new_reference = Book.from_form(request.form)
     try:
         validate_reference(new_reference)
