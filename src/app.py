@@ -96,6 +96,7 @@ def delete_reference():
 def reference_editing():
     if request.method == "GET":
         edit_id = request.args.get("id")
+        # edit_type = request.args.get("type")
         reference = get_reference_by_id(edit_id)
         authors = get_authors_by_reference_id(edit_id)
         return render_template(
@@ -103,9 +104,15 @@ def reference_editing():
         )
     if request.method == "POST":
         reference_id = request.form.get("reference_id")
+        # reference_type = request.form.get("type")
         authors = request.form.getlist("author")
 
-        new_reference = Reference.from_form(request.form)
+        # if reference_type == "article":
+        # ...
+        # if reference_type == "book":
+        # ...
+
+        new_reference = Article.from_form(request.form)
 
         try:
             validate_reference(new_reference)
