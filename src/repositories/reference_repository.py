@@ -1,7 +1,8 @@
 from sqlalchemy import text
 from config import db
 
-from entities.reference import Reference
+from entities.article import Article
+from entities.book import Book
 
 
 def get_all_references():
@@ -12,7 +13,7 @@ def get_all_references():
         )
     )
     contents = result.fetchall()
-    return [Reference(*row) for row in contents]
+    return [Article(*row) for row in contents]
 
 
 def get_reference_by_id(ref_id):

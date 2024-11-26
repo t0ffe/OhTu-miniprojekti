@@ -1,6 +1,6 @@
 import unittest
 from util import validate_reference, UserInputError
-from entities.reference import Reference
+from entities.article import Article
 
 
 class TestReferenceValidation(unittest.TestCase):
@@ -9,12 +9,12 @@ class TestReferenceValidation(unittest.TestCase):
 
     def test_valid_length_does_not_raise_error(self):
         validate_reference(
-            Reference(
+            Article(
                 1, "Author", "Title", "Journal", "2023", "3", "", "5000", "", "note"
             )
         )
         validate_reference(
-            Reference(
+            Article(
                 1,
                 ["j", "j"],
                 "h" * 100,
@@ -31,14 +31,12 @@ class TestReferenceValidation(unittest.TestCase):
     def test_too_short_or_long_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
-                    1, "", "Title", "Journal", "2023", "3", "", "5000", "", "note"
-                )
+                Article(1, "", "Title", "Journal", "2023", "3", "", "5000", "", "note")
             )
 
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     "koodaa" * 201,
                     "Title",
@@ -55,7 +53,7 @@ class TestReferenceValidation(unittest.TestCase):
     def test_year_too_much_or_str_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     "Author",
                     "Title",
@@ -71,7 +69,7 @@ class TestReferenceValidation(unittest.TestCase):
 
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     "Author",
                     "Title",
@@ -88,7 +86,7 @@ class TestReferenceValidation(unittest.TestCase):
     def test_vol_too_much_or_str_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     "Author",
                     "Title",
@@ -104,7 +102,7 @@ class TestReferenceValidation(unittest.TestCase):
 
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     "Author",
                     "Title",
@@ -121,7 +119,7 @@ class TestReferenceValidation(unittest.TestCase):
     def test_number_too_much_or_str_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     "Author",
                     "Title",
@@ -137,7 +135,7 @@ class TestReferenceValidation(unittest.TestCase):
 
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     "Author",
                     "Title",
@@ -154,7 +152,7 @@ class TestReferenceValidation(unittest.TestCase):
     def test_month_too_much_or_str_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     "Author",
                     "Title",
@@ -170,7 +168,7 @@ class TestReferenceValidation(unittest.TestCase):
 
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     "Author",
                     "Title",
@@ -187,7 +185,7 @@ class TestReferenceValidation(unittest.TestCase):
     def test_too_many_authors(self):
         with self.assertRaises(UserInputError):
             validate_reference(
-                Reference(
+                Article(
                     1,
                     [
                         "Author",

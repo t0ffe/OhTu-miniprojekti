@@ -1,4 +1,4 @@
-class Reference:
+class Article:
     def __init__(
         self,
         ref_id,
@@ -27,7 +27,7 @@ class Reference:
 
     @staticmethod
     def from_form(form):
-        return Reference(
+        return Article(
             form.get("reference_id") or None,
             form.getlist("author"),
             form.get("title"),

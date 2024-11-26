@@ -12,7 +12,8 @@ from repositories.reference_repository import (
 )
 from config import app, test_env
 from util import validate_reference
-from entities.reference import Reference
+from entities.article import Article
+from entities.book import Book
 
 
 # Kotisivulle vievä funktio.
@@ -30,7 +31,12 @@ def new():
 # Uuden article-tyypisen referensin luomis funktio.
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
-    new_reference = Reference.from_form(request.form)
+    # type = request.args.get("type")
+    # Tämä pitää saada front-end puolelta kun tekee uuden viitteen.
+    # if type == "article":
+    new_reference = Article.from_form(request.form)
+    # if type == "book":
+    #     new_reference = Article.from_form(request.form)
     try:
         validate_reference(new_reference)
         create_reference(new_reference)
