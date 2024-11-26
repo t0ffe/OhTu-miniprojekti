@@ -26,10 +26,10 @@ Reference List
       {% if reference.pages %} page(s) {{ reference.pages }}.{% endif %}
       {% if reference.month %} month: {{ reference.month }}.{% endif %}
       {% if reference.note %} notes: {{ reference.note }}.{% endif %}
-      <a href="/edit_reference?id={{ reference.id }}">
+      <a href="/edit_reference?id={{ reference.id }}&type={{ reference.type }}">
         <button class="edit-button">Edit</button>
       </a>
-      <a href="/delete_reference?id={{ reference.id }}">
+      <a href="/delete_reference?id={{ reference.id }}&type={{ reference.type }}">
         <button class="delete-button">Delete</button>
       </a>
     </li>
