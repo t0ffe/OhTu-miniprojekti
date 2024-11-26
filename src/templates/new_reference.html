@@ -30,6 +30,15 @@ function remove_author(button) {
 <div class="form-section">
   <h2>Add a new article type reference</h2>
   <br>
+  <div class="dropdown">
+    <button class="dropbtn">Select reference type</button>
+    <div class="dropdown-content">
+      <a href="#">Article</a>
+      <a href="#">Book</a>
+    </div>
+  </div>
+  <br>
+  <br>
   <br>
     <form action="/create_reference" method="post" onsubmit="return check(this)" >
       <div class="form-grid">
@@ -42,7 +51,6 @@ function remove_author(button) {
               </div>
           </div>
       </div>
-
         <div>
           <input placeholder="Title *" type="text" name="title" minlength="1" maxlength="200" required>
         </div>
