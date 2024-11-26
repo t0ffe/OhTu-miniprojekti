@@ -2,6 +2,7 @@ from sqlalchemy import text
 from config import db, app
 
 ARTICLE_TABLE = "articles"
+BOOK_TABLE = "books"
 AUTHOR_TABLE = "authors"
 
 
@@ -45,12 +46,34 @@ def setup_db():
         f"CREATE TABLE {ARTICLE_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
         "  title TEXT NOT NULL, "
-        "  journal TEXT NOT NULL,"
-        "  year INT NOT NULL,"
-        "  volume INT,"
-        "  number INT,"
-        "  pages TEXT,"
-        "  month INT,"
+        "  journal TEXT NOT NULL, "
+        "  year INT NOT NULL, "
+        "  volume INT, "
+        "  number INT, "
+        "  pages TEXT, "
+        "  month INT, "
+        "  note TEXT"
+        ")"
+    )
+
+    if table_exists(BOOK_TABLE):
+        print(f"Table {BOOK_TABLE} exists, dropping")
+        sql = text(f"DROP TABLE {BOOK_TABLE} CASCADE")
+        db.session.execute(sql)
+        db.session.commit()
+
+    print(f"Creating table {BOOK_TABLE}")
+    sql = text(
+        f"CREATE TABLE {BOOK_TABLE} ("
+        "  id SERIAL PRIMARY KEY, "
+        "  title TEXT NOT NULL, "
+        "  publisher TEXT NOT NULL, "
+        "  editor TEXT NOT NULL, "
+        "  year INT NOT NULL, "
+        "  volume INT, "
+        "  number INT, "
+        "  pages TEXT, "
+        "  month INT, "
         "  note TEXT"
         ")"
     )
@@ -69,7 +92,8 @@ def setup_db():
         f"CREATE TABLE {AUTHOR_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
         "  author TEXT NOT NULL, "
-        "  reference_id INT, FOREIGN KEY(reference_id) REFERENCES articles(id)"
+        "  reference_id INT, "
+        "  type TEXT NOT NULL"
         ")"
     )
 
