@@ -129,21 +129,21 @@ def generate_bibkey(reference):
 def format_bibtex(reference):
     bibtex_str = ""
     bibtex_str += f"@article{{{str(generate_bibkey(reference))},\n"
-    bibtex_str += f"  author = {{{str(reference.authors)}}}\n"
-    bibtex_str += f"  title = {{{str(reference.title)}}}\n"
-    bibtex_str += f"  journal = {{{str(reference.journal)}}}\n"
-    bibtex_str += f"  year = {{{str(reference.year)}}}\n"
+    bibtex_str += f"  author = {{{str(reference.authors)}}},\n"
+    bibtex_str += f"  title = {{{str(reference.title)}}},\n"
+    bibtex_str += f"  journal = {{{str(reference.journal)}}},\n"
+    bibtex_str += f"  year = {{{str(reference.year)}}},\n"
 
     if reference.volume:
-        bibtex_str += f"  volume = {{{str(reference.volume)}}}\n"
+        bibtex_str += f"  volume = {{{str(reference.volume)}}},\n"
     if reference.number:
-        bibtex_str += f"  number = {{{str(reference.number)}}}\n"
+        bibtex_str += f"  number = {{{str(reference.number)}}},\n"
     if reference.pages:
-        bibtex_str += f"  pages = {{{str(reference.pages)}}}\n"
+        bibtex_str += f"  pages = {{{str(reference.pages)}}},\n"
     if reference.month:
-        bibtex_str += f"  month = {{{str(reference.month)}}}\n"
+        bibtex_str += f"  month = {{{str(reference.month)}}},\n"
     if reference.note:
-        bibtex_str += f"  note = {{{str(reference.note)}}}\n"
+        bibtex_str += f"  note = {{{str(reference.note)}}},\n"
 
     bibtex_str += "}\n"
 
