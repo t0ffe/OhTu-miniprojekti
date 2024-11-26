@@ -56,6 +56,9 @@ def setup_db():
         ")"
     )
 
+    db.session.execute(sql)
+    db.session.commit()
+
     if table_exists(BOOK_TABLE):
         print(f"Table {BOOK_TABLE} exists, dropping")
         sql = text(f"DROP TABLE {BOOK_TABLE} CASCADE")
