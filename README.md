@@ -11,6 +11,8 @@
 
 [Sprint 2 Burndown-kaavio](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/Ee50PuOooyhOoKF7gboA02cBu1Ug6oWvYHmXb9kySuSpPw?e=VslKeG)
 
+[Sprint 3 Burndown-kaavio](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EQTXSf3Jp-pMsSCEljAw8FgBnS1egKnIkTd6V48zIlzR4g?e=SuYobT)
+
 **Definion of Done**
 - User story on määritelty
 - Story on jaettu teknisiin osiin ja  estimoitu
