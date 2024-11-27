@@ -32,11 +32,10 @@ def new():
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
     reference_type = request.form.get("type")
-    # Tämä pitää saada front-end puolelta kun tekee uuden viitteen.
     if reference_type == "article":
         new_reference = Article.from_form(request.form)
     if reference_type == "book":
-         new_reference = Book.from_form(request.form)
+        new_reference = Book.from_form(request.form)
     try:
         validate_reference(new_reference)
         create_reference(new_reference)
@@ -101,7 +100,7 @@ def reference_editing():
         return render_template(
             "edit_reference.html", reference=reference, authors=authors
         )
-    
+
     if request.method == "POST":
         reference_id = request.form.get("reference_id")
         reference_type = request.form.get("type")
@@ -118,7 +117,7 @@ def reference_editing():
             edit_reference(new_reference)
             flash("Succesfully edited reference!")
             return redirect("/list_references")
-        
+
         except Exception as error:
             flash(str(error))
             return redirect(f"/edit_reference?id={reference_id}")

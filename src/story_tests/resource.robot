@@ -31,6 +31,7 @@ Reset References
     Go To  ${RESET_URL}
 
 *** Variables ***
+${TYPE}  Article
 ${AUTHOR}  Aki Artikuloija
 ${TITLE}  Artikkeli
 ${YEAR}  2020
@@ -40,6 +41,7 @@ ${JOURNAL}  Lehtinen
 Add Reference
     [Arguments]  ${author}  ${title}  ${year}  ${journal}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
     Go To  ${NEW_REFERENCE}
+    Select From List By Label  id:reference_type  Article
     Input Text  author  ${author}
     Input Text  title  ${title}
     Input Text  year  ${year}
