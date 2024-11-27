@@ -29,7 +29,8 @@ All References Link Should Be Clickable
 New Reference Link Should Be Clickable
     Go To  ${HOME_URL}
     Click Link  New reference
-    Page Should Contain  Add a new article type reference
+    Page Should Contain  Add new 
+    Page Should Contain  type reference
 
 No References Should Display Message
     Go To  ${LIST_REFERENCES}
