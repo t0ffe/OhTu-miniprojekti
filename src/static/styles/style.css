@@ -234,28 +234,28 @@ pre {
     display: inline-block;
 }
 
-.dropdown-content {
+.dropdown-menu {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
+    width: 165px;
 }
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+
+.dropdown-menu a {
+    padding: 11px;
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background-color: #e7e7e7;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
