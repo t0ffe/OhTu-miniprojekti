@@ -237,10 +237,11 @@ function populate_form_with_DOI_data(work) {
       }
   });
 
-  const authorsContainer = document.getElementById('authorsContainer');
-  authorsContainer.innerHTML = ''; // Clear existing authors
+  
 
   if (work.author && work.author.length > 0) {
+    const authorsContainer = document.getElementById('authorsContainer');
+    authorsContainer.innerHTML = ''; // Clear existing authors
       work.author.forEach((author, index) => {
           if (index < 21) {
               add_author(`${author.given || ''} ${author.family || ''}`.trim());
