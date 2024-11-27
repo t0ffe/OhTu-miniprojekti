@@ -11,7 +11,6 @@ class Article:
         pages=None,
         month=None,
         note=None,
-        type="article",
     ):
         self.id = ref_id
         self.authors = authors
@@ -23,7 +22,7 @@ class Article:
         self.pages = pages
         self.month = month
         self.note = note
-        self.type = type
+        self.type = "article"
 
     @staticmethod
     def from_form(form):
@@ -38,7 +37,6 @@ class Article:
             form.get("pages") or None,
             form.get("month") or None,
             form.get("note") or None,
-            "article",
         )
 
     def __str__(self):

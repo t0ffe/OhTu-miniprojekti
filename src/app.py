@@ -95,15 +95,16 @@ def delete_reference():
 def reference_editing():
     if request.method == "GET":
         edit_id = request.args.get("id")
-        reference = get_reference_by_id(edit_id)
-        authors = get_authors_by_reference_id(edit_id)
+        edit_type = request.args.get("type")
+        reference = get_reference_by_id(edit_id, edit_type)
+        authors = get_authors_by_reference_id(edit_id, edit_type)
         return render_template(
             "edit_reference.html", reference=reference, authors=authors
         )
 
     if request.method == "POST":
         reference_id = request.form.get("reference_id")
-        reference_type = request.form.get("type")
+        reference_type = request.form.get("reference_type")
         authors = request.form.getlist("author")
 
         if reference_type == "article":

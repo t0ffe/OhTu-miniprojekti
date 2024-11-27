@@ -16,18 +16,26 @@ def get_all_references():
     return [Article(*row) for row in contents]
 
 
-def get_reference_by_id(ref_id):
-    result = db.session.execute(
-        text("SELECT * FROM articles WHERE id = :id"), {"id": ref_id}
-    )
+def get_reference_by_id(ref_id, type):
+    if type == "article":
+        result = db.session.execute(
+            text("SELECT * FROM articles WHERE id = :id"), {"id": ref_id}
+        )
+    elif type == "book":
+        result = db.session.execute(
+            text("SELECT * FROM books WHERE id = :id"), {"id": ref_id}
+        )
     contents = result.fetchall()
     columns = result.keys()
-    return [dict(zip(columns, row)) for row in contents][0]
+    reference = [dict(zip(columns, row)) for row in contents][0]
+    reference["type"] = type
+    return reference
 
 
-def get_authors_by_reference_id(ref_id):
+def get_authors_by_reference_id(ref_id, type):
     result = db.session.execute(
-        text("SELECT author FROM authors WHERE reference_id = :id"), {"id": ref_id}
+        text("SELECT author FROM authors WHERE reference_id = :id AND type = :type"),
+        {"id": ref_id, "type": type},
     )
     contents = result.fetchall()
     return [row[0] for row in contents]

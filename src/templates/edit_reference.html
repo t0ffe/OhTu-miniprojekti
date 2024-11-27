@@ -37,7 +37,8 @@ Edit Reference
         <div id="authorsContainer">
           {% for author in authors %}
           <div class="author-entry">
-            <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required value="{{ author }}">
+            <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required
+              value="{{ author }}">
             <button type="button" class="remove-author" onclick="remove_author(this)">×</button>
           </div>
           {% endfor %}
@@ -83,6 +84,9 @@ Edit Reference
       </div>
       <div>
         <input name="reference_id" type="hidden" value="{{ reference.id }}">
+      </div>
+      <div>
+        <input name="reference_type" type="hidden" value="{{ reference.type }}">
       </div>
     </div>
     <button class="button add-reference-button" type="submit">
