@@ -259,3 +259,44 @@ pre {
 .dropdown-menu a:hover {
     background-color: #e7e7e7;
 }
+
+.doi-search {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px;
+    max-width: 600px;
+}
+
+.search-container input {
+    flex: 1;
+}
+
+.search-status {
+    margin-top: 10px;
+    padding: 10px;
+    display: none;
+    border-radius: 4px;
+}
+
+.search-status.error {
+    background: #ffebee;
+    color: #c62828;
+    display: block;
+}
+
+.search-status.loading {
+    background: #e3f2fd;
+    color: #1565c0;
+    display: block;
+}
+
+.search-status.success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    display: block;
+}

@@ -5,41 +5,19 @@ Edit Reference
 {% endblock %}
 
 {% block body %}
-<script>
-  function add_author() {
-    var authorsContainer = document.getElementById('authorsContainer');
-    var Authors = authorsContainer.getElementsByClassName('author-entry').length;
-
-    if (Authors >= 21) {
-      alert('You can only add max 21 authors');
-      return;
-    }
-
-    const authorEntry = document.createElement('div');
-    authorEntry.className = 'author-entry';
-    authorEntry.innerHTML = `
-        <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required>
-        <button type="button" class="remove-author" onclick="remove_author(this)">×</button>`;
-    authorsContainer.appendChild(authorEntry);
-  }
-
-  function remove_author(button) {
-    button.parentElement.remove();
-  }
-</script>
 <div class="form-section">
   <h2>Edit your reference</h2>
   <form action="/edit_reference" method="post" onsubmit="return check(this)">
     <div class="form-grid">
 
       <div class="authors-container">
-        <button class="add-author-button" type="button" onclick="add_author()">+</button>
         <div id="authorsContainer">
           {% for author in authors %}
           <div class="author-entry">
             <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required
               value="{{ author }}">
-            <button type="button" class="remove-author" onclick="remove_author(this)">×</button>
+              <button class="add-author-button" type="button" onclick="add_author()">+</button>
+              <button type="button" class="remove-author" onclick="remove_author(this)">×</button>
           </div>
           {% endfor %}
         </div>

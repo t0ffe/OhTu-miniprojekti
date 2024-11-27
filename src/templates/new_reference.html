@@ -6,6 +6,13 @@ New Reference
 
 {% block body %}
 <div class="form-section">
+  <div class="doi-search">
+    <div class="search-container">
+      <input type="text" id="doiSearch" placeholder="Enter DOI to auto-fill form">
+      <button type="button" onclick="search_DOI()">Search DOI</button>
+    </div>
+    <div id="doiSearchStatus" class="search-status"></div>
+  </div>
   <form action="/create_reference" method="post" onsubmit="return check(this)">
     <div>
       <h2 style="display: flex; align-items: center; gap: 10px;">
