@@ -13,6 +13,8 @@
 
 [Sprint 3 Burndown-kaavio](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EQTXSf3Jp-pMsSCEljAw8FgBnS1egKnIkTd6V48zIlzR4g?e=SuYobT)
 
+[1. Retro](dokumentaatio/retro.md)
+
 **Definion of Done**
 - User story on määritelty
 - Story on jaettu teknisiin osiin ja  estimoitu
