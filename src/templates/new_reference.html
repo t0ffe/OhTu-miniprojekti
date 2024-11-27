@@ -31,16 +31,16 @@ New Reference
   }
 </script>
 <div class="form-section">
-  <h2>Add a new article type reference</h2>
-  <br>
-  <br>
   <form action="/create_reference" method="post" onsubmit="return check(this)">
     <div>
-      <label for="reference_type">Select the type of reference to add:</label>
-      <select name="type" id="reference_type">
-        <option value="article">Article</option>
-        <option value="book">Book</option>
-      </select>
+      <h2 style="display: flex; align-items: center; gap: 10px;">
+        Add new 
+        <select name="type" id="reference_type" required style="width: auto; font-size: inherit; font-weight: bold;">
+          <option value="article">article</option>
+          <option value="book">book</option>
+        </select>
+        type reference
+      </h2>
     </div>
     <br>
     <div class="form-grid">
