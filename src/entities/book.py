@@ -7,7 +7,6 @@ class Book:
         publisher,
         editor,
         year,
-        address,
         volume=None,
         number=None,
         pages=None,
@@ -20,7 +19,6 @@ class Book:
         self.title = title
         self.publisher = publisher
         self.editor = editor
-        self.address = address
         self.year = year
         self.volume = volume
         self.number = number
@@ -38,7 +36,6 @@ class Book:
             form.get("publisher"),
             form.get("editor"),
             form.get("year"),
-            form.get("address") or None,
             form.get("volume") or None,
             form.get("number") or None,
             form.get("pages") or None,
@@ -53,7 +50,6 @@ class Book:
         pages = None
         month = None
         note = None
-        address = None
 
         if self.volume:
             vol = f"vol. {self.volume}."
@@ -65,6 +61,4 @@ class Book:
             month = f"month: {self.month}."
         if self.note:
             note = f"notes: {self.note}."
-        if self.address:
-            address = f"address: {self.address}."
-        return f"{self.title}. {self.authors}. {self.year}, {self.publisher},{self.address}. {vol or ''} {no or ''} {pages or ''} {month or ''} {note or ''}"
+        return f"{self.title}. {self.authors}. {self.year}, {self.publisher}. {vol or ''} {no or ''} {pages or ''} {month or ''} {note or ''}"

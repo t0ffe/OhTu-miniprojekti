@@ -14,7 +14,6 @@ def validate_reference(reference):
             reference.authors,
             reference.publisher,
             reference.editor,
-            reference.address,
             reference.title,
             reference.year,
             reference.volume,
