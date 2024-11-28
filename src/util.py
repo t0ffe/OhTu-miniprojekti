@@ -7,20 +7,39 @@ def validate_reference(reference):
         if value and (not value.isdigit() or not min_val <= int(value) <= max_val):
             raise UserInputError(
                 f"{value} must be a number between {min_val}-{max_val}"
-            )
+            )   
+    if reference.type == "book":
+        mandatory = [reference.authors, reference.title, reference.year, reference.publisher, reference.editor]
+        allfields = [
+            reference.authors,
+            reference.publisher,
+            reference.editor,
+            reference.address,
+            reference.title,
+            reference.year,
+            reference.volume,
+            reference.number,
+            reference.pages,
+            reference.month,
+            reference.note,
+        ]
 
-    mandatory = [reference.authors, reference.title, reference.journal, reference.year]
-    allfields = [
-        reference.authors,
-        reference.title,
-        reference.journal,
-        reference.year,
-        reference.volume,
-        reference.number,
-        reference.pages,
-        reference.month,
-        reference.note,
-    ]
+    elif reference.type == "article":
+        mandatory = [reference.authors, reference.title, reference.journal, reference.year]
+        allfields = [
+            reference.authors,
+            reference.title,
+            reference.journal,
+            reference.year,
+            reference.volume,
+            reference.number,
+            reference.pages,
+            reference.month,
+            reference.note,
+        ]
+    else:
+        raise UserInputError("Reference type not detected")
+    
 
     if not all(mandatory):
         raise UserInputError("All mandatory fields must be filled")

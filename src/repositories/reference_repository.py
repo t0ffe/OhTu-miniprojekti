@@ -6,14 +6,24 @@ from entities.book import Book
 
 
 def get_all_references():
-    result = db.session.execute(
+    articles_res = db.session.execute(
         text(
             "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
             r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
         )
+    )  
+    articles = articles_res.fetchall()
+    return [Article(*row) for row in articles]
+
+def get_all_book_refs():
+    books_res = db.session.execute(
+        text(
+            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.publisher, r.editor, r.year, \
+            r.volume, r.number, r.pages, r.month, r.note FROM books r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
+        )
     )
-    contents = result.fetchall()
-    return [Article(*row) for row in contents]
+    books = books_res.fetchall()
+    return [Book(*row) for row in books]
 
 
 def get_reference_by_id(ref_id, type):
