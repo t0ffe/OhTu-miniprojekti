@@ -13,9 +13,7 @@ def get_all_references():
         )
     )  
     articles = articles_res.fetchall()
-    return [Article(*row) for row in articles]
-
-def get_all_book_refs():
+    
     books_res = db.session.execute(
         text(
             "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.publisher, r.editor, r.year, \
@@ -23,8 +21,8 @@ def get_all_book_refs():
         )
     )
     books = books_res.fetchall()
-    return [Book(*row) for row in books]
 
+    return [Article(*row) for row in articles] + [Book(*row) for row in books]
 
 def get_reference_by_id(ref_id, type):
     if type == "article":
