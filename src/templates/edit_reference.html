@@ -6,67 +6,18 @@ Edit Reference
 
 {% block body %}
 <div class="form-section">
-  <h2>Edit your reference</h2>
   <form action="/edit_reference" method="post" onsubmit="return check(this)">
-    <div class="form-grid">
-
-      <div class="authors-container">
-        <div id="authorsContainer">
-          {% for author in authors %}
-          <div class="author-entry">
-            <input placeholder="Author" type="text" name="author" minlength="1" maxlength="200" required
-              value="{{ author }}">
-              <button class="add-author-button" type="button" onclick="add_author()">+</button>
-              <button type="button" class="remove-author" onclick="remove_author(this)">×</button>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      <div>
-        <label for="title">Title</label>
-        <input placeholder="Title" type="text" name="title" minlength="1" maxlength="200" required
-          value="{{ reference.title }}">
-      </div>
-      <div>
-        <label for="year">Year</label>
-        <input placeholder="Year" type="number" name="year" min="1" max="2100" required value="{{ reference.year }}">
-      </div>
-      <div>
-        <label for="journal">Journal</label>
-        <input placeholder="Journal" type="text" name="journal" minlength="1" maxlength="200" required
-          value="{{ reference.journal }}">
-      </div>
-      <div>
-        <label for="volume">Volume (Optional)</label>
-        <input placeholder="Volume (Optional)" type="number" name="volume" min="1" max="5000"
-          value="{{ reference.volume or '' }}">
-      </div>
-      <div>
-        <label for="number">Number (Optional)</label>
-        <input placeholder="Number (Optional)" type="number" name="number" min="1" max="5000"
-          value="{{ reference.number or '' }}">
-      </div>
-      <div>
-        <label for="pages">Pages (Optional)</label>
-        <input placeholder="Pages (Optional)" type="text" name="pages" minlength="1" maxlength="200"
-          value="{{ reference.pages or '' }}">
-      </div>
-      <div>
-        <label for="month">Month (Optional)</label>
-        <input placeholder="Month (Optional)" type="number" name="month" min="1" max="12" value="{{ reference.month }}">
-      </div>
-      <div>
-        <label for="note">Note (Optional)</label>
-        <input placeholder="Note (Optional)" type="text" name="note" minlength="1" maxlength="200"
-          value="{{ reference.note or '' }}">
-      </div>
-      <div>
-        <input name="reference_id" type="hidden" value="{{ reference.id }}">
-      </div>
-      <div>
-        <input name="reference_type" type="hidden" value="{{ reference.type }}">
-      </div>
+    <div>
+      <h2 style="display: flex; align-items: center; gap: 10px;" onload=update_form()>
+        <button id="reference-type" value="{{ reference.type }}" hidden></button>
+        Edit {{ reference.type }} type reference
+      </h2>
     </div>
+    <br>
+    <div class="form-grid" id="form-grid">
+      <div id="fields"></div>
+    </div>
+    <input name="reference_id" type="hidden" value="{{ reference.id }}">
     <button class="button add-reference-button" type="submit">
       Edit
     </button>

@@ -250,4 +250,13 @@ function populate_form_with_DOI_data(work) {
   }
   update_form;
 }
+window.onload = () => {
+  update_form();
+  const referenceType = document.getElementById('reference-type');
+  if (referenceType) {
+    referenceType.value = referenceType.getAttribute('value');
+    update_form();
+  }
+};
+
 window.onload = update_form; // So that article fields are shown by default
