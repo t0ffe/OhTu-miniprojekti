@@ -31,7 +31,7 @@ function add_author(name = '') {
     article:       { required: ["author", "title", "journal", "year"], 
                      optional: ["volume", "number", "pages", "month", "note"] },
     book:          { required: ["author", "editor", "title", "publisher", "year"],
-                     optional: ["volume", "number", "address", "pages", "month", "note"] },
+                     optional: ["volume", "number", "pages", "month", "note"] },
     booklet:       { required: ["author", "title", "howpublished", "address", "year"],
                      optional: ["editor", "volume", "number", "organization", "month", "note"] },
     conference:    { required: ["author", "title", "booktitle", "year"],
