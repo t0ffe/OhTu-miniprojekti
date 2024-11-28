@@ -111,32 +111,20 @@ def create_reference(reference):
 
 
 def edit_reference(reference):
-    update_reference_sql = text(
-        """
-        UPDATE articles SET title = :title, journal = :journal, year = :year, volume = :volume,
-        number = :number, pages = :pages, month = :month, note = :note WHERE id = :reference_id
-        """
-    )
-
-    db.session.execute(
-        update_reference_sql,
-        {
-            "title": reference.title,
-            "journal": reference.journal,
-            "year": reference.year,
-            "volume": reference.volume,
-            "number": reference.number,
-            "pages": reference.pages,
-            "month": reference.month,
-            "note": reference.note,
-            "reference_id": reference.id,
-        },
-    )
+    table_name = reference.type + "s"  # Assuming table names are plural forms of types
+    fields = [attr for attr in reference.__dict__.keys() if attr not in ['id', 'type', 'authors']]
+    
+    set_clause = ", ".join([f"{field} = :{field}" for field in fields])
+    update_reference_sql = text(f"UPDATE {table_name} SET {set_clause} WHERE id = :reference_id")
+    
+    params = {field: getattr(reference, field) for field in fields}
+    params["reference_id"] = reference.id
+    
+    db.session.execute(update_reference_sql, params)
 
     remove_previous_authors_sql = text(
         "DELETE FROM authors WHERE reference_id = :reference_id AND type = :type"
     )
-
     db.session.execute(
         remove_previous_authors_sql,
         {"reference_id": reference.id, "type": reference.type},
