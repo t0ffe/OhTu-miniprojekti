@@ -72,7 +72,6 @@ function add_author(name = '') {
     append_fields(formFieldsDiv, fields.required, true);
     append_fields(formFieldsDiv, fields.optional, false);
 
-    // Set field values based on reference data
     if (typeof referenceData !== 'undefined') {
       fields.required.concat(fields.optional).forEach(field => {
         const fieldElement = document.getElementById(field);
@@ -82,7 +81,7 @@ function add_author(name = '') {
       });
       if (authorsData) {
         const authorsContainer = document.getElementById('authorsContainer');
-        authorsContainer.innerHTML = ''; // Clear existing authors
+        authorsContainer.innerHTML = ''; // this will remove the default author field
         authorsData.split(',').forEach(author => {
           author = author.trim();
           add_author(author);
@@ -259,7 +258,7 @@ function populate_form_with_DOI_data(work) {
 
   if (work.author && work.author.length > 0) {
     const authorsContainer = document.getElementById('authorsContainer');
-    authorsContainer.innerHTML = ''; // Clear existing authors
+    authorsContainer.innerHTML = ''; // this will remove the default author field
       work.author.forEach((author, index) => {
           if (index < 21) {
               add_author(`${author.given || ''} ${author.family || ''}`.trim());

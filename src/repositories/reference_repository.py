@@ -111,7 +111,7 @@ def create_reference(reference):
 
 
 def edit_reference(reference):
-    table_name = reference.type + "s"  # Assuming table names are plural forms of types
+    table_name = reference.type + "s"  # assuming our future tables will be named like this
     fields = [attr for attr in reference.__dict__.keys() if attr not in ['id', 'type', 'authors']]
     
     set_clause = ", ".join([f"{field} = :{field}" for field in fields])
