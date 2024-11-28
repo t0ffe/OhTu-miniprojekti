@@ -20,12 +20,18 @@ Reference List
 {% if references %}
   {% for reference in references %}
     <li class="reference">
-      {{ reference.authors }}. {{ reference.title }}. {{ reference.journal }} ({{ reference.year }})
+      
+      {{ reference.authors }}. {{ reference.title }}. {{ reference.publisher or reference.journal }} ({{ reference.year }})
+      {% for key, value in reference.__dict__.items() %}
+        {% if value and key not in ['id', 'type', 'authors', 'title', 'publisher', 'journal', 'year', 'volume', 'number', 'pages', 'month', 'note'] %}
+          {{ key }}: {{ value }}.
+        {% endif %}
+      {% endfor %}
       {% if reference.volume %} vol. {{ reference.volume }}.{% endif %}
       {% if reference.number %} no. {{ reference.number }}.{% endif %}
       {% if reference.pages %} page(s) {{ reference.pages }}.{% endif %}
       {% if reference.month %} month: {{ reference.month }}.{% endif %}
-      {% if reference.note %} notes: {{ reference.note }}.{% endif %}
+      {% if reference.note %} notes: {{ reference.note }}.{% endif %}     
       <a href="/edit_reference?id={{ reference.id }}&type={{ reference.type }}">
         <button class="edit-button">Edit</button>
       </a>
