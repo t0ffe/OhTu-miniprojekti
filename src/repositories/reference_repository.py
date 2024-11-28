@@ -165,36 +165,14 @@ def generate_bibkey(reference):
     return f"{author}{title}{year}"
 
 
-def format_bibtex(reference):
-    bibtex_str = ""
-    bibtex_str += f"@article{{{str(generate_bibkey(reference))},\n"
-    bibtex_str += f"  author = {{{str(reference.authors)}}},\n"
-    bibtex_str += f"  title = {{{str(reference.title)}}},\n"
-    bibtex_str += f"  journal = {{{str(reference.journal)}}},\n"
-    bibtex_str += f"  year = {{{str(reference.year)}}},\n"
-
-    if reference.volume:
-        bibtex_str += f"  volume = {{{str(reference.volume)}}},\n"
-    if reference.number:
-        bibtex_str += f"  number = {{{str(reference.number)}}},\n"
-    if reference.pages:
-        bibtex_str += f"  pages = {{{str(reference.pages)}}},\n"
-    if reference.month:
-        bibtex_str += f"  month = {{{str(reference.month)}}},\n"
-    if reference.note:
-        bibtex_str += f"  note = {{{str(reference.note)}}},\n"
-
-    bibtex_str += "}\n"
-
-    return bibtex_str
-
-
 def join_bibtex():
-    result = db.session.execute(
-        text(
-            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
-            r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
-        )
-    )
-    contents = result.fetchall()
-    return "\n".join([format_bibtex(reference) for reference in contents])
+    references = get_all_references()
+    bibtex_entries = []
+    for reference in references:
+        bibtex_str = f"@{reference.__class__.__name__.lower()}{{{str(generate_bibkey(reference))},\n"
+        for key, value in reference.__dict__.items():
+            if key not in ['id', 'type'] and value:
+                bibtex_str += f"  {key} = {{{str(value)}}},\n"
+        bibtex_str += "}\n"
+        bibtex_entries.append(bibtex_str)
+    return "\n".join(bibtex_entries)
