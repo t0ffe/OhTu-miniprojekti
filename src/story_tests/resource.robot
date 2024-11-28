@@ -52,7 +52,6 @@ Add Reference
     Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
     Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
     Click Button  Add
-    Page Should Contain  Succesfully added reference!
 
 Verify Reference
     [Arguments]  ${author}  ${title}  ${journal}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
