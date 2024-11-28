@@ -71,6 +71,24 @@ function add_author(name = '') {
 
     append_fields(formFieldsDiv, fields.required, true);
     append_fields(formFieldsDiv, fields.optional, false);
+
+    // Set field values based on reference data
+    if (typeof referenceData !== 'undefined') {
+      fields.required.concat(fields.optional).forEach(field => {
+        const fieldElement = document.getElementById(field);
+        if (fieldElement && referenceData[field]) {
+          fieldElement.value = referenceData[field];
+        }
+      });
+      if (authorsData) {
+        const authorsContainer = document.getElementById('authorsContainer');
+        authorsContainer.innerHTML = ''; // Clear existing authors
+        authorsData.split(',').forEach(author => {
+          author = author.trim();
+          add_author(author);
+        });
+      }
+    }
   };
 
   const append_authors_container = (container, optional = false) => {

@@ -23,6 +23,10 @@ Edit Reference
     </button>
   </form>
 </div>
+<script>
+  const referenceData = JSON.parse('{{ reference | tojson | safe }}');
+  const authorsData = '{{ authors }}';
+</script>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}

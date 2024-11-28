@@ -98,8 +98,9 @@ def reference_editing():
         edit_type = request.args.get("type")
         reference = get_reference_by_id(edit_id, edit_type)
         authors = get_authors_by_reference_id(edit_id, edit_type)
+        authors_string = ", ".join([author for author in authors])
         return render_template(
-            "edit_reference.html", reference=reference, authors=authors
+            "edit_reference.html", reference=reference, authors=authors_string
         )
 
     if request.method == "POST":
