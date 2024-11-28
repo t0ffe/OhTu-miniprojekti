@@ -230,35 +230,11 @@ pre {
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+    width: auto; 
+    font-size: inherit; 
+    font-weight: bold;
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-
-.dropdown-menu a {
-    padding: 11px;
-    color: black;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    width: 165px;
-}
-
-.dropdown-menu a:hover {
-    background-color: #e7e7e7;
-}
 
 .doi-search {
     margin-bottom: 20px;
