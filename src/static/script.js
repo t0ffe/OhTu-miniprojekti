@@ -110,6 +110,7 @@ function add_author(name = '') {
 
   const create_field = (field, required) => {
     const row = document.createElement("div");
+    row.className = "field_contents"
 
     const input = document.createElement("input");
     input.placeholder = field.charAt(0).toUpperCase() + field.slice(1) + (required ? " *" : " (Optional)");

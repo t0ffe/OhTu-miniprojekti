@@ -142,6 +142,11 @@ pre {
     margin: 10px 0;
 }
 
+.field_contents {
+    margin-bottom: 10px;
+}
+
+
 .form-section {
     background: white;
     padding: 20px;
