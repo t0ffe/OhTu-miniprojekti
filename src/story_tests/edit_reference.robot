@@ -14,7 +14,7 @@ Author Should Be Editable
     Click Button  Edit
     Input Text  author  Kari Kirjoittelija
     Click Button  Edit
-    Page Should Contain  Succesfully edited reference!
+    Wait until Page Contains Element  css=div.success-message
     Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022
 
 Optional Info Should Be Removable
@@ -29,7 +29,7 @@ Optional Info Should Be Removable
     Clear Element Text  month
     Clear Element Text  note
     Click Button  Edit
-    Page Should Contain  Succesfully edited reference!
+    Wait until Page Contains Element  css=div.success-message
     Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022
 
 Single Reference Should Be Deletable
@@ -37,14 +37,14 @@ Single Reference Should Be Deletable
     Click Button  All references
     Verify Reference  Kari Kirjoittelija  Paras Artikkeli  ${JOURNAL}  2022
     Click Button  Delete
-    Page Should Contain  Succesfully removed reference!
+    Wait until Page Contains Element  css=div.success-message
 
 Reference With Voluntary Info Should Be Deletable
     Add Reference  ${AUTHOR}  Paras Artikkeli Ikinä  2002  Aikakauslehti  2  4  10  5  Opiskele
     Click Button  All references
     Verify Reference  ${AUTHOR}  Paras Artikkeli Ikinä  Aikakauslehti  2002  2  4  10  5  Opiskele
     Click Button  Delete
-    Page Should Contain  Succesfully removed reference!
+    Wait until Page Contains Element  css=div.success-message
 
 All References Should Be Deletable
     Add Reference  ${AUTHOR}  ${TITLE}  ${YEAR}  ${JOURNAL}
@@ -58,8 +58,8 @@ All References Should Be Deletable
     Page Should Not Contain  month:
     Page Should Not Contain  notes:
     Click Button  Delete
-    Page Should Contain  Succesfully removed reference!
+    Wait until Page Contains Element  css=div.success-message
     Click Button  Delete
-    Page Should Contain  Succesfully removed reference!
+    Wait until Page Contains Element  css=div.success-message
     Page Should Contain  No references added yet.
 
