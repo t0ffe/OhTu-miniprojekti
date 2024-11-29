@@ -10,7 +10,7 @@ Test Setup       Reset References
 Main Page Should Be Open
     Go To  ${HOME_URL}
     Title Should Be  References App
-    Page Should Contain  This is an app for the client to add article type references and inspect them in BibTex- format
+    Page Should Contain  This is an app for the client to add different types of references and inspect them in BibTex- format
     Page Should Contain  The client can also edit and remove added references
     Page Should Contain  The app is created by LateXin Ritarit during the course Ohjelmistotuotanto (5 op)
     Page Should Contain  Creators:

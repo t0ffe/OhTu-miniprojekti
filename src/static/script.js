@@ -10,7 +10,7 @@ function add_author(name = '') {
     const authorEntry = document.createElement('div');
     authorEntry.className = 'author-entry';
     authorEntry.innerHTML = `
-        <input placeholder="Author*" type="text" name="author" minlength="1" maxlength="200" value="${name}" required>
+        <input placeholder="Author *" type="text" name="author" minlength="1" maxlength="200" value="${name}" required>
         <button class="add-author-button" type="button" onclick="add_author()">+</button>
         <button type="button" class="remove-author" onclick="remove_author(this)">×</button>`;
     authorsContainer.appendChild(authorEntry);
