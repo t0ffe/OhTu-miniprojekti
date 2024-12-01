@@ -35,3 +35,8 @@ New Reference Link Should Be Clickable
 No References Should Display Message
     Go To  ${LIST_REFERENCES}
     Page Should Contain  No references added yet.
+
+Export As BibTex Should Be Clickable
+    Go To  ${LIST_REFERENCES}
+    Click Button  css=.export-button
+    Page Should Contain  Download BibTeX

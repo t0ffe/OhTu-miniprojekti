@@ -31,13 +31,11 @@ class TestReferenceValidation(unittest.TestCase):
         validate_reference(Book(
             1, ["Author1", "Author2"], "Title", "Publisher", "Editor", "2024", "", "5", ""
         ))
-
     def test_too_short_or_long_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference(
                 Article(1, "", "Title", "Journal", "2023", "3", "", "5000", "", "note")
             )
-
         with self.assertRaises(UserInputError):
             validate_reference(
                 Article(
@@ -60,8 +58,7 @@ class TestReferenceValidation(unittest.TestCase):
         with self.assertRaises(UserInputError):
             validate_reference(Book(
             1, "Author1", "Title", "Publisher", "E"*201, "2024", "", "5", ""
-        ))
-            
+        ))           
     def test_year_too_much_or_str_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference(
@@ -78,7 +75,6 @@ class TestReferenceValidation(unittest.TestCase):
                     "note",
                 )
             )
-
         with self.assertRaises(UserInputError):
             validate_reference(
                 Article(
@@ -118,7 +114,6 @@ class TestReferenceValidation(unittest.TestCase):
                     "note",
                 )
             )
-
         with self.assertRaises(UserInputError):
             validate_reference(
                 Article(
@@ -141,8 +136,7 @@ class TestReferenceValidation(unittest.TestCase):
         with self.assertRaises(UserInputError):
             validate_reference(Book(
             1, "Author1", "Title", "Publisher", "Editor", "2024", "volume"
-        ))
-            
+        ))          
     def test_number_too_much_or_str_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference(
@@ -159,7 +153,6 @@ class TestReferenceValidation(unittest.TestCase):
                     "note",
                 )
             )
-
         with self.assertRaises(UserInputError):
             validate_reference(
                 Article(
@@ -183,7 +176,6 @@ class TestReferenceValidation(unittest.TestCase):
             validate_reference(Book(
             1, "Author1", "Title", "Publisher", "Editor", "2024", "5", "number"
         ))
-            
     def test_month_too_much_or_str_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference(
@@ -200,7 +192,6 @@ class TestReferenceValidation(unittest.TestCase):
                     "note",
                 )
             )
-
         with self.assertRaises(UserInputError):
             validate_reference(
                 Article(
@@ -224,7 +215,6 @@ class TestReferenceValidation(unittest.TestCase):
             validate_reference(Book(
             1, "Author1", "Title", "Publisher", "Editor", "2024", "5", "50", "532", "month"
         ))
-            
     def test_too_many_authors(self):
         with self.assertRaises(UserInputError):
             validate_reference(
