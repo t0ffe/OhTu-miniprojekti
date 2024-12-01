@@ -238,12 +238,14 @@ pre {
     width: auto; 
     font-size: inherit; 
     font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     padding: 8px;
     border-radius: 4px;
 }
 
+.dropdown:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
 .doi-search {
     margin-bottom: 20px;
