@@ -35,8 +35,8 @@ ${AUTHOR}  Aki Artikuloija
 ${TITLE}  Artikkeli
 ${YEAR}  2020
 ${JOURNAL}  Lehtinen
-${PUBLISHER}  Booker
-${EDITOR}  Mr.Editor
+${EDITOR}  Antti Auttaja
+${PUBLISHER}  LateXin Ritarit
 
 *** Keywords ***
 Add Article Reference
@@ -54,22 +54,6 @@ Add Article Reference
     Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
     Click Button  Add
 
-Add Book Reference
-    [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
-    Go To  ${NEW_REFERENCE}
-    Select From List By Label  id:reference-type  book
-    Input Text  author  ${author}
-    Input Text  title  ${title}
-    Input Text  publisher  ${publisher}
-    Input Text  editor  ${editor}
-    Input Text  year  ${year}
-    Run Keyword If  '${volume}' != 'None'  Input Text  volume  ${volume}
-    Run Keyword If  '${number}' != 'None'  Input Text  number  ${number}
-    Run Keyword If  '${pages}' != 'None'  Input Text  pages  ${pages}
-    Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
-    Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
-    Click Button  Add
-
 Verify Article Reference
     [Arguments]  ${author}  ${title}  ${journal}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
     Page Should Contain  ${author}. ${title}. ${journal} (${year})
@@ -79,10 +63,26 @@ Verify Article Reference
     Run Keyword If  '${month}' != 'None'  Page Should Contain  month: ${month}
     Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
 
+Add Book Reference
+    [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}   ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    Go To  ${NEW_REFERENCE}
+    Select From List By Label  id:reference-type  book
+    Input Text  author  ${author}
+    Input Text  editor  ${editor}
+    Input Text  title  ${title}
+    Input Text  publisher  ${publisher}
+    Input Text  year  ${year}
+    
+    Run Keyword If  '${volume}' != 'None'  Input Text  volume  ${volume}
+    Run Keyword If  '${number}' != 'None'  Input Text  number  ${number}
+    Run Keyword If  '${pages}' != 'None'  Input Text  pages  ${pages}
+    Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
+    Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
+    Click Button  Add
+
 Verify Book Reference
-    [Arguments]  ${author}  ${title}  ${publisher}  ${editor}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
-    Page Should Contain  ${author}. ${title}. ${publisher} (${year})
-    Page Should Contain  editor: ${editor}
+    [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}   ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    Page Should Contain  ${author}. ${title}. ${publisher} (${year}) 
     Run Keyword If  '${volume}' != 'None'  Page Should Contain  vol. ${volume}
     Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}
     Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}

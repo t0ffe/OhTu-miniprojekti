@@ -3,9 +3,9 @@ class Book:
         self,
         ref_id,
         authors,
+        editor,
         title,
         publisher,
-        editor,
         year,
         volume=None,
         number=None,
@@ -16,9 +16,9 @@ class Book:
     ):
         self.id = ref_id
         self.authors = authors
+        self.editor = editor
         self.title = title
         self.publisher = publisher
-        self.editor = editor
         self.year = year
         self.volume = volume
         self.number = number
@@ -32,9 +32,9 @@ class Book:
         return Book(
             form.get("reference_id") or None,
             form.getlist("author"),
+            form.get("editor"),
             form.get("title"),
             form.get("publisher"),
-            form.get("editor"),
             form.get("year"),
             form.get("volume") or None,
             form.get("number") or None,

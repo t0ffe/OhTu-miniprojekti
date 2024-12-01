@@ -16,7 +16,7 @@ def get_all_references():
     
     books_res = db.session.execute(
         text(
-            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.publisher, r.editor, r.year, \
+            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.editor, r.title, r.publisher, r.year, \
             r.volume, r.number, r.pages, r.month, r.note FROM books r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
         )
     )

@@ -69,9 +69,9 @@ def setup_db():
     sql = text(
         f"CREATE TABLE {BOOK_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
+        "  editor TEXT NOT NULL, "
         "  title TEXT NOT NULL, "
         "  publisher TEXT NOT NULL, "
-        "  editor TEXT NOT NULL, "
         "  year INT NOT NULL, "
         "  volume INT, "
         "  number INT, "

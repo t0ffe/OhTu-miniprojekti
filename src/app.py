@@ -28,7 +28,7 @@ def new():
     return render_template("new_reference.html")
 
 
-# Uuden article-tyypisen referensin luomisfunktio.
+# Uuden referensin luomisfunktio.
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
     reference_type = request.form.get("type")

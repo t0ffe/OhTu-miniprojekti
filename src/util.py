@@ -9,12 +9,12 @@ def validate_reference(reference):
                 f"{value} must be a number between {min_val}-{max_val}"
             )   
     if reference.type == "book":
-        mandatory = [reference.authors, reference.title, reference.year, reference.publisher, reference.editor]
+        mandatory = [reference.authors, reference.editor, reference.title,  reference.publisher, reference.year ]
         allfields = [
             reference.authors,
-            reference.publisher,
             reference.editor,
             reference.title,
+            reference.publisher,
             reference.year,
             reference.volume,
             reference.number,
