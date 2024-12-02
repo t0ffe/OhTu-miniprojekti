@@ -46,8 +46,6 @@ Article Reference With Voluntary Info Should Be Deletable
     Click Button  Delete
     Wait until Page Contains Element  css=div.success-message
 
-
-
 Book Author Should Be Editable
     Add Book Reference   ${AUTHOR}  ${EDITOR}  Latexin ritarien tarinoita  ${PUBLISHER}  ${YEAR} 
     Click Button  All references
@@ -85,8 +83,6 @@ Book Reference With Voluntary Info Should Be Deletable
     Verify Book Reference  ${AUTHOR}  ${EDITOR}  Paras Artikkeli Ikinä  ${PUBLISHER}  2002  2  4  10  5  Opiskele
     Click Button  Delete
     Wait until Page Contains Element  css=div.success-message
-
-
 
 All References Should Be Deletable
     Add Article Reference  ${AUTHOR}  Parempi Artikkeli  2022  ${JOURNAL}
