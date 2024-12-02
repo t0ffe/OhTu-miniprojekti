@@ -8,7 +8,7 @@ Test Setup       Reset References
 
 *** Test Cases ***
 Single Article Reference Should Be Added
-    Add Article Reference   ${AUTHOR}  ${TITLE}  ${JOURNAL}  ${YEAR}
+    Add Article Reference   ${AUTHOR}  ${TITLE}  ${YEAR}  ${JOURNAL}
     Click Button  All references
     Verify Article Reference   ${AUTHOR}  ${TITLE}  ${JOURNAL}  ${YEAR}
 
