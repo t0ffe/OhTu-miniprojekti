@@ -3,15 +3,14 @@
 
 [![CI Badge](https://github.com/t0ffe/OhTu-miniprojekti/workflows/CI/badge.svg)](https://github.com/t0ffe/OhTu-miniprojekti/actions)
 [![codecov](https://codecov.io/gh/t0ffe/OhTu-miniprojekti/graph/badge.svg?token=E2HOVHAVW0)](https://codecov.io/gh/t0ffe/OhTu-miniprojekti)
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 [Product Backlog](https://github.com/users/t0ffe/projects/4)
 - Backlogissa on omat välilehdet sprinteille 1, 2, 3 ja 4 
 
-[Sprint 1 Burndown-kaavio](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EUMaJ_EyNzlHsF8YF2-GRy0BXbaeBAUQxwVG9nqvj3KeVg?e=hNgaGF)
-
-[Sprint 2 Burndown-kaavio](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/Ee50PuOooyhOoKF7gboA02cBM3iOCAa1zr4BnQ4nloTlXw?e=tZz7PL)
-
-[Sprint 3 Burndown-kaavio](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EQTXSf3Jp-pMsSCEljAw8FgBnS1egKnIkTd6V48zIlzR4g?e=SuYobT)
+Sprintin [1](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EUMaJ_EyNzlHsF8YF2-GRy0BXbaeBAUQxwVG9nqvj3KeVg?e=hNgaGF)
+[2](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/Ee50PuOooyhOoKF7gboA02cBM3iOCAa1zr4BnQ4nloTlXw?e=tZz7PL)
+ ja [3](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EQTXSf3Jp-pMsSCEljAw8FgBnS1egKnIkTd6V48zIlzR4g?e=SuYobT) Burndown-kaaviot
 
 [1. Retro](dokumentaatio/retro.md)
 
@@ -28,3 +27,13 @@
 
 [Sovelluksen käyttö- ja asennusohje](dokumentaatio/kayttoohje.md)
 
+---
+
+This work is licensed under a
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
+
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
+
+[cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
+[cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
+[cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
