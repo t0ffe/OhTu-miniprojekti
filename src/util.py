@@ -7,9 +7,10 @@ def validate_reference(reference):
         if value and (not value.isdigit() or not min_val <= int(value) <= max_val):
             raise UserInputError(
                 f"{value} must be a number between {min_val}-{max_val}"
-            )   
+            )
     if reference.type == "book":
-        mandatory = [reference.authors, reference.editor, reference.title,  reference.publisher, reference.year ]
+        mandatory = [reference.authors, reference.editor,
+                     reference.title,  reference.publisher, reference.year]
         allfields = [
             reference.authors,
             reference.editor,
@@ -24,7 +25,8 @@ def validate_reference(reference):
         ]
 
     elif reference.type == "article":
-        mandatory = [reference.authors, reference.title, reference.journal, reference.year]
+        mandatory = [reference.authors, reference.title,
+                     reference.journal, reference.year]
         allfields = [
             reference.authors,
             reference.title,
@@ -38,12 +40,12 @@ def validate_reference(reference):
         ]
     else:
         raise UserInputError("Invalid reference type")
-    
 
     if not all(mandatory):
         raise UserInputError("All mandatory fields must be filled")
     if any(len(field) > 200 for field in allfields if field):
-        raise UserInputError("Reference information length must be smaller than 200")
+        raise UserInputError(
+            "Reference information length must be smaller than 200")
 
     is_valid_number(reference.year, 1, 2100)
     is_valid_number(reference.volume, 1, 5000)

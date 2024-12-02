@@ -45,8 +45,8 @@ Add Article Reference
     Select From List By Label  id:reference-type  article
     Input Text  author  ${author}
     Input Text  title  ${title}
-    Input Text  year  ${year}
     Input Text  journal  ${journal}
+    Input Text  year  ${year}
     Run Keyword If  '${volume}' != 'None'  Input Text  volume  ${volume}
     Run Keyword If  '${number}' != 'None'  Input Text  number  ${number}
     Run Keyword If  '${pages}' != 'None'  Input Text  pages  ${pages}
@@ -72,7 +72,6 @@ Add Book Reference
     Input Text  title  ${title}
     Input Text  publisher  ${publisher}
     Input Text  year  ${year}
-    
     Run Keyword If  '${volume}' != 'None'  Input Text  volume  ${volume}
     Run Keyword If  '${number}' != 'None'  Input Text  number  ${number}
     Run Keyword If  '${pages}' != 'None'  Input Text  pages  ${pages}
@@ -82,7 +81,8 @@ Add Book Reference
 
 Verify Book Reference
     [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}   ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
-    Page Should Contain  ${author}. ${title}. ${publisher} (${year}) 
+    Page Should Contain  ${author}. ${title}. ${publisher} (${year})  
+    Page Should Contain  editor: ${editor}
     Run Keyword If  '${volume}' != 'None'  Page Should Contain  vol. ${volume}
     Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}
     Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}

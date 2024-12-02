@@ -11,9 +11,9 @@ def get_all_references():
             "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
             r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
         )
-    )  
+    )
     articles = articles_res.fetchall()
-    
+
     books_res = db.session.execute(
         text(
             "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.editor, r.title, r.publisher, r.year, \
@@ -23,6 +23,7 @@ def get_all_references():
     books = books_res.fetchall()
 
     return [Article(*row) for row in articles] + [Book(*row) for row in books]
+
 
 def get_reference_by_id(ref_id, type):
     if type == "article":
@@ -55,9 +56,11 @@ def delete_reference_db(ref_id, type):
         {"id": ref_id, "type": type},
     )
     if type == "article":
-        db.session.execute(text("DELETE FROM articles WHERE id = :id"), {"id": ref_id})
+        db.session.execute(
+            text("DELETE FROM articles WHERE id = :id"), {"id": ref_id})
     elif type == "book":
-        db.session.execute(text("DELETE FROM books WHERE id = :id"), {"id": ref_id})
+        db.session.execute(
+            text("DELETE FROM books WHERE id = :id"), {"id": ref_id})
     db.session.commit()
 
 
@@ -111,15 +114,18 @@ def create_reference(reference):
 
 
 def edit_reference(reference):
-    table_name = reference.type + "s"  # assuming our future tables will be named like this
-    fields = [attr for attr in reference.__dict__.keys() if attr not in ['id', 'type', 'authors']]
-    
+    # assuming our future tables will be named like this
+    table_name = reference.type + "s"
+    fields = [attr for attr in reference.__dict__.keys() if attr not in [
+        'id', 'type', 'authors']]
+
     set_clause = ", ".join([f"{field} = :{field}" for field in fields])
-    update_reference_sql = text(f"UPDATE {table_name} SET {set_clause} WHERE id = :reference_id")
-    
+    update_reference_sql = text(
+        f"UPDATE {table_name} SET {set_clause} WHERE id = :reference_id")
+
     params = {field: getattr(reference, field) for field in fields}
     params["reference_id"] = reference.id
-    
+
     db.session.execute(update_reference_sql, params)
 
     remove_previous_authors_sql = text(
@@ -147,7 +153,8 @@ def create_author(author, reference_id, ref_type):
 
 
 def generate_bibkey(reference):
-    author = "".join([name.split()[-1][:4] for name in reference.authors.split(" & ")])
+    author = "".join([name.split()[-1][:4]
+                     for name in reference.authors.split(" & ")])
     title = reference.title[:3]
     year = reference.year
     return f"{author}{title}{year}"
