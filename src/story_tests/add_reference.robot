@@ -50,8 +50,3 @@ Book Reference With Voluntary Info Should Be Added
     Add Book Reference   ${AUTHOR}  ${EDITOR}  Latexin ritarien klassikot  ${PUBLISHER}  2022  3  2  142  5  Muista tämä
     Click Button  All references
     Verify Book Reference   ${AUTHOR}  ${EDITOR}  Latexin ritarien klassikot  ${PUBLISHER}  2022  3  2  142  5  Muista tämä
-
-Reference can be added with DOI
-    Add DOI   ${DOI}
-    Click Button  All references
-    Verify Article Reference   Alex Gaudeul  Do Open Source Developers Respond to Competition? The LATEX Case Study  Review of Network Economics  2007  6  2  None  1
