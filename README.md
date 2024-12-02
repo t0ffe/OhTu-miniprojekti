@@ -15,7 +15,7 @@
 
 [1. Retro](dokumentaatio/retro.md)
 
-**Definion of Done**
+**Definition of Done**
 - User story on määritelty
 - Story on jaettu teknisiin osiin ja  estimoitu
 - Tekniset osat (koodi) on toteutettu
