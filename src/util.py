@@ -36,6 +36,8 @@ def validate_reference(reference):
             reference.month,
             reference.note,
         ]
+    else:
+        raise UserInputError("Invalid reference type")
     
 
     if not all(mandatory):
