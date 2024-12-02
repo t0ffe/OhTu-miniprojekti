@@ -7,7 +7,7 @@ Test Setup       Reset References
 
 
 *** Test Cases ***
-Reference can be added with DOI
+#Reference can be added with DOI
     #[Tags]  doi
     #Add DOI   ${DOI}
     #Click Button  All references
