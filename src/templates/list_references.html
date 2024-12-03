@@ -1,10 +1,17 @@
 {% extends "layout.html" %}
 
+
 {% block title %}
+
 Reference List
+
 {% endblock %}
 
+
 {% block body %}
+
+
+
 
 
 
@@ -16,11 +23,25 @@ Reference List
     <button class="export-button" >Export as BibTeX</button>
   </a>
 </div>
+
+
+
+
+<div class="form-section">
+  <div class="reference-search">
+    <div class="search-container">
+      <input type="text" id="RefSearch" placeholder="Search for a reference...">
+      <button type="button" onclick="">Search</button>
+    </div>
+  </div>
 <br>
+
+
+
+
 {% if references %}
   {% for reference in references %}
     <li class="reference">
-      
       {{ reference.authors }}. {{ reference.title }}. {{ reference.publisher or reference.journal }} ({{ reference.year }})
       {% for key, value in reference.__dict__.items() %}
         {% if value and key not in ['id', 'type', 'authors', 'title', 'publisher', 'journal', 'year', 'volume', 'number', 'pages', 'month', 'note'] %}
@@ -32,18 +53,22 @@ Reference List
       {% if reference.pages %} page(s) {{ reference.pages }}.{% endif %}
       {% if reference.month %} month: {{ reference.month }}.{% endif %}
       {% if reference.note %} notes: {{ reference.note }}.{% endif %}     
+
       <a href="/edit_reference?id={{ reference.id }}&type={{ reference.type }}">
         <button class="edit-button">Edit</button>
       </a>
+
       <a href="/delete_reference?id={{ reference.id }}&type={{ reference.type }}">
         <button class="delete-button">Delete</button>
       </a>
+
     </li>
   {% endfor %}
 {% else %}
   <p>No references added yet.</p>
 {% endif %}
 </div>
+
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
@@ -53,3 +78,25 @@ Reference List
 {% endwith %}
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
