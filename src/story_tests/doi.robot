@@ -22,13 +22,13 @@ ${INVALID_DOI}          10.1234/invalid
 
 
 *** Test Cases ***
-#Valid DOI Should Auto-Fill Form (Article)
-    #[Documentation]  
-    #Go To  ${NEW_REFERENCE}
-    #Input Text  id:doiSearch  ${VALID_DOI_ARTICLE_1}
-    #Click Button  xpath://button[text()='Search DOI']
-    #Wait Until Page Contains  Reference data found and form populated!
-    #Verify Article Auto-Filled Fields 
+Valid DOI Should Auto-Fill Form (Article)
+    [Documentation]  
+    Go To  ${NEW_REFERENCE}
+    Input Text  id:doiSearch  ${VALID_DOI_ARTICLE_1}
+    Click Button  xpath://button[text()='Search DOI']
+    Wait Until Page Contains  Reference data found and form populated!
+  
 
 Invalid DOI Should Show Error
     [Documentation] 
@@ -37,15 +37,3 @@ Invalid DOI Should Show Error
     Click Button  xpath://button[text()='Search DOI']
     Wait Until Page Contains  Could not find reference data for this DOI. Please check the DOI and try again.
 
-*** Keywords ***
-Verify Article Auto-Filled Fields
-    [Documentation]  
-    ${author}=    Get Value    id=author_field_id
-    ${title}=     Get Value    id=title_field_id
-    ${journal}=   Get Value    id=journal_field_id
-    ${year}=      Get Value    id=year_field_id
-
-    Run Keyword If  '${author}' != ''  Log  Author field contains: ${author}
-    Run Keyword If  '${title}' != ''  Log  Title field contains: ${title}
-    Run Keyword If  '${journal}' != ''  Log  Journal field contains: ${journal}
-    Run Keyword If  '${year}' != ''  Log  Year field contains: ${year}
