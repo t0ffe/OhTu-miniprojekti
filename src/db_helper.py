@@ -1,8 +1,7 @@
 from sqlalchemy import text
 from config import db, app
 
-ARTICLE_TABLE = "articles"
-BOOK_TABLE = "books"
+REFERENCE_TABLE = "referencetable"
 AUTHOR_TABLE = "authors"
 
 
@@ -28,56 +27,43 @@ def reset_db():
     db.session.execute(sql)
     db.session.commit()
 
-    print(f"Clearing contents from table {ARTICLE_TABLE}")
-    sql = text(f"DELETE FROM {ARTICLE_TABLE}")
+    print(f"Clearing contents from table {REFERENCE_TABLE}")
+    sql = text(f"DELETE FROM {REFERENCE_TABLE}")
     db.session.execute(sql)
     db.session.commit()
 
 
 def setup_db():
-    if table_exists(ARTICLE_TABLE):
-        print(f"Table {ARTICLE_TABLE} exists, dropping")
-        sql = text(f"DROP TABLE {ARTICLE_TABLE} CASCADE")
+    if table_exists(REFERENCE_TABLE):
+        print(f"Table {REFERENCE_TABLE} exists, dropping")
+        sql = text(f"DROP TABLE {REFERENCE_TABLE} CASCADE")
         db.session.execute(sql)
         db.session.commit()
 
-    print(f"Creating table {ARTICLE_TABLE}")
+    print(f"Creating table {REFERENCE_TABLE}")
     sql = text(
-        f"CREATE TABLE {ARTICLE_TABLE} ("
+        f"CREATE TABLE {REFERENCE_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
         "  title TEXT NOT NULL, "
-        "  journal TEXT NOT NULL, "
         "  year INT NOT NULL, "
-        "  volume INT, "
-        "  number INT, "
+        "  journal TEXT, "
+        "  volume TEXT, "
         "  pages TEXT, "
         "  month INT, "
-        "  note TEXT"
-        ")"
-    )
-
-    db.session.execute(sql)
-    db.session.commit()
-
-    if table_exists(BOOK_TABLE):
-        print(f"Table {BOOK_TABLE} exists, dropping")
-        sql = text(f"DROP TABLE {BOOK_TABLE} CASCADE")
-        db.session.execute(sql)
-        db.session.commit()
-
-    print(f"Creating table {BOOK_TABLE}")
-    sql = text(
-        f"CREATE TABLE {BOOK_TABLE} ("
-        "  id SERIAL PRIMARY KEY, "
-        "  editor TEXT NOT NULL, "
-        "  title TEXT NOT NULL, "
-        "  publisher TEXT NOT NULL, "
-        "  year INT NOT NULL, "
-        "  volume INT, "
+        "  editor TEXT, "
+        "  publisher TEXT, "
+        "  edition INT, "
         "  number INT, "
-        "  pages TEXT, "
-        "  month INT, "
-        "  note TEXT"
+        "  booktitle TEXT, "
+        "  series TEXT, "
+        "  address TEXT, "
+        "  organization TEXT, "
+        "  institution TEXT, "
+        "  school TEXT, "
+        "  howpublished TEXT, "
+        "  note TEXT, "
+        "  type TEXT, "
+        "  reftype TEXT "
         ")"
     )
 
@@ -95,8 +81,7 @@ def setup_db():
         f"CREATE TABLE {AUTHOR_TABLE} ("
         "  id SERIAL PRIMARY KEY, "
         "  author TEXT NOT NULL, "
-        "  reference_id INT, "
-        "  type TEXT NOT NULL"
+        "  reference_id INT "
         ")"
     )
 
