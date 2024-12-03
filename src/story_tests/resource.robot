@@ -41,7 +41,7 @@ ${DOI}  10.2202/1446-9022.1119
 
 *** Keywords ***
 Add Article Reference
-    [Arguments]  ${author}  ${title}  ${year}  ${journal}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None ${doi}=None
+    [Arguments]  ${author}  ${title}  ${year}  ${journal}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
     Go To  ${NEW_REFERENCE}
     Select From List By Label  id:reference-type  article
     Input Text  author  ${author}
