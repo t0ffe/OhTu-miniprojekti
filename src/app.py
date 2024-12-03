@@ -16,6 +16,14 @@ from entities.article import Article
 from entities.book import Book
 
 
+def reference_from_request(type):
+    reference_objects = {
+        "article": Article.from_form(request.form),
+        "book": Book.from_form(request.form),
+    }
+    return reference_objects[type]
+
+
 # Kotisivulle vievä funktio.
 @app.route("/")
 def index():
@@ -32,10 +40,7 @@ def new():
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
     reference_type = request.form.get("type")
-    if reference_type == "article":
-        new_reference = Article.from_form(request.form)
-    if reference_type == "book":
-        new_reference = Book.from_form(request.form)
+    new_reference = reference_from_request(reference_type)
     try:
         validate_reference(new_reference)
         create_reference(new_reference)
@@ -79,10 +84,9 @@ def download_references_as_bibtex():
 @app.route("/delete_reference", methods=["GET"])
 def delete_reference():
     ref_id = request.args.get("id")
-    type = request.args.get("type")
     if ref_id is not None:
         try:
-            delete_reference_db(ref_id, type)
+            delete_reference_db(ref_id)
             flash("Succesfully removed reference!")
             return redirect("/list_references")
         except Exception as error:
@@ -97,7 +101,7 @@ def reference_editing():
         edit_id = request.args.get("id")
         edit_type = request.args.get("type")
         reference = get_reference_by_id(edit_id, edit_type)
-        authors = get_authors_by_reference_id(edit_id, edit_type)
+        authors = get_authors_by_reference_id(edit_id)
         authors_string = ", ".join([author for author in authors])
         return render_template(
             "edit_reference.html", reference=reference, authors=authors_string
@@ -107,13 +111,7 @@ def reference_editing():
         reference_id = request.form.get("reference_id")
         reference_type = request.form.get("reference_type")
         authors = request.form.getlist("author")
-
-        if reference_type == "article":
-            new_reference = Article.from_form(request.form)
-
-        if reference_type == "book":
-            new_reference = Book.from_form(request.form)
-
+        new_reference = reference_from_request(reference_type)
         try:
             validate_reference(new_reference)
             edit_reference(new_reference)
