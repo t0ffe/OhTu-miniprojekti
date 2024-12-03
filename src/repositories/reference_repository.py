@@ -9,7 +9,7 @@ def get_all_references():
     articles_res = db.session.execute(
         text(
             "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
-            r.number, r.pages, r.month, r.note FROM articles r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
+            r.number, r.pages, r.month, r.note FROM referencetable r INNER JOIN authors a ON r.id = a.reference_id WHERE r.reftype = 'article' GROUP BY r.id"
         )
     )
     articles = articles_res.fetchall()
@@ -17,7 +17,7 @@ def get_all_references():
     books_res = db.session.execute(
         text(
             "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.editor, r.title, r.publisher, r.year, \
-            r.volume, r.number, r.pages, r.month, r.note FROM books r INNER JOIN authors a ON r.id = a.reference_id GROUP BY r.id"
+            r.volume, r.number, r.pages, r.month, r.note FROM referencetable r INNER JOIN authors a ON r.id = a.reference_id WHERE r.reftype = 'book' GROUP BY r.id"
         )
     )
     books = books_res.fetchall()
@@ -26,14 +26,9 @@ def get_all_references():
 
 
 def get_reference_by_id(ref_id, type):
-    if type == "article":
-        result = db.session.execute(
-            text("SELECT * FROM articles WHERE id = :id"), {"id": ref_id}
-        )
-    elif type == "book":
-        result = db.session.execute(
-            text("SELECT * FROM books WHERE id = :id"), {"id": ref_id}
-        )
+    result = db.session.execute(
+        text("SELECT * FROM referencetable WHERE id = :id"), {"id": ref_id}
+    )
     contents = result.fetchall()
     columns = result.keys()
     reference = [dict(zip(columns, row)) for row in contents][0]
@@ -41,26 +36,24 @@ def get_reference_by_id(ref_id, type):
     return reference
 
 
-def get_authors_by_reference_id(ref_id, type):
+def get_authors_by_reference_id(ref_id):
     result = db.session.execute(
-        text("SELECT author FROM authors WHERE reference_id = :id AND type = :type"),
-        {"id": ref_id, "type": type},
+        text("SELECT author FROM authors WHERE reference_id = :id"),
+        {"id": ref_id},
     )
     contents = result.fetchall()
     return [row[0] for row in contents]
 
 
-def delete_reference_db(ref_id, type):
+def delete_reference_db(ref_id):
     db.session.execute(
-        text("DELETE FROM authors WHERE reference_id = :id AND type = :type"),
-        {"id": ref_id, "type": type},
+        text("DELETE FROM authors WHERE reference_id = :id"),
+        {"id": ref_id},
     )
-    if type == "article":
-        db.session.execute(
-            text("DELETE FROM articles WHERE id = :id"), {"id": ref_id})
-    elif type == "book":
-        db.session.execute(
-            text("DELETE FROM books WHERE id = :id"), {"id": ref_id})
+    db.session.execute(
+        text("DELETE FROM referencetable WHERE id = :id"),
+        {"id": ref_id},
+    )
     db.session.commit()
 
 
@@ -68,9 +61,10 @@ def create_reference(reference):
     authors = reference.authors
 
     if reference.type == "article":
+        print("article went through")
         sql = text(
-            "INSERT INTO articles (title, journal, year, volume, number, pages, month, note) \
-                VALUES (:title, :journal, :year, :volume, :number, :pages, :month, :note) RETURNING id"
+            "INSERT INTO referencetable (title, journal, year, volume, number, pages, month, note, reftype) \
+                VALUES (:title, :journal, :year, :volume, :number, :pages, :month, :note, :reftype) RETURNING id"
         )
         result = db.session.execute(
             sql,
@@ -83,13 +77,15 @@ def create_reference(reference):
                 "pages": reference.pages or None,
                 "month": reference.month or None,
                 "note": reference.note or None,
+                "reftype": reference.type,
             },
         )
 
     elif reference.type == "book":
+        print("book went through")
         sql = text(
-            "INSERT INTO books (editor, title, publisher, year, volume, number, pages, month, note) \
-                VALUES (:editor, :title, :publisher, :year, :volume, :number, :pages, :month, :note) RETURNING id"
+            "INSERT INTO referencetable (editor, title, publisher, year, volume, number, pages, month, note, reftype) \
+                VALUES (:editor, :title, :publisher, :year, :volume, :number, :pages, :month, :note, :reftype) RETURNING id"
         )
         result = db.session.execute(
             sql,
@@ -103,6 +99,7 @@ def create_reference(reference):
                 "pages": reference.pages,
                 "month": reference.month,
                 "note": reference.note,
+                "reftype": reference.type,
             },
         )
 
@@ -110,18 +107,21 @@ def create_reference(reference):
     id_of_new_row = result.fetchone()[0]
 
     for author in authors:
-        create_author(author, id_of_new_row, reference.type)
+        create_author(author, id_of_new_row)
 
 
 def edit_reference(reference):
     # assuming our future tables will be named like this
-    table_name = reference.type + "s"
-    fields = [attr for attr in reference.__dict__.keys() if attr not in [
-        'id', 'type', 'authors']]
+    fields = [
+        attr
+        for attr in reference.__dict__.keys()
+        if attr not in ["id", "type", "authors"]
+    ]
 
     set_clause = ", ".join([f"{field} = :{field}" for field in fields])
     update_reference_sql = text(
-        f"UPDATE {table_name} SET {set_clause} WHERE id = :reference_id")
+        f"UPDATE referencetable SET {set_clause} WHERE id = :reference_id"
+    )
 
     params = {field: getattr(reference, field) for field in fields}
     params["reference_id"] = reference.id
@@ -129,32 +129,29 @@ def edit_reference(reference):
     db.session.execute(update_reference_sql, params)
 
     remove_previous_authors_sql = text(
-        "DELETE FROM authors WHERE reference_id = :reference_id AND type = :type"
+        "DELETE FROM authors WHERE reference_id = :reference_id"
     )
     db.session.execute(
         remove_previous_authors_sql,
-        {"reference_id": reference.id, "type": reference.type},
+        {"reference_id": reference.id},
     )
 
     for author in reference.authors:
-        create_author(author, reference.id, reference.type)
+        create_author(author, reference.id)
 
     db.session.commit()
 
 
-def create_author(author, reference_id, ref_type):
+def create_author(author, reference_id):
     sql = text(
-        "INSERT INTO authors (author, reference_id, type) VALUES (:author, :reference_id, :type)"
+        "INSERT INTO authors (author, reference_id) VALUES (:author, :reference_id)"
     )
-    db.session.execute(
-        sql, {"author": author, "reference_id": reference_id, "type": ref_type}
-    )
+    db.session.execute(sql, {"author": author, "reference_id": reference_id})
     db.session.commit()
 
 
 def generate_bibkey(reference):
-    author = "".join([name.split()[-1][:4]
-                     for name in reference.authors.split(" & ")])
+    author = "".join([name.split()[-1][:4] for name in reference.authors.split(" & ")])
     title = reference.title[:3]
     year = reference.year
     return f"{author}{title}{year}"
@@ -166,7 +163,7 @@ def join_bibtex():
     for reference in references:
         bibtex_str = f"@{reference.__class__.__name__.lower()}{{{str(generate_bibkey(reference))},\n"
         for key, value in reference.__dict__.items():
-            if key not in ['id', 'type'] and value:
+            if key not in ["id", "type"] and value:
                 bibtex_str += f"  {key} = {{{str(value)}}},\n"
         bibtex_str += "}\n"
         bibtex_entries.append(bibtex_str)
