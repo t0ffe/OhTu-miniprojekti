@@ -34,6 +34,9 @@ def get_reference_fields(reference_type):
         raise ValueError(f"Invalid reference type: {reference_type}")
     return reference_fields.get(reference_type, {})
 
+def get_reference_types():
+    return list(reference_fields.keys())
+
 if __name__ == "__main__":
     # TODO delete later
     # TODO change location of this?
@@ -49,3 +52,9 @@ if __name__ == "__main__":
 
     all_book_fields = get_reference_fields("book")["required"] + get_reference_fields("book")["optional"]
     print(f"book reference's required and optional fields: \n {all_book_fields}\n")
+
+    print(f"all reference types: \n {get_reference_types()}\n")
+    for ref_type in get_reference_types():
+        print(f"reference type: {ref_type}")
+        print(f"required fields: {get_reference_fields(ref_type)['required']}")
+        print(f"optional fields: {get_reference_fields(ref_type)['optional']}\n")
