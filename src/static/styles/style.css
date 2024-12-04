@@ -289,7 +289,7 @@ pre {
 }
 
 .highlight {
-    background-color: #4a4b2b;
+    background-color: #72A0C1;
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 3px;
@@ -311,4 +311,22 @@ pre {
 
 .no-results.show {
     display: block;
+}
+
+.search-box {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.search-box:focus {
+    border-color: #72A0C1;
+    outline: none;
+}
+
+.search-box:hover {
+    border-color: #72A0C1;
 }
