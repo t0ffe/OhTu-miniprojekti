@@ -61,7 +61,6 @@ def create_reference(reference):
     authors = reference.authors
 
     if reference.type == "article":
-        print("article went through")
         sql = text(
             "INSERT INTO referencetable (title, journal, year, volume, number, pages, month, note, reftype) \
                 VALUES (:title, :journal, :year, :volume, :number, :pages, :month, :note, :reftype) RETURNING id"
@@ -82,7 +81,6 @@ def create_reference(reference):
         )
 
     elif reference.type == "book":
-        print("book went through")
         sql = text(
             "INSERT INTO referencetable (editor, title, publisher, year, volume, number, pages, month, note, reftype) \
                 VALUES (:editor, :title, :publisher, :year, :volume, :number, :pages, :month, :note, :reftype) RETURNING id"
