@@ -35,7 +35,7 @@ class TestReferenceValidation(unittest.TestCase):
         reference_mock.return_value = (
             1, "Author", "Editor", "Title", "Publisher", "2023", "1", "2", "3", "4", "Note", "reference")
 
-        with self.assertRaises(UserInputError):
+        with self.assertRaises(ValueError):
             validate_reference(reference_mock
                                )
 
@@ -43,7 +43,7 @@ class TestReferenceValidation(unittest.TestCase):
         reference_mock = Mock()
         reference_mock.return_value = (1, "Author", "Editor", "Title")
 
-        with self.assertRaises(UserInputError):
+        with self.assertRaises(ValueError):
             validate_reference(reference_mock
                                )
 

@@ -1,7 +1,7 @@
 reference_fields = {
-    "article":       { "required": ["author", "title", "journal", "year"], 
+    "article":       { "required": ["authors", "title", "journal", "year"], 
                        "optional": ["volume", "number", "pages", "month", "note"] },
-    "book":          { "required": ["author", "editor", "title", "publisher", "year"],
+    "book":          { "required": ["authors", "editor", "title", "publisher", "year"],
                        "optional": ["volume", "number", "pages", "month", "note"] },
     "booklet":       { "required": ["author", "title", "howpublished", "address", "year"],
                        "optional": ["editor", "volume", "number", "organization", "month", "note"] },
