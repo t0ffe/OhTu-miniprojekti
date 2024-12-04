@@ -287,3 +287,16 @@ pre {
     color: #2e7d32;
     display: block;
 }
+
+.highlight {
+    background-color: #4a4b2b;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    border-radius: 4px;
+    color: white;
+}
+
+.reference.hidden {
+    display: none;
+}

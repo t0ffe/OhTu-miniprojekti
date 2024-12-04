@@ -40,8 +40,10 @@ Reference List
 
 
 {% if references %}
+  <ul id="referenceList">
   {% for reference in references %}
     <li class="reference">
+      <span class="reference-text">
       {{ reference.authors }}. {{ reference.title }}. {{ reference.publisher or reference.journal }} ({{ reference.year }})
       {% for key, value in reference.__dict__.items() %}
         {% if value and key not in ['id', 'type', 'authors', 'title', 'publisher', 'journal', 'year', 'volume', 'number', 'pages', 'month', 'note'] %}
@@ -53,7 +55,8 @@ Reference List
       {% if reference.pages %} page(s) {{ reference.pages }}.{% endif %}
       {% if reference.month %} month: {{ reference.month }}.{% endif %}
       {% if reference.note %} notes: {{ reference.note }}.{% endif %}     
-
+      </span>
+      <div class="reference-buttons">
       <a href="/edit_reference?id={{ reference.id }}&type={{ reference.type }}">
         <button class="edit-button">Edit</button>
       </a>
@@ -61,9 +64,10 @@ Reference List
       <a href="/delete_reference?id={{ reference.id }}&type={{ reference.type }}">
         <button class="delete-button">Delete</button>
       </a>
-
+      </div>
     </li>
   {% endfor %}
+  </ul>
 {% else %}
   <p>No references added yet.</p>
 {% endif %}

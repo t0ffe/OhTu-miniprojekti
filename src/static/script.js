@@ -277,4 +277,33 @@ window.onload = () => {
   }
 };
 
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('RefSearch');
+  const references = document.querySelectorAll('.reference');
+
+  function search_references(searchTerm) {
+      searchTerm = searchTerm.toLowerCase();
+      
+      references.forEach(reference => {
+          const textElement = reference.querySelector('.reference-text');
+          const text = textElement.textContent.toLowerCase();
+          const matches = text.includes(searchTerm);
+
+          reference.classList.toggle('hidden', !matches);
+          textElement.innerHTML = textElement.innerHTML.replace(/<mark class="highlight">(.*?)<\/mark>/g, '$1');
+          
+          if (searchTerm && matches) {
+              const regex = new RegExp(searchTerm, 'gi');
+              textElement.innerHTML = textElement.innerHTML.replace(regex, match => 
+                  `<mark class="highlight">${match}</mark>`
+              );
+          }
+      });
+  }
+
+  searchInput.addEventListener('input', (event) => {
+      search_references(event.target.value);
+  });
+});
+
 window.onload = update_form; // So that article fields are shown by default
