@@ -1,3 +1,4 @@
+from entities.references import get_reference_fields
 class UserInputError(Exception):
     pass
 
@@ -8,44 +9,21 @@ def validate_reference(reference):
             raise UserInputError(
                 f"{value} must be a number between {min_val}-{max_val}"
             )
-    if reference.type == "book":
-        mandatory = [reference.authors, reference.editor,
-                     reference.title,  reference.publisher, reference.year]
-        allfields = [
-            reference.authors,
-            reference.editor,
-            reference.title,
-            reference.publisher,
-            reference.year,
-            reference.volume,
-            reference.number,
-            reference.pages,
-            reference.month,
-            reference.note,
-        ]
 
-    elif reference.type == "article":
-        mandatory = [reference.authors, reference.title,
-                     reference.journal, reference.year]
-        allfields = [
-            reference.authors,
-            reference.title,
-            reference.journal,
-            reference.year,
-            reference.volume,
-            reference.number,
-            reference.pages,
-            reference.month,
-            reference.note,
-        ]
-    else:
-        raise UserInputError("Invalid reference type")
-
-    if not all(mandatory):
-        raise UserInputError("All mandatory fields must be filled")
-    if any(len(field) > 200 for field in allfields if field):
-        raise UserInputError(
+    fields = get_reference_fields(reference.type)
+    
+    for key in fields["required"]:
+        if not getattr(reference, key, None):
+            raise UserInputError("All mandatory fields must be filled")
+        if len(getattr(reference, key, None)) > 200:
+            raise UserInputError(
             "Reference information length must be smaller than 200")
+    
+    for key in fields["optional"]:
+        if getattr(reference, key, None):
+            if len(getattr(reference, key, None)) > 200:
+                raise UserInputError(
+                "Reference information length must be smaller than 200")
 
     is_valid_number(reference.year, 1, 2100)
     is_valid_number(reference.volume, 1, 5000)
