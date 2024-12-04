@@ -15,7 +15,6 @@ from util import validate_reference
 from entities.article import Article
 from entities.book import Book
 
-
 def reference_from_request(type):
     reference_objects = {
         "article": Article.from_form(request.form),
@@ -23,18 +22,15 @@ def reference_from_request(type):
     }
     return reference_objects[type]
 
-
 # Kotisivulle vievä funktio.
 @app.route("/")
 def index():
     return render_template("index.html")
 
-
 # Uuden referenssin lisäyssivu.
 @app.route("/new_reference")
 def new():
     return render_template("new_reference.html")
-
 
 # Uuden referensin luomisfunktio.
 @app.route("/create_reference", methods=["POST"])
@@ -50,20 +46,17 @@ def reference_creation():
         flash(str(error))
         return redirect("/new_reference")
 
-
 # Sivu joka listaa kaikki lisätyt referenssit.
 @app.route("/list_references", methods=["GET"])
 def list_references():
     references = get_all_references()
     return render_template("list_references.html", references=references)
 
-
 # Funktio joka muuttaa referenssin bibtex muotoon ja näyttää sen sivulla.
 @app.route("/references_as_bibtex")
 def references_as_bibtex():
     bibtex = join_bibtex()
     return render_template("bibtex.html", bibtex=bibtex)
-
 
 # Funktio joka lataa referenssit bibtex muodossa.
 @app.route("/download_references_as_bibtex")
@@ -79,7 +72,6 @@ def download_references_as_bibtex():
         download_name="bibliography.bib",
     )
 
-
 # Funktio joka poistaa referenssin.
 @app.route("/delete_reference", methods=["GET"])
 def delete_reference():
@@ -94,7 +86,7 @@ def delete_reference():
             return redirect("/list_references")
 
 
-# Funktio, joka hoitaa article referenssin editoimisen.
+# Funktio, joka hoitaa referenssin editoimisen.
 @app.route("/edit_reference", methods=["POST", "GET"])
 def reference_editing():
     if request.method == "GET":
@@ -122,9 +114,7 @@ def reference_editing():
             flash(str(error))
             return redirect(f"/edit_reference?id={reference_id}")
 
-
 # testausta varten oleva reitti
-
 if test_env:
     # Testauksessa resetoi tietokannan.
     @app.route("/reset_db")

@@ -37,7 +37,6 @@ ${YEAR}  2020
 ${JOURNAL}  Lehtinen
 ${EDITOR}  Antti Auttaja
 ${PUBLISHER}  LateXin Ritarit
-${DOI}  10.2202/1446-9022.1119
 
 *** Keywords ***
 Add Article Reference
@@ -95,8 +94,6 @@ Add DOI
     Go To  ${NEW_REFERENCE}
     Input Text  id=doiSearch  ${doi}
     Click Button  xpath=//button[contains(text(), 'Search DOI')]
-    Wait Until Element Is Visible  id=doiSearchStatus
-    Click Button  Add
 
 Verify BibTeX Output
     [Arguments]  ${expected_bibtex}
