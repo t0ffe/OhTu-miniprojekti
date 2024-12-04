@@ -280,15 +280,18 @@ window.onload = () => {
 document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('RefSearch');
   const references = document.querySelectorAll('.reference');
+  const noResultsElement = document.getElementById('noResults');
 
   function search_references(searchTerm) {
       searchTerm = searchTerm.toLowerCase();
+      let hasMatches = false;
       
       references.forEach(reference => {
           const textElement = reference.querySelector('.reference-text');
           const text = textElement.textContent.toLowerCase();
           const matches = text.includes(searchTerm);
 
+          if (matches) hasMatches = true;
           reference.classList.toggle('hidden', !matches);
           textElement.innerHTML = textElement.innerHTML.replace(/<mark class="highlight">(.*?)<\/mark>/g, '$1');
           
@@ -299,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
               );
           }
       });
+      noResultsElement.classList.toggle('show', searchTerm && !hasMatches);
   }
 
   searchInput.addEventListener('input', (event) => {
