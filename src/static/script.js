@@ -10,7 +10,7 @@ function add_author(name = '') {
     const authorEntry = document.createElement('div');
     authorEntry.className = 'author-entry';
     authorEntry.innerHTML = `
-        <input placeholder="Author *" type="text" name="author" minlength="1" maxlength="200" value="${name}" required>
+        <input placeholder="Author *" class="reference-form-field" type="text" name="author" minlength="1" maxlength="200" value="${name}" required>
         <button class="add-author-button" type="button" onclick="add_author()">+</button>
         <button type="button" class="remove-author" onclick="remove_author(this)">×</button>`;
     authorsContainer.appendChild(authorEntry);
@@ -110,7 +110,7 @@ function add_author(name = '') {
 
   const create_field = (field, required) => {
     const row = document.createElement("div");
-    row.className = "field_contents"
+    row.className = "field-contents"
 
     const input = document.createElement("input");
     input.placeholder = field.charAt(0).toUpperCase() + field.slice(1) + (required ? " *" : " (Optional)");
@@ -146,6 +146,7 @@ function add_author(name = '') {
         input.type = "text";
     }
     input.id = field;
+    input.className = "reference-form-field";
 
     row.appendChild(input);
     return row;
