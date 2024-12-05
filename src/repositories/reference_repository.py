@@ -2,7 +2,7 @@ from sqlalchemy import text
 from config import db
 from entities.article import Article
 from entities.book import Book
-
+from entities.conference import Conference
 
 
 def get_all_references():
@@ -22,7 +22,16 @@ def get_all_references():
     )
     books = books_res.fetchall()
 
-    return [Article(*row) for row in articles] + [Book(*row) for row in books]
+    conferences_res = db.session.execute(
+        text(
+            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.booktitle, r.year, r.editor, "
+            "r.volume, r.number, r.pages, r.address, r.month, r.organization, r.publisher, r.note FROM referencetable r "
+            "INNER JOIN authors a ON r.id = a.reference_id WHERE r.reftype = 'conference' GROUP BY r.id"
+        )
+    )
+    conferences = conferences_res.fetchall()
+
+    return [Article(*row) for row in articles] + [Book(*row) for row in books]  + [Conference(*row) for row in conferences]
 
 
 
@@ -64,6 +73,7 @@ def create_reference(reference):
     field_contents = {
         "article": ["title", "journal", "year", "volume", "number", "pages", "month", "note"],
         "book": ["editor", "title", "publisher", "year", "volume", "number", "pages", "month", "note"],
+        "conference": ["author", "title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"],
     }
 
     fields = field_contents.get(reference.type)
