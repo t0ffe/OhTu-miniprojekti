@@ -14,11 +14,13 @@ from config import app, test_env
 from util import validate_reference
 from entities.article import Article
 from entities.book import Book
+from entities.conference import Conference
 
 def reference_from_request(type):
     reference_objects = {
         "article": Article.from_form(request.form),
         "book": Book.from_form(request.form),
+        "conference": Conference.from_form(request.form),
     }
     return reference_objects[type]
 
