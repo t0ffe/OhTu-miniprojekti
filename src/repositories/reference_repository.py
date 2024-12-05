@@ -73,7 +73,7 @@ def create_reference(reference):
     field_contents = {
         "article": ["title", "journal", "year", "volume", "number", "pages", "month", "note"],
         "book": ["editor", "title", "publisher", "year", "volume", "number", "pages", "month", "note"],
-        "conference": ["author", "title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"],
+        "conference": ["title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"],
     }
 
     fields = field_contents.get(reference.type)

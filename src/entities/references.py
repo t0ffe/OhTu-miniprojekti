@@ -5,7 +5,7 @@ reference_fields = {
                        "optional": ["volume", "number", "pages", "month", "note"] },
     "booklet":       { "required": ["author", "title", "howpublished", "address", "year"],
                        "optional": ["editor", "volume", "number", "organization", "month", "note"] },
-    "conference":    { "required": ["author", "title", "booktitle", "year"],
+    "conference":    { "required": ["authors", "title", "booktitle", "year"],
                        "optional": ["editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"] },
     "inbook":        { "required": ["author", "title", "booktitle", "publisher", "year"],
                        "optional": ["editor", "volume", "number", "address", "edition", "month", "pages", "note"] },
