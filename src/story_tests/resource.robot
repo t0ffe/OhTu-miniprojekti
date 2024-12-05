@@ -37,6 +37,9 @@ ${YEAR}  2020
 ${JOURNAL}  Lehtinen
 ${EDITOR}  Antti Auttaja
 ${PUBLISHER}  LateXin Ritarit
+${BOOKTITLE}  Latexin konferenssitapahtuma
+${ORGANIZATION}  Helsingin yliopisto
+${ADDRESS}  Helsinki
 
 *** Keywords ***
 Add Article Reference
@@ -87,6 +90,39 @@ Verify Book Reference
     Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}
     Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}
     Run Keyword If  '${month}' != 'None'  Page Should Contain  month: ${month}
+    Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
+
+
+Add Conference Reference
+    [Arguments]  ${author}  ${title}  ${booktitle}  ${year}  ${editor}=None  ${volume}=None  ${number}=None  ${pages}=None  ${address}=None  ${month}=None  ${organization}=None  ${publisher}=None  ${note}=None
+    Go To  ${NEW_REFERENCE}
+    Select From List By Label  id:reference-type  conference
+    Input Text  author  ${author}
+    Input Text  title  ${title}
+    Input Text  booktitle  ${booktitle}
+    Input Text  year  ${year}
+    Run Keyword If  '${editor}' != 'None'  Input Text  editor  ${editor}
+    Run Keyword If  '${volume}' != 'None'  Input Text  volume  ${volume}
+    Run Keyword If  '${number}' != 'None'  Input Text  number  ${number}
+    Run Keyword If  '${pages}' != 'None'  Input Text  pages  ${pages}
+    Run Keyword If  '${address}' != 'None'  Input Text  address  ${address}
+    Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
+    Run Keyword If  '${organization}' != 'None'  Input Text  organization  ${organization}
+    Run Keyword If  '${publisher}' != 'None'  Input Text  publisher  ${publisher}
+    Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
+    Click Button  Add
+
+Verify Conference Reference
+    [Arguments]  ${author}  ${title}  ${booktitle}  ${year}  ${editor}=None  ${volume}=None  ${number}=None  ${pages}=None  ${address}=None  ${month}=None  ${organization}=None  ${publisher}=None  ${note}=None
+    Page Should Contain  ${author}. ${title}. ${booktitle} (${year})
+    Run Keyword If  '${editor}' != 'None'  Page Should Contain  editor: ${editor}
+    Run Keyword If  '${volume}' != 'None'  Page Should Contain  vol. ${volume}
+    Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}
+    Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}
+    Run Keyword If  '${address}' != 'None'  Page Should Contain  address: ${address}
+    Run Keyword If  '${month}' != 'None'  Page Should Contain  month: ${month}
+    Run Keyword If  '${organization}' != 'None'  Page Should Contain  organization: ${organization}
+    Run Keyword If  '${publisher}' != 'None'  Page Should Contain  publisher: ${publisher}
     Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
 
 Add DOI
