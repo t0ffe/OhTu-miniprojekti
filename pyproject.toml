@@ -17,6 +17,7 @@ psycopg2-binary = "^2.9.10"
 requests = "^2.32.3"
 pylint = "^3.3.1"
 autopep8 = "^2.3.1"
+coverage = "^7.6.8"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -15,26 +15,35 @@ from util import validate_reference
 from entities.article import Article
 from entities.book import Book
 from entities.conference import Conference
+from entities.booklet import Booklet
+
 
 def reference_from_request(type):
     reference_objects = {
         "article": Article.from_form(request.form),
         "book": Book.from_form(request.form),
         "conference": Conference.from_form(request.form),
+        "booklet": Booklet.from_form(request.form),
     }
     return reference_objects[type]
 
 # Kotisivulle vievä funktio.
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
 
 # Uuden referenssin lisäyssivu.
+
+
 @app.route("/new_reference")
 def new():
     return render_template("new_reference.html")
 
 # Uuden referensin luomisfunktio.
+
+
 @app.route("/create_reference", methods=["POST"])
 def reference_creation():
     reference_type = request.form.get("type")
@@ -49,18 +58,24 @@ def reference_creation():
         return redirect("/new_reference")
 
 # Sivu joka listaa kaikki lisätyt referenssit.
+
+
 @app.route("/list_references", methods=["GET"])
 def list_references():
     references = get_all_references()
     return render_template("list_references.html", references=references)
 
 # Funktio joka muuttaa referenssin bibtex muotoon ja näyttää sen sivulla.
+
+
 @app.route("/references_as_bibtex")
 def references_as_bibtex():
     bibtex = join_bibtex()
     return render_template("bibtex.html", bibtex=bibtex)
 
 # Funktio joka lataa referenssit bibtex muodossa.
+
+
 @app.route("/download_references_as_bibtex")
 def download_references_as_bibtex():
     bibtex = join_bibtex()
@@ -75,6 +90,8 @@ def download_references_as_bibtex():
     )
 
 # Funktio joka poistaa referenssin.
+
+
 @app.route("/delete_reference", methods=["GET"])
 def delete_reference():
     ref_id = request.args.get("id")
@@ -115,6 +132,7 @@ def reference_editing():
         except Exception as error:
             flash(str(error))
             return redirect(f"/edit_reference?id={reference_id}")
+
 
 # testausta varten oleva reitti
 if test_env:

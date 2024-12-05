@@ -18,18 +18,17 @@ def validate_reference(reference):
         print(vars(reference))
         print(key)
         if not getattr(reference, key, None):
-            raise UserInputError("All mandatory fields must be filled")
+            raise UserInputError(
+                f"All mandatory fields must be filled, missing {key}")
         if len(getattr(reference, key, None)) > 200:
             raise UserInputError(
-                "Reference information length must be smaller than 200"
-            )
+                "Reference information length must be smaller than 200")
 
     for key in fields["optional"]:
         if getattr(reference, key, None):
             if len(getattr(reference, key, None)) > 200:
                 raise UserInputError(
-                    "Reference information length must be smaller than 200"
-                )
+                    "Reference information length must be smaller than 200")
 
     is_valid_number(reference.year, 1, 2100)
     is_valid_number(reference.volume, 1, 5000)

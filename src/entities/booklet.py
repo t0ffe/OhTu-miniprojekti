@@ -15,6 +15,7 @@ class Booklet:
         organization=None,
         month=None,
         note=None,
+        type="booklet",
     ):
         self.id = ref_id
         self.authors = authors
@@ -28,8 +29,7 @@ class Booklet:
         self.organization = organization
         self.month = month
         self.note = note
-        self.type = "booklet"
-        
+        self.type = type
 
     @staticmethod
     def from_form(form):
@@ -46,17 +46,19 @@ class Booklet:
             form.get("organization") or None,
             form.get("month") or None,
             form.get("note") or None,
+            "booklet",
         )
 
     def __str__(self):
-        editor = None
+        edit = None
         vol = None
         no = None
+        org = None
         month = None
         note = None
 
         if self.editor:
-            editor = f"editor: {self.editor}."
+            edit = f"editor: {self.editor}."
         if self.volume:
             vol = f"vol. {self.volume}."
         if self.number:
@@ -67,4 +69,4 @@ class Booklet:
             month = f"month: {self.month}."
         if self.note:
             note = f"notes: {self.note}."
-        return f"{self.authors}. {self.title}. {self.howpublished}, {self.address}, {self.year}. {editor or ''} {vol or ''} {no or ''} {org or ''}{month or ''} {note or ''}"
+        return f"{self.authors}. {self.title}. {self.howpublished}. {self.address}. ({self.year}). {edit or ''} {vol or ''} {no or ''} {org or ''} {month or ''} {note or ''}"

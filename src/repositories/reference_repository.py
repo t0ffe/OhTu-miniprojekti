@@ -3,36 +3,50 @@ from config import db
 from entities.article import Article
 from entities.book import Book
 from entities.conference import Conference
+from entities.booklet import Booklet
+
+FIELD_CONTENTS = {
+    "article": ["title", "journal", "year", "volume", "number", "pages", "month", "note"],
+    "book": ["editor", "title", "publisher", "year", "volume", "number", "pages", "month", "note"],
+    "booklet": ["title", "howpublished", "address", "year", "editor", "volume", "number", "organization", "month", "note"],
+}
 
 
 def get_all_references():
-    articles_res = db.session.execute(
-        text(
-            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.journal, r.year, r.volume, \
-            r.number, r.pages, r.month, r.note FROM referencetable r INNER JOIN authors a ON r.id = a.reference_id WHERE r.reftype = 'article' GROUP BY r.id"
-        )
+    articles = get_all_references_of_type("article")
+    books = get_all_references_of_type("book")
+    booklets = get_all_references_of_type("booklet")
+
+    all_references = []
+    for row in articles:
+        reference = Article(*row)
+        all_references.append((reference.id, reference.type, reference))
+    for row in books:
+        reference = Book(*row)
+        all_references.append((reference.id, reference.type, reference))
+    for row in booklets:
+        reference = Booklet(*row)
+        all_references.append((reference.id, reference.type, reference))
+
+    return all_references
+
+
+def get_all_references_of_type(reference_type):
+    fields = FIELD_CONTENTS.get(reference_type)
+
+    if not fields:
+        raise ValueError(f"Invalid reference type: {reference_type}")
+
+    field_names = ", ".join(fields)
+
+    sql = text(
+        "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, " + field_names + " FROM referencetable r INNER JOIN authors a \
+            ON r.id = a.reference_id WHERE r.reftype =:reference_type GROUP BY r.id"
     )
-    articles = articles_res.fetchall()
 
-    books_res = db.session.execute(
-        text(
-            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.editor, r.title, r.publisher, r.year, \
-            r.volume, r.number, r.pages, r.month, r.note FROM referencetable r INNER JOIN authors a ON r.id = a.reference_id WHERE r.reftype = 'book' GROUP BY r.id"
-        )
-    )
-    books = books_res.fetchall()
-
-    conferences_res = db.session.execute(
-        text(
-            "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, r.title, r.booktitle, r.year, r.editor, "
-            "r.volume, r.number, r.pages, r.address, r.month, r.organization, r.publisher, r.note FROM referencetable r "
-            "INNER JOIN authors a ON r.id = a.reference_id WHERE r.reftype = 'conference' GROUP BY r.id"
-        )
-    )
-    conferences = conferences_res.fetchall()
-
-    return [Article(*row) for row in articles] + [Book(*row) for row in books]  + [Conference(*row) for row in conferences]
-
+    result = db.session.execute(sql, {"reference_type": reference_type})
+    references = result.fetchall()
+    return references
 
 
 def get_reference_by_id(ref_id, type):
@@ -46,7 +60,6 @@ def get_reference_by_id(ref_id, type):
     return reference
 
 
-
 def get_authors_by_reference_id(ref_id):
     result = db.session.execute(
         text("SELECT author FROM authors WHERE reference_id = :id"),
@@ -54,7 +67,6 @@ def get_authors_by_reference_id(ref_id):
     )
     contents = result.fetchall()
     return [row[0] for row in contents]
-
 
 
 def delete_reference_db(ref_id):
@@ -70,23 +82,17 @@ def delete_reference_db(ref_id):
 
 
 def create_reference(reference):
-    field_contents = {
-        "article": ["title", "journal", "year", "volume", "number", "pages", "month", "note"],
-        "book": ["editor", "title", "publisher", "year", "volume", "number", "pages", "month", "note"],
-        "conference": ["title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"],
-    }
-
-    fields = field_contents.get(reference.type)
+    fields = FIELD_CONTENTS.get(reference.type)
 
     if not fields:
         raise ValueError(f"Invalid reference type: {reference.type}")
-    
+
     field_places = ", ".join(f":{field}" for field in fields)
     field_names = ", ".join(fields)
 
     sql = text(
-        "INSERT INTO referencetable (" +field_names+ ", reftype) "
-        "VALUES (" +field_places+ ", :reftype) RETURNING id"
+        "INSERT INTO referencetable (" + field_names + ", reftype) "
+        "VALUES (" + field_places + ", :reftype) RETURNING id"
     )
 
     parameters = {field: getattr(reference, field, None) for field in fields}
@@ -100,7 +106,6 @@ def create_reference(reference):
 
     for author in reference.authors:
         create_author(author, row_id)
-
 
 
 def edit_reference(reference):
@@ -135,8 +140,6 @@ def edit_reference(reference):
     db.session.commit()
 
 
-
-
 def create_author(author, reference_id):
     sql = text(
         "INSERT INTO authors (author, reference_id) VALUES (:author, :reference_id)"
@@ -145,15 +148,12 @@ def create_author(author, reference_id):
     db.session.commit()
 
 
-
-
 def generate_bibkey(reference):
-    author = "".join([name.split()[-1][:4] for name in reference.authors.split(" & ")])
+    author = "".join([name.split()[-1][:4]
+                     for name in reference.authors.split(" & ")])
     title = reference.title[:3]
     year = reference.year
     return f"{author}{title}{year}"
-
-
 
 
 def join_bibtex():
@@ -167,37 +167,3 @@ def join_bibtex():
         bibtex_str += "}\n"
         bibtex_entries.append(bibtex_str)
     return "\n".join(bibtex_entries)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

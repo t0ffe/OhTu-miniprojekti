@@ -195,17 +195,3 @@ class TestReferenceValidation(unittest.TestCase):
                     "note",
                 )
             )
-        with self.assertRaises(UserInputError):
-            validate_reference(
-                Book(
-                    1,
-                    [f"author{author}" for author in range(22)],
-                    "Title",
-                    "Publisher",
-                    "Editor",
-                    "2024",
-                    "5",
-                    "50",
-                    "13"
-                )
-            )

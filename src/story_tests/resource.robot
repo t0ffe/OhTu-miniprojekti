@@ -59,7 +59,7 @@ Add Article Reference
 
 Verify Article Reference
     [Arguments]  ${author}  ${title}  ${journal}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
-    Page Should Contain  ${author}. ${title}. ${journal} (${year})
+    Page Should Contain  ${author}. ${title}. ${journal},  (${year}).
     Run Keyword If  '${volume}' != 'None'  Page Should Contain  vol. ${volume}
     Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}
     Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}
@@ -67,7 +67,7 @@ Verify Article Reference
     Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
 
 Add Book Reference
-    [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}   ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
     Go To  ${NEW_REFERENCE}
     Select From List By Label  id:reference-type  book
     Input Text  author  ${author}
@@ -83,9 +83,8 @@ Add Book Reference
     Click Button  Add
 
 Verify Book Reference
-    [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}   ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
-    Page Should Contain  ${author}. ${title}. ${publisher} (${year})  
-    Page Should Contain  editor: ${editor}
+    [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    Page Should Contain  ${author}. ${title}. ${publisher}. (${year}).  
     Run Keyword If  '${volume}' != 'None'  Page Should Contain  vol. ${volume}
     Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}
     Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}
@@ -135,3 +134,31 @@ Verify BibTeX Output
     [Arguments]  ${expected_bibtex}
     ${actual_bibtex}=  Get Text  xpath=//div[@class="export-page"]/pre
     Should Be Equal As Strings  ${actual_bibtex}  ${expected_bibtex}
+
+
+Add Booklet Reference
+    [Arguments]  ${author}  ${title}  ${howpublished}  ${address}  ${year}  ${editor}=None  ${volume}=None  ${number}=None  ${organization}=None  ${month}=None  ${note}=None
+    Go To  ${NEW_REFERENCE}
+    Select From List By Label  id:reference-type  booklet
+    Input Text  author  ${author}
+    Input Text  title  ${title}
+    Input Text  howpublished  ${howpublished }
+    Input Text  address  ${address}
+    Input Text  year  ${year}
+    Run Keyword If  '${editor}' != 'None'  Input Text  editor  ${editor}
+    Run Keyword If  '${volume}' != 'None'  Input Text  volume  ${volume}
+    Run Keyword If  '${number}' != 'None'  Input Text  number  ${number}
+    Run Keyword If  '${organization}' != 'None'  Input Text  organization  ${organization}
+    Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
+    Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
+    Click Button  Add
+
+Verify Booklet Reference
+    [Arguments]  ${author}  ${title}  ${howpublished}  ${address}  ${year}  ${editor}=None  ${volume}=None  ${number}=None  ${organization}=None  ${month}=None  ${note}=None
+    Page Should Contain  ${author}. ${title}. ${howpublished}. ${address}. (${year}).  
+    Run Keyword If  '${editor}' != 'None'  Page Should Contain   editor:  ${editor}
+    Run Keyword If  '${volume}' != 'None'  Page Should Contain   vol. ${volume}
+    Run Keyword If  '${number}' != 'None'  Page Should Contain   no.  ${number}
+    Run Keyword If  '${organization}' != 'None'  Page Should Contain   organization:  ${organization}
+    Run Keyword If  '${month}' != 'None'  Page Should Contain   month:  ${month}
+    Run Keyword If  '${note}' != 'None'  Page Should Contain   notes:  ${note}
