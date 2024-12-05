@@ -10,8 +10,9 @@ Test Setup       Reset References
 Main Page Should Be Open
     Go To  ${HOME_URL}
     Title Should Be  References App
-    Page Should Contain  This is an app for the client to add different types of references and inspect them in BibTex- format
-    Page Should Contain  The client can also edit and remove added references
+    Page Should Contain  This is an app for the client to add different types of references and inspect them in BibTeX- format
+    Page Should Contain  The client can edit and remove added references
+    Page Should Contain  DOI-search looks up references to execute autofill for the reference fields
     Page Should Contain  The app is created by LateXin Ritarit during the course Ohjelmistotuotanto (5 op)
     Page Should Contain  Creators:
     Page Should Contain  Tofelius Laakso
