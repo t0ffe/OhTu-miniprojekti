@@ -47,7 +47,7 @@ def setup_db():
         "  title TEXT NOT NULL, "
         "  year INT NOT NULL, "
         "  journal TEXT, "
-        "  volume TEXT, "
+        "  volume INT, "
         "  pages TEXT, "
         "  month INT, "
         "  editor TEXT, "
