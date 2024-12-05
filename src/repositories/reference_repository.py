@@ -1,8 +1,8 @@
 from sqlalchemy import text
 from config import db
-
 from entities.article import Article
 from entities.book import Book
+
 
 
 def get_all_references():
@@ -25,6 +25,7 @@ def get_all_references():
     return [Article(*row) for row in articles] + [Book(*row) for row in books]
 
 
+
 def get_reference_by_id(ref_id, type):
     result = db.session.execute(
         text("SELECT * FROM referencetable WHERE id = :id"), {"id": ref_id}
@@ -36,6 +37,7 @@ def get_reference_by_id(ref_id, type):
     return reference
 
 
+
 def get_authors_by_reference_id(ref_id):
     result = db.session.execute(
         text("SELECT author FROM authors WHERE reference_id = :id"),
@@ -43,6 +45,7 @@ def get_authors_by_reference_id(ref_id):
     )
     contents = result.fetchall()
     return [row[0] for row in contents]
+
 
 
 def delete_reference_db(ref_id):
@@ -58,54 +61,36 @@ def delete_reference_db(ref_id):
 
 
 def create_reference(reference):
-    authors = reference.authors
+    field_contents = {
+        "article": ["title", "journal", "year", "volume", "number", "pages", "month", "note"],
+        "book": ["editor", "title", "publisher", "year", "volume", "number", "pages", "month", "note"],
+    }
 
-    if reference.type == "article":
-        sql = text(
-            "INSERT INTO referencetable (title, journal, year, volume, number, pages, month, note, reftype) \
-                VALUES (:title, :journal, :year, :volume, :number, :pages, :month, :note, :reftype) RETURNING id"
-        )
-        result = db.session.execute(
-            sql,
-            {
-                "title": reference.title,
-                "journal": reference.journal,
-                "year": reference.year,
-                "volume": reference.volume or None,
-                "number": reference.number or None,
-                "pages": reference.pages or None,
-                "month": reference.month or None,
-                "note": reference.note or None,
-                "reftype": reference.type,
-            },
-        )
+    fields = field_contents.get(reference.type)
 
-    elif reference.type == "book":
-        sql = text(
-            "INSERT INTO referencetable (editor, title, publisher, year, volume, number, pages, month, note, reftype) \
-                VALUES (:editor, :title, :publisher, :year, :volume, :number, :pages, :month, :note, :reftype) RETURNING id"
-        )
-        result = db.session.execute(
-            sql,
-            {
-                "editor": reference.editor,
-                "title": reference.title,
-                "publisher": reference.publisher,
-                "year": reference.year,
-                "volume": reference.volume,
-                "number": reference.number,
-                "pages": reference.pages,
-                "month": reference.month,
-                "note": reference.note,
-                "reftype": reference.type,
-            },
-        )
+    if not fields:
+        raise ValueError(f"Invalid reference type: {reference.type}")
+    
+    field_places = ", ".join(f":{field}" for field in fields)
+    field_names = ", ".join(fields)
+
+    sql = text(
+        "INSERT INTO referencetable (" +field_names+ ", reftype) "
+        "VALUES (" +field_places+ ", :reftype) RETURNING id"
+    )
+
+    parameters = {field: getattr(reference, field, None) for field in fields}
+    parameters["reftype"] = reference.type
+
+    result = db.session.execute(sql, parameters)
 
     db.session.commit()
-    id_of_new_row = result.fetchone()[0]
 
-    for author in authors:
-        create_author(author, id_of_new_row)
+    row_id = result.fetchone()[0]
+
+    for author in reference.authors:
+        create_author(author, row_id)
+
 
 
 def edit_reference(reference):
@@ -140,6 +125,8 @@ def edit_reference(reference):
     db.session.commit()
 
 
+
+
 def create_author(author, reference_id):
     sql = text(
         "INSERT INTO authors (author, reference_id) VALUES (:author, :reference_id)"
@@ -148,11 +135,15 @@ def create_author(author, reference_id):
     db.session.commit()
 
 
+
+
 def generate_bibkey(reference):
     author = "".join([name.split()[-1][:4] for name in reference.authors.split(" & ")])
     title = reference.title[:3]
     year = reference.year
     return f"{author}{title}{year}"
+
+
 
 
 def join_bibtex():
@@ -166,3 +157,37 @@ def join_bibtex():
         bibtex_str += "}\n"
         bibtex_entries.append(bibtex_str)
     return "\n".join(bibtex_entries)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
