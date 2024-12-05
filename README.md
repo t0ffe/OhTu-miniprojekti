@@ -12,7 +12,7 @@ Sprintin [1](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_hel
 [2](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/Ee50PuOooyhOoKF7gboA02cBM3iOCAa1zr4BnQ4nloTlXw?e=tZz7PL)
  ja [3](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EQTXSf3Jp-pMsSCEljAw8FgBnS1egKnIkTd6V48zIlzR4g?e=SuYobT) Burndown-kaaviot
 
-[1. Retro](dokumentaatio/retro.md)
+[Retrot](dokumentaatio/retro.md)
 
 **Definition of Done**
 - User story on määritelty
