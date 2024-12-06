@@ -113,7 +113,7 @@ Add Conference Reference
 
 Verify Conference Reference
     [Arguments]  ${author}  ${title}  ${booktitle}  ${year}  ${editor}=None  ${volume}=None  ${number}=None  ${pages}=None  ${address}=None  ${month}=None  ${organization}=None  ${publisher}=None  ${note}=None
-    Page Should Contain  ${author}. ${title}. ${booktitle} (${year})
+    Page Should Contain  ${author}. ${title}. In ${booktitle} (${year}).
     Run Keyword If  '${editor}' != 'None'  Page Should Contain  editor: ${editor}
     Run Keyword If  '${volume}' != 'None'  Page Should Contain  vol. ${volume}
     Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}

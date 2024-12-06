@@ -64,22 +64,22 @@ class Conference:
         note = None
 
         if self.editor:
-            editor = f"Editor: {self.editor}."
+            editor = f"editor: {self.editor}."
         if self.volume:
             vol = f"vol. {self.volume}."
         if self.number:
             no = f"no. {self.number}."
         if self.pages:
-            pages = f"pages {self.pages}."
+            pages = f"page(s) {self.pages}."
         if self.address:
-            address = f"Address: {self.address}."
+            address = f"address: {self.address}."
         if self.month:
             month = f"month: {self.month}."
         if self.organization:
-            organization = f"Organization: {self.organization}."
+            organization = f"organization: {self.organization}."
         if self.publisher:
-            publisher = f"Publisher: {self.publisher}."
+            publisher = f"publisher: {self.publisher}."
         if self.note:
-            note = f"Note: {self.note}."
+            note = f"notes: {self.note}."
         
-        return f"{self.authors}. {self.title}. In {self.booktitle}, {self.year}. {editor or ''} {vol or ''} {no or ''} {pages or ''} {address or ''} {month or ''} {organization or ''} {publisher or ''} {note or ''}"
+        return f"{self.authors}. {self.title}. In {self.booktitle} ({self.year}). {editor or ''} {vol or ''} {no or ''} {pages or ''} {address or ''} {month or ''} {organization or ''} {publisher or ''} {note or ''}"

@@ -12,6 +12,7 @@ FIELD_CONTENTS = {
     "article": ["title", "journal", "year", "volume", "number", "pages", "month", "note"],
     "book": ["editor", "title", "publisher", "year", "volume", "number", "pages", "month", "note"],
     "booklet": ["title", "howpublished", "address", "year", "editor", "volume", "number", "organization", "month", "note"],
+    "conference" : ["title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"]
 }
 
 
@@ -22,6 +23,7 @@ def get_all_references():
         "article": Article,
         "book": Book,
         "booklet": Booklet,
+        "conference": Conference,
     }
 
     references = []
