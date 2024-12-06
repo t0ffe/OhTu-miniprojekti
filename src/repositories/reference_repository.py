@@ -34,7 +34,6 @@ def get_all_references():
         for row in rows_of_entity:
             reference = entity_of_class(*row)
             references.append((reference.id, reference.type, reference))
-
     return references
 
 
@@ -179,8 +178,8 @@ def join_bibtex():
     references = get_all_references()
     bibtex_entries = []
     for reference in references:
-        bibtex_str = f"@{reference.__class__.__name__.lower()}{{{str(generate_bibkey(reference))},\n"
-        for key, value in reference.__dict__.items():
+        bibtex_str = f"@{reference[2].__class__.__name__.lower()}{{{str(generate_bibkey(reference[2]))},\n"
+        for key, value in reference[2].__dict__.items():
             if key not in ["id", "type"] and value:
                 bibtex_str += f"  {key} = {{{str(value)}}},\n"
         bibtex_str += "}\n"
