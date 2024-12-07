@@ -15,8 +15,6 @@ def validate_reference(reference):
     fields = get_reference_fields(reference.type)
 
     for key in fields["required"]:
-        print(vars(reference))
-        print(key)
         if not getattr(reference, key, None):
             raise UserInputError(
                 f"All mandatory fields must be filled, missing {key}")
