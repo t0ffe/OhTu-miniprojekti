@@ -1,9 +1,10 @@
-from sqlalchemy import text
+from sqlalchemy import text 
 from config import db
 from entities.article import Article
 from entities.book import Book
 from entities.conference import Conference
 from entities.booklet import Booklet
+from entities.mastersthesis import Mastersthesis
 
 
 
@@ -12,7 +13,8 @@ FIELD_CONTENTS = {
     "article": ["title", "journal", "year", "volume", "number", "pages", "month", "note"],
     "book": ["editor", "title", "publisher", "year", "volume", "number", "pages", "month", "note"],
     "booklet": ["title", "howpublished", "address", "year", "editor", "volume", "number", "organization", "month", "note"],
-    "conference" : ["title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"]
+    "conference" : ["title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"],
+    "mastersthesis" : ["title", "school", "year", "thesis_type", "address", "month", "note"]
 }
 
 
@@ -24,6 +26,7 @@ def get_all_references():
         "book": Book,
         "booklet": Booklet,
         "conference": Conference,
+        "mastersthesis": Mastersthesis
     }
 
     references = []

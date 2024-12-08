@@ -16,6 +16,7 @@ from entities.article import Article
 from entities.book import Book
 from entities.conference import Conference
 from entities.booklet import Booklet
+from entities.mastersthesis import Mastersthesis
 
 
 def reference_from_request(type):
@@ -24,6 +25,7 @@ def reference_from_request(type):
         "book": Book.from_form(request.form),
         "conference": Conference.from_form(request.form),
         "booklet": Booklet.from_form(request.form),
+        "mastersthesis": Mastersthesis.from_form(request.form),
     }
     return reference_objects[type]
 
