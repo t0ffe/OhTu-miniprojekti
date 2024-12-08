@@ -53,4 +53,4 @@ class Mastersthesis:
         if self.note:
             note = f"Note: {self.note}."
         
-        return f"{self.authors}. {self.title}. {self.school}, {self.year}. {thesis_type or ''} {address or ''} {month or ''} {note or ''}"
+        return f"{self.authors}. {self.title}. {self.school}. {self.year}. {thesis_type or ''} {address or ''} {month or ''} {note or ''}"

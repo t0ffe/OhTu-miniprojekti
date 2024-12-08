@@ -32,7 +32,7 @@ Reset References
 
 *** Variables ***
 ${AUTHOR}  Aki Artikuloija
-${TITLE}  Artikkeli
+${TITLE}  Mahtava Gradu
 ${YEAR}  2020
 ${JOURNAL}  Lehtinen
 ${EDITOR}  Antti Auttaja
@@ -40,6 +40,7 @@ ${PUBLISHER}  LateXin Ritarit
 ${BOOKTITLE}  Latexin konferenssitapahtuma
 ${ORGANIZATION}  Helsingin yliopisto
 ${ADDRESS}  Helsinki
+${SCHOOL}  University of Helsinki
 
 *** Keywords ***
 Add Article Reference
@@ -162,3 +163,34 @@ Verify Booklet Reference
     Run Keyword If  '${organization}' != 'None'  Page Should Contain   organization:  ${organization}
     Run Keyword If  '${month}' != 'None'  Page Should Contain   month:  ${month}
     Run Keyword If  '${note}' != 'None'  Page Should Contain   notes:  ${note}
+
+
+Add Master's thesis Reference
+    [Arguments]  ${author}  ${title}  ${school}  ${year}  ${thesis_type}=None  ${address}=None  ${month}=None  ${note}=None
+    Go To  ${NEW_REFERENCE}
+    Select From List By Label  id:reference-type  mastersthesis
+    Input Text  author  ${author}
+    Input Text  title  ${title}
+    Input Text  school  ${school}
+    Input Text  year  ${year}
+    Run Keyword If  '${thesis_type}' != 'None'  Input Text  thesis_type  ${thesis_type}
+    Run Keyword If  '${address}' != 'None'  Input Text  address  ${address}
+    Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
+    Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
+    Click Button  Add
+
+Verify Master's thesis Reference
+    [Arguments]  ${author}  ${title}  ${school}  ${year}  ${thesis_type}=None  ${address}=None  ${month}=None  ${note}=None
+    Page Should Contain  ${author}. ${title}. ${school}. ${year}.
+    Run Keyword If  '${thesis_type}' != 'None'  Input Text  thesis_type  ${thesis_type}
+    Run Keyword If  '${address}' != 'None'  Input Text  address  ${address}
+    Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
+    Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
+
+
+
+
+
+
+
+

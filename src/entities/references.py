@@ -16,7 +16,7 @@ reference_fields = {
     "manual":        {"required": ["title", "year"],
                       "optional": ["authors", "organization", "address", "edition", "month", "note"]},
     "mastersthesis": {"required": ["authors", "title", "school", "year"],
-                      "optional": ["type", "address", "month", "note"]},
+                      "optional": ["thesis_type", "address", "month", "note"]},
     "misc":          {"required": [],
                       "optional": ["authors", "title", "howpublished", "month", "year", "note"]},
     "phdthesis":     {"required": ["authors", "title", "school", "year"],

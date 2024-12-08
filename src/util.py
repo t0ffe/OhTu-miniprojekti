@@ -28,10 +28,14 @@ def validate_reference(reference):
                 raise UserInputError(
                     "Reference information length must be smaller than 200")
 
-    is_valid_number(reference.year, 1, 2100)
-    is_valid_number(reference.volume, 1, 5000)
-    is_valid_number(reference.number, 1, 5000)
-    is_valid_number(reference.month, 1, 12)
+    if hasattr(reference, "year") and reference.year:
+        is_valid_number(reference.year, 1, 2100)
+    if hasattr(reference, "volume") and reference.volume:
+        is_valid_number(reference.volume, 1, 5000)
+    if hasattr(reference, "number") and reference.number:
+        is_valid_number(reference.number, 1, 5000)
+    if hasattr(reference, "month") and reference.month:
+        is_valid_number(reference.month, 1, 12)
 
     if len(reference.authors) > 21:
         raise UserInputError("Maximum number of authors is 21")
