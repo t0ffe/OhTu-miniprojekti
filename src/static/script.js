@@ -45,7 +45,7 @@ function add_author(name = '') {
     manual:        { required: ["title", "year"],
                      optional: ["author", "organization", "address", "edition", "month", "note"] },
     mastersthesis: { required: ["author", "title", "school", "year"],
-                     optional: ["type", "address", "month", "note"] },
+                     optional: ["thesis_type", "address", "month", "note"] },
     misc:          { required: [],
                      optional: ["author", "title", "howpublished", "month", "year", "note"] },
     phdthesis:     { required: ["author", "title", "school", "year"],

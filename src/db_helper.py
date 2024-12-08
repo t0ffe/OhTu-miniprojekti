@@ -62,7 +62,7 @@ def setup_db():
         "  school TEXT, "
         "  howpublished TEXT, "
         "  note TEXT, "
-        "  type TEXT, "
+        "  thesis_type TEXT, "
         "  reftype TEXT "
         ")"
     )
