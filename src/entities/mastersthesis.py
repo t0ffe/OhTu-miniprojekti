@@ -6,10 +6,10 @@ class Mastersthesis:
         title,
         school,
         year,
+        thesis_type=None,
         address=None,
         month=None,
         note=None,
-        thesis_type=None,
         type="mastersthesis",
     ):
         self.id = ref_id
