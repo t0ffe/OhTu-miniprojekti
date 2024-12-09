@@ -53,12 +53,17 @@ class Book:
 
         if self.volume:
             vol = f"vol. {self.volume}."
+
         if self.number:
             no = f"no. {self.number}."
+
         if self.pages:
             pages = f"page(s) {self.pages}."
+
         if self.month:
             month = f"month: {self.month}."
+
         if self.note:
             note = f"notes: {self.note}."
+            
         return f"Book: {self.authors}. {self.title}. {self.publisher}. ({self.year}). {vol or ''} {no or ''} {pages or ''} {month or ''} {note or ''}"

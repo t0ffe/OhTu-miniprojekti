@@ -65,20 +65,28 @@ class Conference:
 
         if self.editor:
             editor = f"editor: {self.editor}."
+
         if self.volume:
             vol = f"vol. {self.volume}."
+
         if self.number:
             no = f"no. {self.number}."
+
         if self.pages:
             pages = f"page(s) {self.pages}."
+
         if self.address:
             address = f"address: {self.address}."
+
         if self.month:
             month = f"month: {self.month}."
+
         if self.organization:
             organization = f"organization: {self.organization}."
+
         if self.publisher:
             publisher = f"publisher: {self.publisher}."
+            
         if self.note:
             note = f"notes: {self.note}."
 

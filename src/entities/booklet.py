@@ -59,14 +59,20 @@ class Booklet:
 
         if self.editor:
             edit = f"editor: {self.editor}."
+
         if self.volume:
             vol = f"vol. {self.volume}."
+
         if self.number:
             no = f"no. {self.number}."
+
         if self.organization:
             org = f"organization: {self.organization}."
+
         if self.month:
             month = f"month: {self.month}."
+
         if self.note:
             note = f"notes: {self.note}."
+            
         return f"Booklet: {self.authors}. {self.title}. {self.howpublished}. {self.address}. ({self.year}). {edit or ''} {vol or ''} {no or ''} {org or ''} {month or ''} {note or ''}"

@@ -42,12 +42,16 @@ class Mastersthesis:
         address = None
         month = None
         note = None
+        
         if self.thesis_type:
             thesis_type = f"Type: {self.thesis_type}."
+
         if self.address:
             address = f"Address: {self.address}."
+
         if self.month:
             month = f"month: {self.month}."
+
         if self.note:
             note = f"Note: {self.note}."
 
