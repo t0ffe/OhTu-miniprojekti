@@ -183,8 +183,9 @@ async function search_DOI() {
       if (data.status !== 'ok') {
           throw new Error('Failed to fetch DOI data');
       }
-    
-      const work = data.message;
+      const jsonString = JSON.stringify(data).replace(/&amp;/g, '&');
+      const cleanedData = JSON.parse(jsonString);
+      const work = cleanedData.message;
       populate_form_with_DOI_data(work);
       show_DOI_status('Reference data found and form populated!', 'success');
   } catch (error) {
@@ -306,19 +307,23 @@ document.addEventListener('DOMContentLoaded', function() {
       
       references.forEach(reference => {
           const textElement = reference.querySelector('.reference-text');
-          const text = textElement.textContent.toLowerCase();
+          if (!textElement.dataset.originalText) {
+            textElement.dataset.originalText = textElement.textContent; 
+          }
+          const text = textElement.dataset.originalText.toLowerCase();
           const matches = text.includes(searchTerm);
 
           if (matches) hasMatches = true;
           reference.classList.toggle('hidden', !matches);
-          textElement.innerHTML = textElement.innerHTML.replace(/<mark class="highlight">(.*?)<\/mark>/g, '$1');
           
           if (searchTerm && matches) {
               const regex = new RegExp(searchTerm, 'gi');
-              textElement.innerHTML = textElement.innerHTML.replace(regex, match => 
+              textElement.innerHTML = textElement.dataset.originalText.replace(regex, match => 
                   `<mark class="highlight">${match}</mark>`
               );
-          }
+            } else {
+              textElement.innerHTML = textElement.dataset.originalText;
+        }
       });
       noResultsElement.classList.toggle('show', searchTerm && !hasMatches);
   }
