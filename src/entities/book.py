@@ -3,7 +3,7 @@ class Book:
         self,
         ref_id,
         authors,
-        editor,
+        #editor,
         title,
         publisher,
         year,
@@ -16,7 +16,7 @@ class Book:
     ):
         self.id = ref_id
         self.authors = authors
-        self.editor = editor
+        #self.editor = editor
         self.title = title
         self.publisher = publisher
         self.year = year
@@ -32,7 +32,7 @@ class Book:
         return Book(
             form.get("reference_id") or None,
             form.getlist("author"),
-            form.get("editor"),
+            #form.get("editor"),
             form.get("title"),
             form.get("publisher"),
             form.get("year"),

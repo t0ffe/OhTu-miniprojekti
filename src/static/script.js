@@ -30,7 +30,7 @@ function add_author(name = '') {
   const form_fields = {
     article:       { required: ["author", "title", "journal", "year"], 
                      optional: ["volume", "number", "pages", "month", "note"] },
-    book:          { required: ["author", "editor", "title", "publisher", "year"],
+    book:          { required: ["author", "title", "publisher", "year"],
                      optional: ["volume", "number", "pages", "month", "note"] },
     booklet:       { required: ["author", "title", "howpublished", "address", "year"],
                      optional: ["editor", "volume", "number", "organization", "month", "note"] },
@@ -244,6 +244,14 @@ function populate_form_with_DOI_data(work) {
   document.getElementById('reference-type').value = type;
   update_form();
 
+  const contributors = [];
+  if (work.author) {
+      contributors.push(...work.author.map(a => `${a.given || ''} ${a.family || ''}`.trim()));
+  }
+  if (work.editor) {
+      contributors.push(...work.editor.map(e => `${e.given || ''} ${e.family || ''}`.trim()));
+  }
+
   const fieldMappings = {
       title: work.title ? work.title[0] : '',
       year: work.published?.['date-parts']?.[0]?.[0] || '',
@@ -256,8 +264,7 @@ function populate_form_with_DOI_data(work) {
       publisher: work.publisher || '',
       school: work['institution'] ? work['institution'][0].name : '',
       institution: work['institution'] ? work['institution'][0].name : '',
-      editor: work.editor ? work.editor.map(e => `${e.given} ${e.family}`).join(', ') : '',
-      author: work.author ? work.author.map(a => `${a.given} ${a.family}`).join(', ') : ''
+      author: contributors.join(', ')
   };
 
   const fields = form_fields[type].required.concat(form_fields[type].optional);
@@ -270,14 +277,12 @@ function populate_form_with_DOI_data(work) {
 
   
 
-  if (work.author && work.author.length > 0) {
+  if (contributors.length > 0) {
     const authorsContainer = document.getElementById('authorsContainer');
-    authorsContainer.innerHTML = ''; // this will remove the default author field
-      work.author.forEach((author, index) => {
-          if (index < 21) {
-              add_author(`${author.given || ''} ${author.family || ''}`.trim());
-          }
-      });
+    authorsContainer.innerHTML = ''; // Remove default author field
+    contributors.slice(0, 21).forEach(contributor => {
+        add_author(contributor);
+    });
   }
   update_form;
 }

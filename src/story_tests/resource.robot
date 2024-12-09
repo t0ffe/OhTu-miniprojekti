@@ -68,11 +68,10 @@ Verify Article Reference
     Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
 
 Add Book Reference
-    [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    [Arguments]  ${author}  ${title}  ${publisher}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
     Go To  ${NEW_REFERENCE}
     Select From List By Label  id:reference-type  book
     Input Text  author  ${author}
-    Input Text  editor  ${editor}
     Input Text  title  ${title}
     Input Text  publisher  ${publisher}
     Input Text  year  ${year}
@@ -84,7 +83,7 @@ Add Book Reference
     Click Button  Add
 
 Verify Book Reference
-    [Arguments]  ${author}  ${editor}  ${title}  ${publisher}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
+    [Arguments]  ${author}  ${title}  ${publisher}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
     Page Should Contain  ${author}. ${title}. ${publisher}. (${year}).  
     Run Keyword If  '${volume}' != 'None'  Page Should Contain  vol. ${volume}
     Run Keyword If  '${number}' != 'None'  Page Should Contain  no. ${number}

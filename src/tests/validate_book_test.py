@@ -11,14 +11,13 @@ class TestReferenceValidation(unittest.TestCase):
     def test_valid_length_does_not_raise_error(self):
         validate_reference(
             Book(
-                1, "Author", "Editor", "Title", "Publisher", "2023", "1", "2", "3", "4", "Note"
+                1, "Author", "Title", "Publisher", "2023", "1", "2", "3", "4", "Note"
             )
         )
         validate_reference(
             Book(
                 1,
                 ["a", "a"],
-                "e" * 100,
                 "t" * 100,
                 "p" * 100,
                 "2023",
@@ -33,7 +32,7 @@ class TestReferenceValidation(unittest.TestCase):
     def test_invalid_reference_type_raises_error(self):
         reference_mock = Mock()
         reference_mock.return_value = (
-            1, "Author", "Editor", "Title", "Publisher", "2023", "1", "2", "3", "4", "Note", "reference")
+            1, "Author", "Title", "Publisher", "2023", "1", "2", "3", "4", "Note", "reference")
 
         with self.assertRaises(ValueError):
             validate_reference(reference_mock
@@ -41,7 +40,7 @@ class TestReferenceValidation(unittest.TestCase):
 
     def test_mandatory_missing_raises_error(self):
         reference_mock = Mock()
-        reference_mock.return_value = (1, "Author", "Editor", "Title")
+        reference_mock.return_value = (1, "Author", "Title")
 
         with self.assertRaises(ValueError):
             validate_reference(reference_mock
@@ -53,8 +52,7 @@ class TestReferenceValidation(unittest.TestCase):
                 Book(
                     1,
                     "",
-                    "e" * 100,
-                    "t" * 100,
+                    "t" * 101,
                     "p" * 100,
                     "2023",
                     "3",
@@ -70,8 +68,7 @@ class TestReferenceValidation(unittest.TestCase):
                 Book(
                     1,
                     ["a", "a"],
-                    "e" * 201,
-                    "t" * 100,
+                    "t" * 201,
                     "p" * 100,
                     "2023",
                     "3",
