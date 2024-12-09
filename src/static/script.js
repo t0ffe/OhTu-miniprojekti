@@ -108,14 +108,26 @@ function add_author(name = '') {
     container.appendChild(div);
   };
 
+
+
   const create_field = (field, required) => {
     const row = document.createElement("div");
     row.className = "field-contents"
 
+
+
     const input = document.createElement("input");
-    input.placeholder = field.charAt(0).toUpperCase() + field.slice(1) + (required ? " *" : " (Optional)");
-    input.name = field;
-    input.required = required;
+    let placeholderText = field.charAt(0).toUpperCase() + field.slice(1);
+    if (field === "thesis_type") {
+      placeholderText = "Thesis type";
+
+    }
+
+      input.placeholder = placeholderText + (required ? " *" : " (Optional)");
+      input.name = field;
+      input.required = required;
+
+
 
     switch (field) {
       case "title":
