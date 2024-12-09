@@ -1,6 +1,8 @@
 *** Settings ***
 Library  SeleniumLibrary
 
+
+
 *** Variables ***
 ${SERVER}     localhost:5001
 ${DELAY}      0.5 seconds
@@ -11,6 +13,8 @@ ${LIST_REFERENCES}  http://${SERVER}/list_references
 ${EDIT_REFERENCE}  http://${SERVER}/edit_reference
 ${BROWSER}    chrome
 ${HEADLESS}   false
+
+
 
 *** Keywords ***
 Open And Configure Browser
@@ -27,6 +31,8 @@ Open And Configure Browser
     END
     Open Browser  browser=${BROWSER}  options=${options}
 
+
+
 Reset References
     Go To  ${RESET_URL}
 
@@ -41,6 +47,8 @@ ${BOOKTITLE}  Latexin konferenssitapahtuma
 ${ORGANIZATION}  Helsingin yliopisto
 ${ADDRESS}  Helsinki
 ${SCHOOL}  University of Helsinki
+
+
 
 *** Keywords ***
 Add Article Reference
@@ -58,6 +66,8 @@ Add Article Reference
     Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
     Click Button  Add
 
+
+
 Verify Article Reference
     [Arguments]  ${author}  ${title}  ${journal}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
     Page Should Contain  ${author}. ${title}. ${journal},  (${year}).
@@ -66,6 +76,8 @@ Verify Article Reference
     Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}
     Run Keyword If  '${month}' != 'None'  Page Should Contain  month: ${month}
     Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
+
+
 
 Add Book Reference
     [Arguments]  ${author}  ${title}  ${publisher}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
@@ -82,6 +94,8 @@ Add Book Reference
     Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
     Click Button  Add
 
+
+
 Verify Book Reference
     [Arguments]  ${author}  ${title}  ${publisher}  ${year}  ${volume}=None  ${number}=None  ${pages}=None  ${month}=None  ${note}=None
     Page Should Contain  ${author}. ${title}. ${publisher}. (${year}).  
@@ -90,6 +104,7 @@ Verify Book Reference
     Run Keyword If  '${pages}' != 'None'  Page Should Contain  page(s) ${pages}
     Run Keyword If  '${month}' != 'None'  Page Should Contain  month: ${month}
     Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
+
 
 
 Add Conference Reference
@@ -111,6 +126,8 @@ Add Conference Reference
     Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
     Click Button  Add
 
+
+
 Verify Conference Reference
     [Arguments]  ${author}  ${title}  ${booktitle}  ${year}  ${editor}=None  ${volume}=None  ${number}=None  ${pages}=None  ${address}=None  ${month}=None  ${organization}=None  ${publisher}=None  ${note}=None
     Page Should Contain  ${author}. ${title}. In ${booktitle} (${year}).
@@ -124,16 +141,21 @@ Verify Conference Reference
     Run Keyword If  '${publisher}' != 'None'  Page Should Contain  publisher: ${publisher}
     Run Keyword If  '${note}' != 'None'  Page Should Contain  notes: ${note}
 
+
+
 Add DOI
     [Arguments]  ${doi}
     Go To  ${NEW_REFERENCE}
     Input Text  id=doiSearch  ${doi}
     Click Button  xpath=//button[contains(text(), 'Search DOI')]
 
+
+
 Verify BibTeX Output
     [Arguments]  ${expected_bibtex}
     ${actual_bibtex}=  Get Text  xpath=//div[@class="export-page"]/pre
     Should Be Equal As Strings  ${actual_bibtex}  ${expected_bibtex}
+
 
 
 Add Booklet Reference
@@ -153,6 +175,8 @@ Add Booklet Reference
     Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
     Click Button  Add
 
+
+
 Verify Booklet Reference
     [Arguments]  ${author}  ${title}  ${howpublished}  ${address}  ${year}  ${editor}=None  ${volume}=None  ${number}=None  ${organization}=None  ${month}=None  ${note}=None
     Page Should Contain  ${author}. ${title}. ${howpublished}. ${address}. (${year}).  
@@ -162,6 +186,7 @@ Verify Booklet Reference
     Run Keyword If  '${organization}' != 'None'  Page Should Contain   organization:  ${organization}
     Run Keyword If  '${month}' != 'None'  Page Should Contain   month:  ${month}
     Run Keyword If  '${note}' != 'None'  Page Should Contain   notes:  ${note}
+
 
 
 Add Master's thesis Reference
@@ -178,6 +203,9 @@ Add Master's thesis Reference
     Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
     Click Button  Add
 
+
+
+
 Verify Master's thesis Reference
     [Arguments]  ${author}  ${title}  ${school}  ${year}  ${thesis_type}=None  ${address}=None  ${month}=None  ${note}=None
     Page Should Contain  ${author}. ${title}. ${school}. ${year}.
@@ -185,6 +213,41 @@ Verify Master's thesis Reference
     Run Keyword If  '${address}' != 'None'  Page Should Contain  Address:  ${address}
     Run Keyword If  '${month}' != 'None'  Page Should Contain  month:  ${month}
     Run Keyword If  '${note}' != 'None'  Page Should Contain  Note:  ${note}
+
+
+
+Add PhD Thesis Reference
+    [Arguments]  ${author}  ${title}  ${school}  ${year}  ${thesis_type}=None  ${address}=None  ${month}=None  ${note}=None
+    Go To  ${NEW_REFERENCE}
+    Select From List By Label  id:reference-type  phdthesis
+    Input Text  author  ${author}
+    Input Text  title  ${title}
+    Input Text  school  ${school}
+    Input Text  year  ${year}
+    Run Keyword If  '${thesis_type}' != 'None'  Input Text  thesis_type  ${thesis_type}
+    Run Keyword If  '${address}' != 'None'  Input Text  address  ${address}
+    Run Keyword If  '${month}' != 'None'  Input Text  month  ${month}
+    Run Keyword If  '${note}' != 'None'  Input Text  note  ${note}
+    Click Button  Add
+
+
+
+Verify PhD Thesis Reference
+    [Arguments]  ${author}  ${title}  ${school}  ${year}  ${thesis_type}=None  ${address}=None  ${month}=None  ${note}=None
+    Page Should Contain  ${author}. ${title}. ${school}. ${year}.
+    Run Keyword If  '${thesis_type}' != 'None'  Page Should Contain  Type:  ${thesis_type}
+    Run Keyword If  '${address}' != 'None'  Page Should Contain  Address:  ${address}
+    Run Keyword If  '${month}' != 'None'  Page Should Contain  month:  ${month}
+    Run Keyword If  '${note}' != 'None'  Page Should Contain  Note:  ${note}
+
+
+
+
+
+
+
+
+
 
 
 
