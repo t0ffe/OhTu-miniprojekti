@@ -81,5 +81,5 @@ class Conference:
             publisher = f"publisher: {self.publisher}."
         if self.note:
             note = f"notes: {self.note}."
-        
-        return f"{self.authors}. {self.title}. In {self.booktitle} ({self.year}). {editor or ''} {vol or ''} {no or ''} {pages or ''} {address or ''} {month or ''} {organization or ''} {publisher or ''} {note or ''}"
+
+        return f"Conference: {self.authors}. {self.title}. In {self.booktitle} ({self.year}). {editor or ''} {vol or ''} {no or ''} {pages or ''} {address or ''} {month or ''} {organization or ''} {publisher or ''} {note or ''}"

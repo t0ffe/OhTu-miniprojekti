@@ -23,7 +23,6 @@ class Mastersthesis:
         self.note = note
         self.type = type
 
-
     @staticmethod
     def from_form(form):
         return Mastersthesis(
@@ -38,7 +37,6 @@ class Mastersthesis:
             form.get("note") or None,
         )
 
-
     def __str__(self):
         thesis_type = None
         address = None
@@ -52,5 +50,5 @@ class Mastersthesis:
             month = f"month: {self.month}."
         if self.note:
             note = f"Note: {self.note}."
-        
-        return f"{self.authors}. {self.title}. {self.school}. {self.year}. {thesis_type or ''} {address or ''} {month or ''} {note or ''}"
+
+        return f"Master's thesis: {self.authors}. {self.title}. {self.school}. {self.year}. {thesis_type or ''} {address or ''} {month or ''} {note or ''}"

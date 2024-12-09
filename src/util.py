@@ -6,11 +6,6 @@ class UserInputError(Exception):
 
 
 def validate_reference(reference):
-    def is_valid_number(value, min_val, max_val):
-        if value and (not value.isdigit() or not min_val <= int(value) <= max_val):
-            raise UserInputError(
-                f"{value} must be a number between {min_val}-{max_val}"
-            )
 
     fields = get_reference_fields(reference.type)
 
@@ -18,24 +13,33 @@ def validate_reference(reference):
         if not getattr(reference, key, None):
             raise UserInputError(
                 f"All mandatory fields must be filled, missing {key}")
-        if len(getattr(reference, key, None)) > 200:
-            raise UserInputError(
-                "Reference information length must be smaller than 200")
+        validate_field(reference, key)
 
     for key in fields["optional"]:
         if getattr(reference, key, None):
-            if len(getattr(reference, key, None)) > 200:
-                raise UserInputError(
-                    "Reference information length must be smaller than 200")
+            validate_field(reference, key)
 
-    if hasattr(reference, "year") and reference.year:
+
+def validate_field(reference, key):
+    if len(getattr(reference, key, None)) > 200:
+        raise UserInputError(
+            "Reference information length must be smaller than 200")
+    if key == "authors" and len(reference.authors) > 21:
+        raise UserInputError("Maximum number of authors is 21")
+    if key == "year":
         is_valid_number(reference.year, 1, 2100)
-    if hasattr(reference, "volume") and reference.volume:
+    if key == "volume":
         is_valid_number(reference.volume, 1, 5000)
-    if hasattr(reference, "number") and reference.number:
+    if key == "edition":
+        is_valid_number(reference.edition, 1, 5000)
+    if key == "number":
         is_valid_number(reference.number, 1, 5000)
-    if hasattr(reference, "month") and reference.month:
+    if key == "month":
         is_valid_number(reference.month, 1, 12)
 
-    if len(reference.authors) > 21:
-        raise UserInputError("Maximum number of authors is 21")
+
+def is_valid_number(value, min_val, max_val):
+    if value and (not value.isdigit() or not min_val <= int(value) <= max_val):
+        raise UserInputError(
+            f"{value} must be a number between {min_val}-{max_val}"
+        )
