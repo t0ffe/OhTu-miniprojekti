@@ -5,6 +5,7 @@ from entities.book import Book
 from entities.conference import Conference
 from entities.booklet import Booklet
 from entities.mastersthesis import Mastersthesis
+from entities.phdthesis import PhDThesis
 
 
 
@@ -14,7 +15,8 @@ FIELD_CONTENTS = {
     "book": ["title", "publisher", "year", "volume", "number", "pages", "month", "note"],
     "booklet": ["title", "howpublished", "address", "year", "editor", "volume", "number", "organization", "month", "note"],
     "conference" : ["title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"],
-    "mastersthesis" : ["title", "school", "year", "thesis_type", "address", "month", "note"]
+    "mastersthesis" : ["title", "school", "year", "thesis_type", "address", "month", "note"],
+    "phdthesis" : ["title", "school", "year", "thesis_type", "address", "month", "note"]
 }
 
 
@@ -26,7 +28,8 @@ def get_all_references():
         "book": Book,
         "booklet": Booklet,
         "conference": Conference,
-        "mastersthesis": Mastersthesis
+        "mastersthesis": Mastersthesis,
+        "phdthesis": PhDThesis
     }
 
     references = []

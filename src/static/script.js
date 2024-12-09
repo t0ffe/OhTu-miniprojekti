@@ -49,7 +49,7 @@ function add_author(name = '') {
     misc:          { required: [],
                      optional: ["author", "title", "howpublished", "month", "year", "note"] },
     phdthesis:     { required: ["author", "title", "school", "year"],
-                     optional: ["type", "address", "month", "note"] },
+                     optional: ["thesis_type", "address", "month", "note"] },
     proceedings:   { required: ["title", "year"],
                      optional: ["editor", "volume", "number", "series", "address", "month", "publisher"] },
     techreport:    { required: ["author", "title", "institution", "year"],
