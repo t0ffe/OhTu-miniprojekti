@@ -8,10 +8,20 @@ Test Setup       Reset References
 
 *** Test Cases ***
 
+
 Single Master's thesis Reference Should Be Added
     Add Master's thesis Reference   ${AUTHOR}  ${TITLE}  ${SCHOOL}  ${YEAR}
     Click Button  All references
     Verify Master's thesis Reference   ${AUTHOR}  ${TITLE}  ${SCHOOL}  ${YEAR}
+
+
+
+Two Master's thesis References Should Be Added
+    Add Master's thesis Reference  ${AUTHOR}  ${TITLE}  ${SCHOOL}  ${YEAR}
+    Add Master's thesis Reference  Antti Anttinen  Pro Gradu!  Aalto University  2022
+    Click Button  All references
+    Verify Master's thesis Reference  ${AUTHOR}  ${TITLE}  ${SCHOOL}  ${YEAR}
+    Verify Master's thesis Reference  Antti Anttinen  Pro Gradu!  Aalto University  2022
 
 
 
