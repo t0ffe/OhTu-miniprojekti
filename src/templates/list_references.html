@@ -35,6 +35,17 @@ Reference List
 
 
 
+{% if references|length>0 %}
+<div class="delete-all-contents">
+  <form action="/delete_all_refs" method="post" onsubmit="return confirmDeleteAllPrompt()">
+    <button type="submit" class="delete-all-button">Delete All References</button>
+  </form>
+</div>
+<br>
+{% endif %}
+
+
+
 
 {% if references %}
   <ul id="referenceList">

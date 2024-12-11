@@ -201,6 +201,14 @@ function show_DOI_status(message, type) {
   statusDiv.classList.add(type);
 }
 
+
+
+function confirmDeleteAllPrompt() {
+  return confirm("Are you sure you want to delete all references?");
+}
+
+
+
 function populate_form_with_DOI_data(work) {
   let type = 'article';
   switch (work.type) {
