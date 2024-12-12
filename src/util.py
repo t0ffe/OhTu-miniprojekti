@@ -30,12 +30,8 @@ def validate_field(reference, key):
         is_valid_number(reference.year, 1, 2100)
     if key == "volume":
         is_valid_number(reference.volume, 1, 5000)
-    if key == "edition":
-        is_valid_number(reference.edition, 1, 5000)
     if key == "number":
         is_valid_number(reference.number, 1, 5000)
-    if key == "month":
-        is_valid_number(reference.month, 1, 12)
 
 
 def is_valid_number(value, min_val, max_val):

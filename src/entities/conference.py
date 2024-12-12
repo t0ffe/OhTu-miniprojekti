@@ -86,7 +86,7 @@ class Conference:
 
         if self.publisher:
             publisher = f"publisher: {self.publisher}."
-            
+
         if self.note:
             note = f"notes: {self.note}."
 

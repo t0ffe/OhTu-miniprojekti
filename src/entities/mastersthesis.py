@@ -42,7 +42,7 @@ class Mastersthesis:
         address = None
         month = None
         note = None
-        
+
         if self.thesis_type:
             thesis_type = f"Type: {self.thesis_type}."
 

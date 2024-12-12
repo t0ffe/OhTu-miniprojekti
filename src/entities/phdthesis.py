@@ -23,7 +23,6 @@ class PhDThesis:
         self.note = note
         self.type = type
 
-
     @staticmethod
     def from_form(form):
         return PhDThesis(
@@ -37,7 +36,6 @@ class PhDThesis:
             form.get("month") or None,
             form.get("note") or None,
         )
-
 
     def __str__(self):
         thesis_type = None
@@ -53,8 +51,8 @@ class PhDThesis:
 
         if self.month:
             month = f"month: {self.month}."
-            
+
         if self.note:
             note = f"Note: {self.note}."
-        
+
         return f"PhD Thesis: {self.authors}. {self.title}. {self.school}. {self.year}. {thesis_type or ''} {address or ''} {month or ''} {note or ''}"

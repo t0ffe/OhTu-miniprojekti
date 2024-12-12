@@ -74,5 +74,5 @@ class Booklet:
 
         if self.note:
             note = f"notes: {self.note}."
-            
+
         return f"Booklet: {self.authors}. {self.title}. {self.howpublished}. {self.address}. ({self.year}). {edit or ''} {vol or ''} {no or ''} {org or ''} {month or ''} {note or ''}"

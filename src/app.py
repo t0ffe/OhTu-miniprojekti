@@ -136,7 +136,6 @@ def reference_editing():
         except Exception as error:
             flash(str(error))
             return redirect(f"/edit_reference?id={reference_id}")
-        
 
 
 @app.route("/delete_all_refs", methods=["POST"])
@@ -148,7 +147,6 @@ def delete_all_references():
     except Exception as error:
         flash(str(error))
         return redirect("/list_references")
-
 
 
 # testausta varten oleva reitti

@@ -12,9 +12,9 @@ FIELD_CONTENTS = {
     "article": ["title", "journal", "year", "volume", "number", "pages", "month", "note"],
     "book": ["title", "publisher", "year", "volume", "number", "pages", "month", "note"],
     "booklet": ["title", "howpublished", "address", "year", "editor", "volume", "number", "organization", "month", "note"],
-    "conference" : ["title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"],
-    "mastersthesis" : ["title", "school", "year", "thesis_type", "address", "month", "note"],
-    "phdthesis" : ["title", "school", "year", "thesis_type", "address", "month", "note"]
+    "conference": ["title", "booktitle", "year", "editor", "volume", "number", "pages", "address", "month", "organization", "publisher", "note"],
+    "mastersthesis": ["title", "school", "year", "thesis_type", "address", "month", "note"],
+    "phdthesis": ["title", "school", "year", "thesis_type", "address", "month", "note"]
 }
 
 

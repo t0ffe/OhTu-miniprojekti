@@ -62,5 +62,5 @@ class Book:
 
         if self.note:
             note = f"notes: {self.note}."
-            
+
         return f"Book: {self.authors}. {self.title}. {self.publisher}. ({self.year}). {vol or ''} {no or ''} {pages or ''} {month or ''} {note or ''}"

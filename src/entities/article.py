@@ -60,5 +60,5 @@ class Article:
 
         if self.note:
             note = f"notes: {self.note}."
-            
+
         return f"Article: {self.authors}. {self.title}. {self.journal}, {self.year}. {vol or ''} {no or ''} {pages or ''} {month or ''} {note or ''}"
