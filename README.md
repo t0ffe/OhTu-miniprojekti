@@ -10,7 +10,8 @@
 
 Sprintin [1](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EUMaJ_EyNzlHsF8YF2-GRy0BXbaeBAUQxwVG9nqvj3KeVg?e=hNgaGF)
 [2](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/Ee50PuOooyhOoKF7gboA02cBM3iOCAa1zr4BnQ4nloTlXw?e=tZz7PL)
- ja [3](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EQTXSf3Jp-pMsSCEljAw8FgBnS1egKnIkTd6V48zIlzR4g?e=SuYobT) Burndown-kaaviot
+[3](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EQTXSf3Jp-pMsSCEljAw8FgBnS1egKnIkTd6V48zIlzR4g?e=SuYobT)
+ja [4](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EW_96CzHWflGrCyIHbBv6s4B1cAQ33pSnFaExM-7iy6avQ?e=1WD9J3) Burndown-kaaviot
 
 [Retrot](dokumentaatio/retro.md)
 
