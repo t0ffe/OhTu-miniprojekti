@@ -31,7 +31,7 @@ def get_all_references():
     references = []
 
     for reference_type, entity_of_class in reference_types.items():
-        rows_of_entity = get_all_references_of_type(reference_type)
+        rows_of_entity = get_all_references_by_type(reference_type)
 
         for row in rows_of_entity:
             reference = entity_of_class(*row)
@@ -39,21 +39,23 @@ def get_all_references():
     return references
 
 
-def get_all_references_of_type(reference_type):
+def get_all_references_by_type(reference_type):
     fields = FIELD_CONTENTS.get(reference_type)
 
     if not fields:
         raise ValueError(f"Invalid reference type: {reference_type}")
 
-    field_names = ", ".join(fields)
-
     sql = text(
-        "SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, " + field_names + " FROM referencetable r INNER JOIN authors a \
-            ON r.id = a.reference_id WHERE r.reftype =:reference_type GROUP BY r.id"
+        f"""
+        SELECT r.id, STRING_AGG(a.author, ' & ') AS authors, {', '.join(fields)}
+        FROM referencetable r
+        INNER JOIN authors a ON r.id = a.reference_id
+        WHERE r.reftype = :reference_type
+        GROUP BY r.id
+        """
     )
     result = db.session.execute(sql, {"reference_type": reference_type})
-    references = result.fetchall()
-    return references
+    return result.fetchall()
 
 
 def get_reference_by_id(ref_id, type):
@@ -72,8 +74,7 @@ def get_authors_by_reference_id(ref_id):
         text("SELECT author FROM authors WHERE reference_id = :id"),
         {"id": ref_id},
     )
-    contents = result.fetchall()
-    return [row[0] for row in contents]
+    return [row[0] for row in result.fetchall()]
 
 
 def delete_reference_db(ref_id):
@@ -94,19 +95,17 @@ def create_reference(reference):
     if not fields:
         raise ValueError(f"Invalid reference type: {reference.type}")
 
-    field_places = ", ".join(f":{field}" for field in fields)
-    field_names = ", ".join(fields)
-
     sql = text(
-        "INSERT INTO referencetable (" + field_names + ", reftype) "
-        "VALUES (" + field_places + ", :reftype) RETURNING id"
+        f"INSERT INTO referencetable ({', '.join(fields)}, reftype) VALUES ({', '.join(f':{field}' for field in fields)}, :reftype) RETURNING id"
     )
 
     parameters = {field: getattr(reference, field, None) for field in fields}
     parameters["reftype"] = reference.type
+
     result = db.session.execute(sql, parameters)
     db.session.commit()
     row_id = result.fetchone()[0]
+    
     for author in reference.authors:
         create_author(author, row_id)
 
