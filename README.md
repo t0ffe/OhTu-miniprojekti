@@ -7,7 +7,7 @@
 
 [Product Backlog](https://github.com/users/t0ffe/projects/4)
 - Backlogissa on omat välilehdet sprinteille 1, 2, 3 ja 4 
-
+[Loppuraportti](https://helsinkifi-my.sharepoint.com/:w:/g/personal/mcilola_ad_helsinki_fi/EYkmx2WZbFJKrmZ9qdiYMN4BXDLkR9QrkzmtM8EWdTvMww?e=bgJcXb)
 Sprintin [1](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EUMaJ_EyNzlHsF8YF2-GRy0BXbaeBAUQxwVG9nqvj3KeVg?e=hNgaGF)
 [2](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/Ee50PuOooyhOoKF7gboA02cBM3iOCAa1zr4BnQ4nloTlXw?e=tZz7PL)
 [3](https://helsinkifi-my.sharepoint.com/:x:/g/personal/heiditap_ad_helsinki_fi/EQTXSf3Jp-pMsSCEljAw8FgBnS1egKnIkTd6V48zIlzR4g?e=SuYobT)
